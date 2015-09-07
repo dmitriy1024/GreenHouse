@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using GreenHouse.Domain.Entities;
-using GreenHouse.Domain.Concrete;
+﻿using System.Web.Mvc;
+using GreenHouse.Domain.Abstract;
 
 namespace GreenHouse.WebUI.Controllers
 {
     public class HomeUserController : Controller
     {
-        // GET: HomeUser
+        private IRoomRepository _repository;
+
+        public HomeUserController(IRoomRepository productRepository)
+        {
+            _repository = productRepository;
+        }
+
         public ActionResult Index()
         {
-            var v = new EFRoomRepository().Rooms;
-            return View(v);
+            return View(_repository.Rooms);
         }
     }
 }

@@ -3,7 +3,7 @@ using GreenHouse.Domain.Entities;
 
 namespace GreenHouse.Domain.Abstract
 {
-    interface IRoomRepository
+    public interface IRoomRepository
     {
         IQueryable<Room> Rooms { get; }
     }
