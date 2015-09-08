@@ -29,6 +29,29 @@ namespace GreenHouse.Domain.Concrete
                         System.Diagnostics.Debug.WriteLine(item2.BeginTime);
                     }
                 }
+
+                foreach (var item in _context.AdditEquipments)
+                {
+                    System.Diagnostics.Debug.WriteLine(item.Name);
+                }
+
+                foreach (var item in _context.Rooms)
+                {
+                    System.Diagnostics.Debug.WriteLine(item.Number);
+                    foreach (var item2 in item.AdditEquipments)
+                    {
+                        System.Diagnostics.Debug.WriteLine(item2.Name);
+                    }
+                }
+
+                foreach (var item in _context.AdditEquipments)
+                {
+                    System.Diagnostics.Debug.WriteLine(item.Name);
+                    foreach (var item2 in item.Rooms)
+                    {
+                        System.Diagnostics.Debug.WriteLine(item2.Number);
+                    }
+                }
                 return _context.Rooms;
             }
         }

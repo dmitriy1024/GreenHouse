@@ -10,5 +10,6 @@ namespace GreenHouse.Domain.Entities
         public int Capacity { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<AdditEquipment> AdditEquipments { get; set; }
     }
 }
