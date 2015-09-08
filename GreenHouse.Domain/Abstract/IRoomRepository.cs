@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using GreenHouse.Domain.Entities;
+﻿using GreenHouse.Domain.Entities;
+using System.Collections.Generic;
 
 namespace GreenHouse.Domain.Abstract
 {
     public interface IRoomRepository
     {
-        IQueryable<Room> Rooms { get; }
+        IEnumerable<Room> Rooms { get; }
     }
 }

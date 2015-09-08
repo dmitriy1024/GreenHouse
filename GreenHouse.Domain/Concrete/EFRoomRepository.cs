@@ -1,6 +1,6 @@
 ﻿using GreenHouse.Domain.Abstract;
 using GreenHouse.Domain.Entities;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace GreenHouse.Domain.Concrete
 {
@@ -8,7 +8,7 @@ namespace GreenHouse.Domain.Concrete
     {
         private EFDbContext _context = new EFDbContext();
 
-        public IQueryable<Room> Rooms
+        public IEnumerable<Room> Rooms
         {
             get
             {
