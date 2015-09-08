@@ -52,7 +52,9 @@
     <Compile Include="Abstract\IRoomRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFRoomRepository.cs" />
+    <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
