@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using GreenHouse.Domain.Abstract;
+using System;
 
 namespace GreenHouse.WebUI.Controllers
 {
@@ -14,7 +15,8 @@ namespace GreenHouse.WebUI.Controllers
 
         public ActionResult Index()
         {
-            return View(_repository.Rooms);
+            var rooms = _repository.GetRoomsByDate(new DateTime(2015,9,8));
+            return View(rooms);
         }
     }
 }

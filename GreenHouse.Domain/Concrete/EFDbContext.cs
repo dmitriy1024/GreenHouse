@@ -7,7 +7,7 @@ namespace GreenHouse.Domain.Concrete
     {   
         public DbSet<Room> Rooms { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<AdditEquipment> AdditEquipments { get; set; }        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
