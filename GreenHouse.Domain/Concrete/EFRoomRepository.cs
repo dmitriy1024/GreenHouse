@@ -58,18 +58,17 @@ namespace GreenHouse.Domain.Concrete
             }
         }
 
-        public IEnumerable<Room> GetRoomsByDate(DateTime date)
+        public IEnumerable<Reservation> GetReservationsByDate(DateTime date)
         {
             var begDate = date.Date;
             var endDate = date.AddDays(1);
 
-            var reservatioms = _context.Reservations.Where(a => a.BeginTime > begDate && a.BeginTime < endDate);
-
-            var rooms = from i in reservatioms
-                        join fi in _context.Rooms on i.RoomId equals fi.Id
-                        select fi;
-
-            return rooms.ToList();
+            var reservations = _context.Reservations.Where(a => a.BeginTime > begDate && a.BeginTime < endDate);
+            foreach (var item in reservations)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Room.Number);
+            }
+            return reservations.ToList();
         }
     }
 }
