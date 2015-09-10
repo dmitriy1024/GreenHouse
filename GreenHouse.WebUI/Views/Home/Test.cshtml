@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+<h2>Test</h2>
+
+<div id="content" class="well">
+    No content loaded
+</div>
+
+<script>
+    $(window).load(function () {
+        var year = 2015;
+        var month = 9;
+        var day = 8;
+
+        var model = {
+            Year: year,
+            Month: month,
+            Day : day
+        };
+
+        $.ajax({
+            type: "POST",
+            data: model,
+            dataType: "html",
+            url: '@Url.Action("Reservations", "Home")'
+        }).done(function (result) {
+            $('#content').html(result);
+        });
+    });
+
+</script>

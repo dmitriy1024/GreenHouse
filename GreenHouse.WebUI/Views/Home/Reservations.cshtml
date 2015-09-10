@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Reservations";
+}
+@model GreenHouse.Domain.Entities.Reservation[,]
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+
+
+    <div class="col-sm-8" id="diagram">
+        <a id="previous-column" href="#"><</a>
+        <a id="next-column" href="#">></a>
+        <div class="table-container">
+            <table class="table sliding-window table-header">
+                <tr>
+                    @for (int j = 301; j <= 315; j++)
+                    {
+                        <td><span>K. @j </span></td>
+                    }
+                </tr>
+            </table>
+
+            <table class="table sliding-window">
+
+                @for (int i = 0; i < 8; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < 15; j++)
+                        {
+                            if (Model[j, i] != null)
+                            {
+                                <td class="diagram-cell" data-toggle="popover" title="" data-content="<div class='custompopover'> Цель <textarea />
+                            <button>Бронировать</button></div>">
+                                        <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
+                                    </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+<script>
+            $(function() {
+                $('[data-toggle="popover"]').popover({
+                    html: true
+                });
+            })
+
+            $(function() {
+
+                //////////////////////////////////////////
+                $('#next-column').click(function (event) {
+                    event.preventDefault();
+                    $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
+                });
+                $('#previous-column').click(function (event) {
+                    event.preventDefault();
+                    $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
+                });
+            });
+       
+
+</script>
+@Scripts.Render("~/bundles/bootstrap")

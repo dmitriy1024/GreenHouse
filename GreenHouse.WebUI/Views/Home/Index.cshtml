@@ -40,44 +40,8 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-8" id="diagram">
-            <a id="previous-column" href="#">Previous</a>
-            <a id="next-column" href="#">Next</a>
-            <div class="table-container">
-                <table class="table sliding-window table-header">
-                    <tr>
-                        @for (int j = 300; j <= 315; j++)
-                        {
-                            <td><span>K. @j </span></td>
-                        }
-                    </tr>
-                </table>
-
-                <table class="table sliding-window">
-
-                    @for (int i = 0; i < 8; i++)
-                    {
-                        <tr>
-                            @for (int j = 0; j < 15; j++)
-                            {
-                                if (Model[j, i] != null)
-                                {
-                                    <td class="diagram-cell" data-toggle="popover" title="" data-content="<div class='custompopover'> Цель <textarea />
-                            <button>Бронировать</button></div>">
-                                        <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                            }
-                        </tr>
-                    }
-
-                </table>
-            </div>
-
+        <div id="content">
+            No content loaded
         </div>
 
         <div class="col-sm-4 text-right cal">
@@ -85,9 +49,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
-                            <div>
+                            @*<div>
                                 <button id="btnCalendarMode" class="btn btn-md" onclick="$.GreenHouse.btnCalendarMode_Click(this)" data-mode="0">День</button>
-                            </div>
+                            </div>*@
                             <div id="datetimepicker12"></div>
                         </div>
                     </div>
@@ -95,40 +59,56 @@
             </div>
         </div>
 
-        <script>
-            $(function() {
-                $('[data-toggle="popover"]').popover({
-                    html: true
-                });
-            })
-        </script>
+
         <script type="text/javascript">
-                $(function() {
-                    $('#datetimepicker12').datepicker({
-                        inline: true,
-                        sideBySide: true,
-                        language: 'ru'
-                    });
+                //$(function() {
+                //    $('#datetimepicker12').datepicker({
+                //        inline: true,
+                //        sideBySide: true,
+                //        language: 'ru'
+                //    });
 
-                    $("#hideCal").click(function() {
-                        $(".cal").hide("slow");
-                        $("#diagram").removeClass("col-sm-8");
-                        $("#diagram").addClass("col-sm-12");
+                //    $("#hideCal").click(function() {
+                //        $(".cal").hide("slow");
+                //        $("#diagram").removeClass("col-sm-8");
+                //        $("#diagram").addClass("col-sm-12");
 
-                    });
-                    $("#showCal").click(function() {
-                        $(".cal").show("slow");
-                        $("#diagram").removeClass("col-sm-12");
-                        $("#diagram").addClass("col-sm-8");
-                    });
-                    //////////////////////////////////////////
-                    $('#next-column').click(function (event) {
-                        event.preventDefault();
-                        $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
-                    });
-                    $('#previous-column').click(function (event) {
-                        event.preventDefault();
-                        $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
+                //    });
+                //    $("#showCal").click(function() {
+                //        $(".cal").show("slow");
+                //        $("#diagram").removeClass("col-sm-12");
+                //        $("#diagram").addClass("col-sm-8");
+                //    });
+                //    //////////////////////////////////////////
+                //    $('#next-column').click(function (event) {
+                //        event.preventDefault();
+                //        $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
+                //    });
+                //    $('#previous-column').click(function (event) {
+                //        event.preventDefault();
+                //        $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
+                //    });
+                //});
+
+
+                $(window).load(function () {
+                    var year = 2015;
+                    var month = 9;
+                    var day = 8;
+
+                    var model = {
+                        Year: year,
+                        Month: month,
+                        Day: day
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        data: model,
+                        dataType: "html",
+                        url: '@Url.Action("Reservations", "Home")'
+                    }).done(function (result) {
+                        $('#content').html(result);
                     });
                 });
         </script>

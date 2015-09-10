@@ -17,42 +17,37 @@ namespace GreenHouse.WebUI.Controllers
 
         public ActionResult Index()
         {
-            //Reserve reservedRoom1 = new Reserve(1, 2, "Oleg Zubenko");
-            //Reserve reservedRoom2 = new Reserve(5, 6, "Andrew Zagoruy");
-            //Reserve reservedRoom3 = new Reserve(3, 5, "Andrew Popov");
-
-            //Reserve[,] resArr = new Reserve[15, 8];
-
-            //resArr[1, 2] = reservedRoom1;
-            //resArr[5, 6] = reservedRoom2;
-            //resArr[3, 5] = reservedRoom3;
-
             Reservation[,] resArr = new Reservation[15,8];
 
             var res = _repository.GetReservationsByDate(new DateTime(2015, 9, 8));
             foreach (var item in res)
             {
                 int roomNum = Int32.Parse(item.Room.Number);
-                int timeRes = ((DateTime)item.EndTime).Hour;
+                int timeRes = ((DateTime)item.EndTime).Hour-7;
                 resArr[roomNum - 300, timeRes] = item;
             }
             return View(resArr);
         }
 
-    }
-
-    public class Reserve
-    {
-        public int RoomNum { get; private set; }
-        public int Time { get; private set; }
-        public string Name { get; private set; }
-
-        public Reserve(int room, int time, string name)
+        [HttpPost]
+        public ActionResult Reservations(int year = 5, int month = 5, int day = 5)
         {
-            RoomNum = room;
-            Time = time;
-            Name = name;
+            Reservation[,] resArr = new Reservation[15, 8];
+
+            var res = _repository.GetReservationsByDate(new DateTime(2015, 9, 8));
+            foreach (var item in res)
+            {
+                int roomNum = Int32.Parse(item.Room.Number);
+                int timeRes = ((DateTime)item.EndTime).Hour - 7;
+                resArr[roomNum - 300, timeRes] = item;
+            }
+            
+            return PartialView(resArr);
+        }
+
+        public ActionResult Test()
+        {
+            return PartialView();
         }
     }
-
 }
