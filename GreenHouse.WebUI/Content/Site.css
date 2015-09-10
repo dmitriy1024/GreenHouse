@@ -277,3 +277,117 @@ div#room311 {
     height: 148px;
     background-image: url(images/rooms/r-311-200.png);
 }
+
+div#room306 {
+    top: 29px;
+    left: 198px;
+    width: 66px;
+    height: 48px;
+    background-image: url(images/rooms/r-306-200.png);
+}
+
+div#room308 {
+    top: 95px;
+    left: 39px;
+    width: 87px;
+    height: 34px;
+    background-image: url(images/rooms/r-307-30.png);
+}
+
+div#room309 {
+    top: 134px;
+    left: 39px;
+    width: 87px;
+    height: 40px;
+    background-image: url(images/rooms/r-309-100.png);
+}
+
+div#room310 {
+    top: 178px;
+    left: 39px;
+    width: 87px;
+    height: 63px;
+    background-image: url(images/rooms/r-310-200.png);
+}
+
+div#room305 {
+    top: 82px;
+    left: 173px;
+    width: 90px;
+    height: 48px;
+    background-image: url(images/rooms/r-305-100.png);
+}
+
+div#room312 {
+    top: 307px;
+    left: 190px;
+    width: 151px;
+    height: 88px;
+    background-image: url(images/rooms/r-312-100.png);
+}
+
+div#room313 {
+    top: 307px;
+    left: 350px;
+    width: 105px;
+    height: 88px;
+    background-image: url(images/rooms/r-313-100.png);
+}
+
+div#room314 {
+    top: 307px;
+    left: 465px;
+    width: 146px;
+    height: 88px;
+    background-image: url(images/rooms/r-314-100.png);
+}
+
+div#room315 {
+    top: 307px;
+    left: 621px;
+    width: 44px;
+    height: 30px;
+    background-image: url(images/rooms/r-315-30.png);
+}
+
+div#room301 {
+    top: 165px;
+    left: 504px;
+    width: 108px;
+    height: 92px;
+    background-image: url(images/rooms/r-301-100.png);
+}
+
+div#room302 {
+    top: 165px;
+    left: 464px;
+    width: 37px;
+    height: 92px;
+    background-image: url(images/rooms/r-302-30.png);
+}
+
+div#room303 {
+    top: 165px;
+    left: 295px;
+    width: 41px;
+    height: 92px;
+    background-image: url(images/rooms/r-303-30.png);
+}
+
+div#room304 {
+    top: 192px;
+    left: 173px;
+    width: 112px;
+    height: 64px;
+    background-image: url(images/rooms/r-304-100.png);
+}
+
+.room {
+    display: table;
+    text-align: center;
+}
+
+.room span {
+    display: table-cell;
+    vertical-align: middle;
+}
