@@ -17,10 +17,6 @@ namespace GreenHouse.WebUI.Controllers
 
         public ActionResult Index()
         {
-<<<<<<< HEAD:GreenHouse.WebUI/Controllers/HomeController.cs
-=======
-
->>>>>>> origin/roomsBranch:GreenHouse.WebUI/Controllers/HomeUserController.cs
             Reservation[,] resArr = new Reservation[15,8];
 
             var res = _repository.GetReservationsByDate(new DateTime(2015, 9, 8));
@@ -38,7 +34,6 @@ namespace GreenHouse.WebUI.Controllers
         {
             Reservation[,] resArr = new Reservation[15, 8];
 
-<<<<<<< HEAD:GreenHouse.WebUI/Controllers/HomeController.cs
             var res = _repository.GetReservationsByDate(new DateTime(2015, 9, 8));
             foreach (var item in res)
             {
@@ -49,12 +44,5 @@ namespace GreenHouse.WebUI.Controllers
             
             return PartialView(resArr);
         }
-
-        public ActionResult Test()
-        {
-            return PartialView();
-        }
     }
-=======
->>>>>>> origin/roomsBranch:GreenHouse.WebUI/Controllers/HomeUserController.cs
 }
