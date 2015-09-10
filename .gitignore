@@ -68,3 +68,5 @@ packages/
 
 #Test files
 *.testsettings
+GreenHouse.WebUI/Controllers/HomeController.cs.orig
+GreenHouse.WebUI/Views/Home/Index.cshtml.orig
