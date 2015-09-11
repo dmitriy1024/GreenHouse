@@ -183,6 +183,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Rooms.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\LoginPopup.cshtml" />
+    <Content Include="Views\Shared\RegistrationPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

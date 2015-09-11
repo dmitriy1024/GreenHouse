@@ -34,6 +34,7 @@ h5 {
 
 .navbar div.email {
 	font-size: 18px;
+    margin-top: 5px;
 }
 
 .navbar ul li a span {
@@ -90,12 +91,17 @@ h5 {
 }
 
 .input-group {
-	padding: 30px 60px;
+	padding: 30px 30px;
 }
 
 .input-group .form-control {
 	width: 80%;
 	height: 60px;
+    border-radius: 4px;
+}
+
+.btn btn-default {
+    border-radius: 4px;
 }
 
 .input-group-btn .btn{
@@ -141,18 +147,16 @@ table.table-condensed .dow{
 	display:none;
 }
 
+/*---------------------------------------------------------------------------------------------------------*/
 .table-container {
-    width:100%; /* Total width of visible columns + border widths */
+    width: 100%; /* Total width of visible columns + border widths */
     height:490px;
-    /*border:solid 1px lightgrey;*/
     overflow:hidden;
 }
 
 .sliding-window {
 	display: table;
     width:1500px; /* Total width of all columns in sliding-window + border widths */
-    /*height:100%;*/
-    /*overflow:hidden;*/
 }
 
 .table-header {
@@ -209,33 +213,6 @@ table.table-condensed .dow{
 	border-radius: 0;
 }
 
-/*.floor-map {
-	border: dotted 1px blue;
-	background: url(images/bg_plan.png);
-	color: #ffffff;
-}
-
-.plan h3, .plan h5 {
-	padding-left: 100px;
-}
-
-.plan {
-	width: 100%;
-	height: 600px;
-	border: dotted 1px red;
-	background: url(images/map.png) no-repeat;
-	background-position: 25% 68%;
-	background-size: 900px, 600px;
-}*/
-
-
-
-
-
-
-
-
-
 
 .map-bg {
     background-image: url(images/bg_plan.png);
@@ -245,6 +222,7 @@ div.mapContainer {
     padding: 50px;
     width: 800px;
     color: #ffffff;
+    margin: 0 auto;
 }
 
 div.mapImgContainer {
@@ -390,4 +368,143 @@ div#room304 {
 .room span {
     display: table-cell;
     vertical-align: middle;
+}
+
+.popover {
+    background-color: lightgrey;
+    border-radius: 0;
+}
+
+.popover.right .arrow:after {
+    border-right-color: lightgrey;
+}
+
+
+.time-table tr td{
+    display: table-cell;
+	border-top: 1px solid lightgrey;
+	height: 56px;
+    vertical-align: top;
+}
+
+table.time {
+    margin-top: 5px;
+}
+
+
+
+/*------------------------------------------------------------------------------------------------*/
+
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 60%;
+  display: block;
+  margin-bottom: 10px;
+    margin: 0 auto;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  border-radius: 4px; 
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #438E11;;
+  padding: 12px 0px;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #438E11;;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+  text-align: center;
+    padding-top: 20px;
+}
+
+.login-popup-logo {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.close {
+    text-align: right;
+}
+
+.reg-icons {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.reg-line {
+    border-bottom: 1px solid #006400;
 }

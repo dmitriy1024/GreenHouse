@@ -40,54 +40,78 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-8" id="diagram">
-            <a id="previous-column" href="#">Previous</a>
-            <a id="next-column" href="#">Next</a>
-            <div class="table-container">
-                <table class="table sliding-window table-header">
-                    <tr>
-                        @for (int j = 300; j <= 315; j++)
-                        {
-                            <td><span>K. @j </span></td>
-                        }
-                    </tr>
-                </table>
-
-                <table class="table sliding-window">
-
-                    @for (int i = 0; i < 8; i++)
-                    {
-                        <tr>
-                            @for (int j = 0; j < 15; j++)
-                            {
-                                if (Model[j, i] != null)
+        <div class="col-sm-9" id="diagram">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <a id="previous-column" href="#"><h4><</h4></a>
+                        <div class="time-table">
+                            <table class="time">
+                                @for (int t = 9; t < 17; t++)
                                 {
-                                    <td class="diagram-cell" data-toggle="popover" title="" data-content="<div class='custompopover'> Цель <textarea />
-                            <button>Бронировать</button></div>">
-                                        <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
-                                    </td>
+                                    <tr>
+                                        <td>@t<span>:00</span></td>
+                                    </tr>
                                 }
-                                else
-                                {
-                                    <td></td>
-                                }
-                            }
-                        </tr>
-                    }
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        @*<a id="previous-column" href="#">Previous</a>*@
+                        @*<a id="next-column" href="#">Next</a>*@
+                        <div class="table-container">
+                            <table class="table sliding-window table-header">
+                                <tr>
+                                    @for (int j = 301; j <= 315; j++)
+                                    {
+                                        <td><span>K. @j </span></td>
+                                    }
+                                </tr>
+                            </table>
 
-                </table>
+                            <table class="table sliding-window">
+
+                                @for (int i = 0; i < 8; i++)
+                                {
+                                    <tr>
+                                        @for (int j = 0; j < 15; j++)
+                                        {
+                                            if (Model[j, i] != null)
+                                            {
+                                                <td class="diagram-cell" data-toggle="popover" title="" data-content="
+                                        <div class='custompopover'>
+                                            <img src='../../Content/images/icon-user-grey.png'>
+                                            @Model[j, i].User.FName @Model[j, i].User.SName<br/>@Model[j, i].Purpose</div>">
+                                                    <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        }
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <a id="next-column" href="#"><h4>></h4></a>
+                    </div>
+                </div>
             </div>
-
+           
         </div>
 
-        <div class="col-sm-4 text-right cal">
+        <div class="col-sm-3 text-right cal">
             <div style="overflow: hidden;">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-12">
+                        @*<div class="col-md-12">
                             <div>
                                 <button id="btnCalendarMode" class="btn btn-md" onclick="$.GreenHouse.btnCalendarMode_Click(this)" data-mode="0">День</button>
-                            </div>
+                            </div>*@
                             <div id="datetimepicker12"></div>
                         </div>
                     </div>
@@ -132,8 +156,11 @@
                         $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
                     });
                 });
+
+                $(document).ready(function () {
+                    $("#myModal").modal('show');
+                });
         </script>
     </div>
-</div>
 
 @Html.Partial("~/Views/Shared/Rooms.cshtml")
