@@ -78,11 +78,11 @@
                                         {
                                             if (Model[j, i] != null)
                                             {
-                                                <td class="diagram-cell" data-toggle="popover" title="" data-content="
+                                                <td class="diagram-cell">
+                                                    <span data-toggle="popover" title="" data-content="
                                         <div class='custompopover'>
                                             <img src='../../Content/images/icon-user-grey.png'>
-                                            @Model[j, i].User.FName @Model[j, i].User.SName<br/>@Model[j, i].Purpose</div>">
-                                                    <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
+                                            @Model[j, i].User.FName @Model[j, i].User.SName<br/>@Model[j, i].Purpose</div>">@Model[j, i].User.SName @Model[j, i].User.FName</span>
                                                 </td>
                                             }
                                             else
@@ -136,9 +136,13 @@
                     });
 
                     $("#hideCal").click(function() {
-                        $(".cal").hide("slow");
-                        $("#diagram").removeClass("col-sm-8");
-                        $("#diagram").addClass("col-sm-12");
+                        $(".cal").slideUp("slow");//.hide();
+
+                        $(setTimeout(function() {
+                            $("#diagram").removeClass("col-sm-8");
+                            $("#diagram").addClass("col-sm-12");
+                        }, 500));
+
 
                     });
                     $("#showCal").click(function() {
