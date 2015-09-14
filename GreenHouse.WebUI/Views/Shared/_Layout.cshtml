@@ -59,6 +59,37 @@
     @Html.Partial("~/Views/Shared/LoginPopup.cshtml")
     @Html.Partial("~/Views/Shared/RegistrationPopup.cshtml")
 
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker12').datepicker({
+                inline: true,
+                sideBySide: true,
+                language: 'ru'
+            });
+
+            $("#hideCal").click(function () {
+                $(".cal").hide("slow");
+                $("#diagram").removeClass("col-sm-8");
+                $("#diagram").addClass("col-sm-12");
+
+            });
+            $("#showCal").click(function () {
+                $(".cal").show("slow");
+                $("#diagram").removeClass("col-sm-12");
+                $("#diagram").addClass("col-sm-8");
+            });
+            //////////////////////////////////////////
+            $('#next-column').click(function (event) {
+                event.preventDefault();
+                $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
+            });
+            $('#previous-column').click(function (event) {
+                event.preventDefault();
+                $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
+            });
+        });
+    </script>
+
 @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -24,12 +24,27 @@ namespace GreenHouse.WebUI.Controllers
             foreach (var item in res)
             {
                 int roomNum = Int32.Parse(item.Room.Number);
-                int timeRes = ((DateTime)item.EndTime).Hour;
+                int timeRes = ((DateTime)item.EndTime).Hour - 7;
                 resArr[roomNum - 300, timeRes] = item;
             }
             return View(resArr);
         }
 
+        [HttpPost]
+        public ActionResult Reservations(int year = 5, int month = 5, int day = 5)
+        {
+            Reservation[,] resArr = new Reservation[15, 8];
+
+            var res = _repository.GetReservationsByDate(new DateTime(2015, 9, 8));
+            foreach (var item in res)
+            {
+                int roomNum = Int32.Parse(item.Room.Number);
+                int timeRes = ((DateTime)item.EndTime).Hour - 7;
+                resArr[roomNum - 300, timeRes] = item;
+            }
+
+            return PartialView(resArr);
+        }
     }
 
 }

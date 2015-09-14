@@ -40,68 +40,8 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-9" id="diagram">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <a id="previous-column" href="#"><h4><</h4></a>
-                        <div class="time-table">
-                            <table class="time">
-                                @for (int t = 9; t < 17; t++)
-                                {
-                                    <tr>
-                                        <td>@t<span>:00</span></td>
-                                    </tr>
-                                }
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-10">
-                        @*<a id="previous-column" href="#">Previous</a>*@
-                        @*<a id="next-column" href="#">Next</a>*@
-                        <div class="table-container">
-                            <table class="table sliding-window table-header">
-                                <tr>
-                                    @for (int j = 301; j <= 315; j++)
-                                    {
-                                        <td><span>K. @j </span></td>
-                                    }
-                                </tr>
-                            </table>
-
-                            <table class="table sliding-window">
-
-                                @for (int i = 0; i < 8; i++)
-                                {
-                                    <tr>
-                                        @for (int j = 0; j < 15; j++)
-                                        {
-                                            if (Model[j, i] != null)
-                                            {
-                                                <td class="diagram-cell">
-                                                    <span data-toggle="popover" title="" data-content="
-                                        <div class='custompopover'>
-                                            <img src='../../Content/images/icon-user-grey.png'>
-                                            @Model[j, i].User.FName @Model[j, i].User.SName<br/>@Model[j, i].Purpose</div>">@Model[j, i].User.SName @Model[j, i].User.FName</span>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td></td>
-                                            }
-                                        }
-                                    </tr>
-                                }
-
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <a id="next-column" href="#"><h4>></h4></a>
-                    </div>
-                </div>
-            </div>
-           
+        <div id="content">
+            No content loaded
         </div>
 
         <div class="col-sm-3 text-right cal">
@@ -128,42 +68,26 @@
             })
         </script>
         <script type="text/javascript">
-                $(function() {
-                    $('#datetimepicker12').datepicker({
-                        inline: true,
-                        sideBySide: true,
-                        language: 'ru'
-                    });
+            $(window).load(function () {
+                var year = 2015;
+                var month = 9;
+                var day = 8;
 
-                    $("#hideCal").click(function() {
-                        $(".cal").slideUp("slow");//.hide();
+                var model = {
+                    Year: year,
+                    Month: month,
+                    Day: day
+                };
 
-                        $(setTimeout(function() {
-                            $("#diagram").removeClass("col-sm-8");
-                            $("#diagram").addClass("col-sm-12");
-                        }, 500));
-
-
-                    });
-                    $("#showCal").click(function() {
-                        $(".cal").show("slow");
-                        $("#diagram").removeClass("col-sm-12");
-                        $("#diagram").addClass("col-sm-8");
-                    });
-                    //////////////////////////////////////////
-                    $('#next-column').click(function (event) {
-                        event.preventDefault();
-                        $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
-                    });
-                    $('#previous-column').click(function (event) {
-                        event.preventDefault();
-                        $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
-                    });
+                $.ajax({
+                    type: "POST",
+                    data: model,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
                 });
-
-                $(document).ready(function () {
-                    $("#myModal").modal('show');
-                });
+            });
         </script>
     </div>
 
