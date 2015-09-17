@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "Reservations";
 }
 @model GreenHouse.Domain.Entities.Reservation[,]
@@ -7,7 +8,8 @@
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
 
-<div class="col-sm-9" id="diagram">
+
+
     <div class="container">
         <div class="row">
             <div class="col-sm-1">
@@ -45,16 +47,23 @@
                                 {
                                     if (Model[j, i] != null)
                                     {
-                                        <td class="diagram-cell" data-toggle="popover" title="" data-content="
+                                        <td class="diagram-cell">
+                                                    <span data-toggle="popover" title="" data-content="
                                         <div class='custompopover'>
                                             <img src='../../Content/images/icon-user-grey.png'>
-                                            @Model[j, i].User.FName @Model[j, i].User.SName<br/>@Model[j, i].Purpose</div>">
-                                                    <span>@Model[j, i].User.SName @Model[j, i].User.FName</span>
+                                            @Model[j, i].AspNetUser.Email @Model[j, i].AspNetUser.Email<br/>@Model[j, i].Purpose</div>">@Model[j, i].AspNetUser.UserName</span>
                                                 </td>
                                     }
                                     else
                                     {
-                                        <td></td>
+                                        <td class="cell">
+                                            @if(Request.IsAuthenticated)
+                                            {
+                                                <span data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
+                                                <textarea autofocus cols=31 maxlength=80 rows=3></textarea>
+                                                <button>Бронировать</button> </div>"><img class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png"></span>
+                                            }
+                                        </td>
                                     }
                                 }
                             </tr>
@@ -69,7 +78,7 @@
         </div>
     </div>
 
-</div>
+
 
 
 
@@ -96,3 +105,4 @@
 
 </script>
 @Scripts.Render("~/bundles/bootstrap")
+

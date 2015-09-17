@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-@model GreenHouse.Domain.Entities.Reservation[,]
+@*@model GreenHouse.Domain.Entities.Reservation[,]*@
 
 <div class="container header-image">
     <div class="row">
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h3>Расписание</h3>
-            <h4>На 24 Августа 2015</h4>
+            <h4 id="forCurrentDate">@String.Format("На  {0}  {1}  {2}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) </h4>
         </div>
         <div class="col-sm-6 text-right">
             <h6>
@@ -40,15 +40,16 @@
     </div>
 
     <div class="row">
-        <div id="content">
-            No content loaded
+        <div class="col-sm-9" id="diagram">
+            <div id="content">
+                Загрузка...
+            </div>
         </div>
-
-        <div class="col-sm-3 text-right cal">
-            <div style="overflow: hidden;">
-                <div class="form-group">
-                    <div class="row">
-                        @*<div class="col-md-12">
+            <div class="col-sm-3 text-right cal">
+                <div style="overflow: hidden;">
+                    <div class="form-group">
+                        <div class="row">
+                            @*<div class="col-md-12">
                             <div>
                                 <button id="btnCalendarMode" class="btn btn-md" onclick="$.GreenHouse.btnCalendarMode_Click(this)" data-mode="0">День</button>
                             </div>*@
@@ -60,18 +61,19 @@
         </div>
 
 
-        <script>
+    <script>
             $(function() {
                 $('[data-toggle="popover"]').popover({
                     html: true
                 });
             })
-        </script>
-        <script type="text/javascript">
-            $(window).load(function () {
-                var year = 2015;
-                var month = 9;
-                var day = 8;
+    </script>
+    <script type="text/javascript">
+        $(window).load(function () {
+
+                var year = @DateTime.Now.Year;
+                var month = @DateTime.Now.Month;
+                var day = @DateTime.Now.Day;
 
                 var model = {
                     Year: year,
@@ -88,7 +90,31 @@
                     $('#content').html(result);
                 });
             });
-        </script>
-    </div>
+
+        $(function () {
+            $('#datetimepicker12').on("changeDate", function (e) {
+                var day = e.date.getDate();
+                var month = e.date.getMonth() + 1;
+                var year = e.date.getFullYear();
+                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+
+                var model = {
+                    Year: year,
+                    Month: month,
+                    Day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+            });
+        });
+    </script>
+</div>
 
 @Html.Partial("~/Views/Shared/Rooms.cshtml")

@@ -508,3 +508,15 @@ table.time {
 .reg-line {
     border-bottom: 1px solid #006400;
 }
+
+.icon-add-new-event {
+    opacity: 0;
+}
+.cell:hover .icon-add-new-event{
+    opacity: 1;
+}
+
+ textarea {
+    resize: none;
+     margin: 10px 0;
+} 

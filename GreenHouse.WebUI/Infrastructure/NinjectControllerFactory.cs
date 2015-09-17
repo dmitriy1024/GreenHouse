@@ -27,6 +27,7 @@ namespace GreenHouse.WebUI.Infrastructure
         private void AddBindings()
         {
             _ninjectKernel.Bind<IRoomRepository>().To<EFRoomRepository>();
+            _ninjectKernel.Bind<IReservationRepository>().To<EFReservationRepository>();
         }
     }
 }

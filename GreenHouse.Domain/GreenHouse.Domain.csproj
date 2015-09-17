@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FEBF7239-0762-41D8-A566-C0398853E0AD}</ProjectGuid>
+    <ProjectGuid>{06BC0815-F9AC-498B-AC68-B3199D6DEADA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GreenHouse.Domain</RootNamespace>
@@ -49,15 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IReservationRepository.cs" />
     <Compile Include="Abstract\IRoomRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFReservationRepository.cs" />
     <Compile Include="Concrete\EFRoomRepository.cs" />
     <Compile Include="Entities\AdditEquipment.cs" />
+    <Compile Include="Entities\AspNetUser.cs" />
     <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Entities\Room.cs" />
-    <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

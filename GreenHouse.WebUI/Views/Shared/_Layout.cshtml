@@ -26,38 +26,39 @@
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a data-toggle="modal" data-target="#login-modal">
-                                        <div class="email">Логин</div>
-                                        @*<div><span>admin</span></div>*@
-                                    </a>
-                                </li>
-                                <li><a data-toggle="modal" data-target="#reg-modal"><span class="exit">Регистрация</span></a></li>
-                            </ul>
+                            @*<ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <a data-toggle="modal" data-target="#login-modal">
+                                            <div class="email">Логин</div>
+                                            <div><span>admin</span></div>
+                                        </a>
+                                    </li>
+                                    <li><a data-toggle="modal" data-target="#reg-modal"><span class="exit">Регистрация</span></a></li>
+                                </ul>*@
+                            @Html.Partial("_LoginPartial")
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
         </div>
     </div>
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
 
-    <div class="navbar-fixed-bottom row-fluid footer text-right">
-        <div class="navbar-inner">
-            <div class="container">
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Softheme. Все права защищены</p>
-                </footer>
+        <div class="navbar-fixed-bottom row-fluid footer text-right">
+            <div class="navbar-inner">
+                <div class="container">
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - Softheme. Все права защищены</p>
+                    </footer>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-    @Html.Partial("~/Views/Shared/LoginPopup.cshtml")
-    @Html.Partial("~/Views/Shared/RegistrationPopup.cshtml")
+    @*@Html.Partial("~/Views/Shared/LoginPopup.cshtml")
+        @Html.Partial("~/Views/Shared/RegistrationPopup.cshtml")*@
 
     <script type="text/javascript">
         $(function () {
@@ -68,11 +69,14 @@
             });
 
             $("#hideCal").click(function () {
-                $(".cal").hide("slow");
-                $("#diagram").removeClass("col-sm-8");
-                $("#diagram").addClass("col-sm-12");
+                $(".cal").slideUp("slow");//.hide();
 
+                $(setTimeout(function () {
+                    $("#diagram").removeClass("col-sm-8");
+                    $("#diagram").addClass("col-sm-12");
+                }, 500));
             });
+
             $("#showCal").click(function () {
                 $(".cal").show("slow");
                 $("#diagram").removeClass("col-sm-12");
@@ -90,8 +94,86 @@
         });
     </script>
 
-@Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </body>
 </html>
 
+
+
+@Html.Partial("~/Views/Account/Login.cshtml")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@

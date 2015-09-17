@@ -4,8 +4,8 @@ using GreenHouse.Domain.Entities;
 
 namespace GreenHouse.Domain.Abstract
 {
-    public interface IRoomRepository
+    public interface IReservationRepository
     {
-        IEnumerable<Room> Rooms { get; }        
+        IEnumerable<Reservation> GetReservationsByDate(DateTime date);
     }
 }
