@@ -51,7 +51,7 @@
                                                     <span data-toggle="popover" title="" data-content="
                                         <div class='custompopover'>
                                             <img src='../../Content/images/icon-user-grey.png'>
-                                            @Model[j, i].AspNetUser.Email @Model[j, i].AspNetUser.Email<br/>@Model[j, i].Purpose</div>">@Model[j, i].AspNetUser.UserName</span>
+                                            @Model[j, i].AspNetUser.UserName<br/>@Model[j, i].Purpose</div>">@Model[j, i].AspNetUser.UserName</span>
                                                 </td>
                                     }
                                     else
@@ -97,7 +97,7 @@
                 currentDate: $("#forCurrentDate").text(),
                 purpose: $("#purpose").val()
             };
-
+            
             $.ajax({
                 type: "POST",
                 data: model,
@@ -105,7 +105,7 @@
                 url: '@Url.Action("AddReservation", "Home")'
             })
 
-            var year = @DateTime.Now.Year;
+            @*var year = @DateTime.Now.Year;
             var month = @DateTime.Now.Month;
             var day = @DateTime.Now.Day;
 
@@ -123,6 +123,8 @@
             }).done(function (result) {
                 $('#content').html(result);
             });
+
+            $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);*@
         });
     });
     $(function() {

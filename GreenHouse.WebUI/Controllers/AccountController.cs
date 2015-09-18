@@ -152,7 +152,8 @@ namespace GreenHouse.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                string userName = String.Format("{0} {1}", model.FName, model.LName);
+                var user = new ApplicationUser { UserName = userName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
