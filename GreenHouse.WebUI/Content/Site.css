@@ -150,7 +150,7 @@ table.table-condensed .dow{
 /*---------------------------------------------------------------------------------------------------------*/
 .table-container {
     width: 100%; /* Total width of visible columns + border widths */
-    height:490px;
+    height:800px;
     overflow:hidden;
 }
 

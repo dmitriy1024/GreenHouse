@@ -16,9 +16,9 @@
                 <a id="previous-column" href="#"><h4><</h4></a>
                 <div class="time-table">
                     <table class="time">
-                        @for (int t = 9; t < 17; t++)
+                        @for (int t = 9; t < 22; t++)
                         {
-                            <tr>
+                            <tr height ="50px">
                                 <td>@t<span>:00</span></td>
                             </tr>
                         }
@@ -40,10 +40,10 @@
 
                     <table class="table sliding-window">
 
-                        @for (int i = 0; i < 8; i++)
+                        @for (int i = 0; i < Model.GetLength(1); i++)
                         {
                             <tr>
-                                @for (int j = 0; j < 15; j++)
+                                @for (int j = 0; j < Model.GetLength(0); j++)
                                 {
                                     if (Model[j, i] != null)
                                     {
@@ -56,12 +56,14 @@
                                     }
                                     else
                                     {
-                                        <td class="cell">
+                                        <td id="@i-@j" class="cell">
                                             @if(Request.IsAuthenticated)
                                             {
                                                 <span data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
-                                                <textarea autofocus cols=31 maxlength=80 rows=3></textarea>
-                                                <button>Бронировать</button> </div>"><img class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png"></span>
+                                                <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>
+                                                <button id='reservate'>Бронировать</button> </div>">
+                                                <img class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
+                                                </span>
                                             }
                                         </td>
                                     }
@@ -79,30 +81,60 @@
     </div>
 
 
-
-
-
 <script>
-            $(function() {
-                $('[data-toggle="popover"]').popover({
-                    html: true
-                });
+    $(function() {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    })
+
+    $(function () {
+        $("body").delegate('#reservate', 'click', function () {
+            var id = $("#reservate").closest("td").attr("id");            
+            
+            var model = {
+                roomAndTime: id,
+                currentDate: $("#forCurrentDate").text(),
+                purpose: $("#purpose").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("AddReservation", "Home")'
             })
 
-            $(function() {
+            var year = @DateTime.Now.Year;
+            var month = @DateTime.Now.Month;
+            var day = @DateTime.Now.Day;
 
-                //////////////////////////////////////////
-                $('#next-column').click(function (event) {
-                    event.preventDefault();
-                    $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
-                });
-                $('#previous-column').click(function (event) {
-                    event.preventDefault();
-                    $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
-                });
+            var model = {
+                Year: year,
+                Month: month,
+                Day: day
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("Reservations", "Home")'
+            }).done(function (result) {
+                $('#content').html(result);
             });
-
-
+        });
+    });
+    $(function() {
+        $('#next-column').click(function (event) {
+            event.preventDefault();
+            $('.table-container').animate({ scrollLeft: '+=100' }, 'fast');
+        });
+        $('#previous-column').click(function (event) {
+            event.preventDefault();
+            $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
+        });
+    });
 </script>
 @Scripts.Render("~/bundles/bootstrap")
 

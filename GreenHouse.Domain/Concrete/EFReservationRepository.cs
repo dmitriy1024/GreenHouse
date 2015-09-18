@@ -19,5 +19,22 @@ namespace GreenHouse.Domain.Concrete
 
             return reservations.ToList();
         }
+
+        public void AddReservation(string userId, string roomNum, DateTime beginTime, DateTime endTime, string purpose)
+        {
+            var room = _context.Rooms.Where(a => String.Compare(a.Number, roomNum) == 0).ToList();
+            
+            var res = new Reservation()
+            {
+                AspNetUserId = userId,
+                BeginTime = beginTime,
+                EndTime = endTime,
+                RoomId = room[0].Id,
+                Purpose = purpose
+            };
+
+            _context.Reservations.Add(res);
+            _context.SaveChanges();
+        }
     }
 }
