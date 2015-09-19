@@ -54,9 +54,9 @@
             </div>
         </div>
 
-    <input type="hidden" id="forCurrentYear" value="@DateTime.Now.Year">
-    <input type="hidden" id="forCurrentMonth" value="@DateTime.Now.Month">
-    <input type="hidden" id="forCurrentDay" value="@DateTime.Now.Day">
+    <input type="hidden" id="forCurrentYear" >
+    <input type="hidden" id="forCurrentMonth" >
+    <input type="hidden" id="forCurrentDay" >
 
     <script>
             $(function() {
@@ -67,7 +67,7 @@
     </script>
 
     <script type="text/javascript">
-        $(window).load(function () {
+        @*$(window).load(function () {
                 var year = @DateTime.Now.Year;
                 var month = @DateTime.Now.Month;
                 var day = @DateTime.Now.Day;
@@ -86,7 +86,7 @@
                 }).done(function (result) {
                     $('#content').html(result);
                 });
-            });
+            });*@
 
         $(function () {
             $('#datetimepicker12').on("changeDate", function (e) {
@@ -96,10 +96,10 @@
 
                 $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
                 
-                $('#forCurrentYear').data('value', year);
-                $('#forCurrentMonth').data('value', month);
-                $('#forCurrentDay').data('value', day);
-
+                $('#forCurrentYear').val(year);
+                $('#forCurrentMonth').val(month);
+                $('#forCurrentDay').val(day);
+                debugger;
                 var model = {
                     Year: year,
                     Month: month,

@@ -33,7 +33,7 @@
                         </tr>
                     </table>
 
-                    <table class="table sliding-window">
+                    <table class="table sliding-window" id="resTable">
 
                         @for (int hour = ViewBag.BeginHour; hour < ViewBag.EndHour; hour++)
                         {
@@ -85,15 +85,18 @@
     })
     
     $(function () {
-        $("body").delegate('#reservate', 'click', function () {
+        $("#resTable").delegate('#reservate', 'click', function () {
             var roomId = $("#reservate").closest("td").data("roomId");            
             var beginHour = $("#reservate").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
             
             var model = {
                 roomId: roomId,
-                year: $('#forCurrentYear').attr('value'),
-                month: $('#forCurrentMonth').attr('value'),
-                day: $('#forCurrentDay').attr('value'),
+                year: year,
+                month: month,
+                day: day,
                 beginHour: beginHour,
                 purpose: $("#purpose").val()
             };
@@ -103,28 +106,24 @@
                 data: model,
                 dataType: "html",
                 url: '@Url.Action("AddReservation", "Home")'
-            })
-
-            @*var year = @DateTime.Now.Year;
-            var month = @DateTime.Now.Month;
-            var day = @DateTime.Now.Day;
-
-            var model = {
-                Year: year,
-                Month: month,
-                Day: day
-            };
-
-            $.ajax({
-                type: "POST",
-                data: model,
-                dataType: "html",
-                url: '@Url.Action("Reservations", "Home")'
             }).done(function (result) {
-                $('#content').html(result);
-            });
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+                debugger;
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
 
-            $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);*@
+                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+            });           
         });
     });
     $(function() {
