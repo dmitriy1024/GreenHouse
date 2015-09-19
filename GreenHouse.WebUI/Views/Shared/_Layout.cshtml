@@ -65,9 +65,10 @@
             $('#datetimepicker12').datepicker({
                 inline: true,
                 sideBySide: true,
-                setDate: new Date(),
-                language: 'ru'
+                language: 'ru'               
             });
+
+            $('#datetimepicker12').datepicker('_setDate', new Date());
 
             $("#hideCal").click(function () {
                 $(".cal").slideUp("slow");//.hide();
@@ -101,9 +102,10 @@
 </body>
 </html>
 
-
-
 @Html.Partial("~/Views/Account/Login.cshtml")
+
+
+
 
 
 

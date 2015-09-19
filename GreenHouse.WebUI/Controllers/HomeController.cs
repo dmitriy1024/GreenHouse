@@ -27,41 +27,22 @@ namespace GreenHouse.WebUI.Controllers
             return View();
         }
 
-
         [HttpPost]
         public ActionResult Reservations(int year, int month, int day)
         {
-            int rowCount = 12;
-            int roomsCount = 15;
-            int beginTime = 9;
+            var roomsAndResByDate = _roomRepository.GetRoomsAndReservationsByDate(new DateTime(year, month, day));
 
-            Reservation[,] resArr = new Reservation[roomsCount, rowCount];
-
-            var res = _reservationRepository.GetReservationsByDate(new DateTime(year, month, day));
-
-            foreach (var item in res)
-            {
-                int roomNum = Int32.Parse(item.Room.Number);
-                int timeRes = (item.BeginTime).Hour - beginTime;
-                resArr[roomNum - 301, timeRes] = item;
-            }
-
-            return PartialView(resArr);
+            ViewBag.BeginHour = 9;
+            ViewBag.EndHour = 21;
+            return PartialView(roomsAndResByDate);
         }
 
         [HttpPost]
-        public void AddReservation(string roomAndTime, string currentDate, string purpose)
-        {
-            int begHour = Int32.Parse(roomAndTime.Split('-')[0]) + 9;
-            int roomNumber = Int32.Parse(roomAndTime.Split('-')[1]) + 301;
-            var res = (currentDate.Split(' '));
-            int year = Int32.Parse(currentDate.Split(' ')[6]);
-            int month = Int32.Parse(currentDate.Split(' ')[4]);
-            int day = Int32.Parse(currentDate.Split(' ')[2]);
+        public void AddReservation(int roomId, int year, int month, int day, int beginHour, string purpose)
+        {   
+            DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
 
-            DateTime beginTime = new DateTime(year, month, day).AddHours(begHour);
-
-            _reservationRepository.AddReservation(User.Identity.GetUserId(), roomNumber.ToString(), beginTime, beginTime.AddHours(1), purpose);
+            _reservationRepository.AddReservation(User.Identity.GetUserId(), roomId, beginTime, beginTime.AddHours(1), purpose);
         }
 
         public ActionResult About()

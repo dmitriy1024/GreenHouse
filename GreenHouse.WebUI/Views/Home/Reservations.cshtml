@@ -1,14 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
+@using GreenHouse.Domain.Entities;
 @{
     ViewBag.Title = "Reservations";
 }
-@model GreenHouse.Domain.Entities.Reservation[,]
+@model Dictionary<Room, IEnumerable<Reservation>>
 
-@Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-@Scripts.Render("~/bundles/jquery")
-
-
 
     <div class="container">
         <div class="row">
@@ -16,7 +13,7 @@
                 <a id="previous-column" href="#"><h4><</h4></a>
                 <div class="time-table">
                     <table class="time">
-                        @for (int t = 9; t < 22; t++)
+                        @for (int t = ViewBag.BeginHour; t < ViewBag.EndHour; t++)
                         {
                             <tr height ="50px">
                                 <td>@t<span>:00</span></td>
@@ -26,38 +23,37 @@
                 </div>
             </div>
             <div class="col-sm-10">
-                @*<a id="previous-column" href="#">Previous</a>*@
-                @*<a id="next-column" href="#">Next</a>*@
                 <div class="table-container">
                     <table class="table sliding-window table-header">
                         <tr>
-                            @for (int j = 301; j <= 315; j++)
+                            @foreach (var room in Model.Keys)
                             {
-                                <td><span>K. @j </span></td>
+                                <td><span>K. @room.Number </span></td>
                             }
                         </tr>
                     </table>
 
                     <table class="table sliding-window">
 
-                        @for (int i = 0; i < Model.GetLength(1); i++)
+                        @for (int hour = ViewBag.BeginHour; hour < ViewBag.EndHour; hour++)
                         {
                             <tr>
-                                @for (int j = 0; j < Model.GetLength(0); j++)
+                                @foreach (var item in Model)
                                 {
-                                    if (Model[j, i] != null)
+                                    var res = item.Value.Where(a => a.BeginTime.Hour == hour);
+                                    if (res.Count() > 0)
                                     {
-                                        <td class="diagram-cell">
-                                                    <span data-toggle="popover" title="" data-content="
-                                        <div class='custompopover'>
-                                            <img src='../../Content/images/icon-user-grey.png'>
-                                            @Model[j, i].AspNetUser.UserName<br/>@Model[j, i].Purpose</div>">@Model[j, i].AspNetUser.UserName</span>
-                                                </td>
+                                        <td class="diagram-cell"> 
+                                            <span data-toggle="popover" title="" data-content="
+                                                    <div class='custompopover'>
+                                                    <img src='../../Content/images/icon-user-grey.png'>
+                                            @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
+                                        </td>
                                     }
                                     else
                                     {
-                                        <td id="@i-@j" class="cell">
-                                            @if(Request.IsAuthenticated)
+                                        <td class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
+                                            @if (Request.IsAuthenticated)
                                             {
                                                 <span data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>
@@ -87,17 +83,21 @@
             html: true
         });
     })
-
+    
     $(function () {
         $("body").delegate('#reservate', 'click', function () {
-            var id = $("#reservate").closest("td").attr("id");            
+            var roomId = $("#reservate").closest("td").data("roomId");            
+            var beginHour = $("#reservate").closest("td").data("beginHour");
             
             var model = {
-                roomAndTime: id,
-                currentDate: $("#forCurrentDate").text(),
+                roomId: roomId,
+                year: $('#forCurrentYear').attr('value'),
+                month: $('#forCurrentMonth').attr('value'),
+                day: $('#forCurrentDay').attr('value'),
+                beginHour: beginHour,
                 purpose: $("#purpose").val()
             };
-            
+            debugger;
             $.ajax({
                 type: "POST",
                 data: model,
