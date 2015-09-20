@@ -13,10 +13,10 @@
                 <a id="previous-column" href="#"><h4><</h4></a>
                 <div class="time-table">
                     <table class="time">
-                        @for (int t = ViewBag.BeginHour; t < ViewBag.EndHour; t++)
+                        @for (int t = ViewBag.BeginHour; t <= ViewBag.EndHour; t++)
                         {
-                            <tr height ="50px">
-                                <td>@t<span>:00</span></td>
+                            <tr>
+                                <td class="cell">@t<span>:00</span></td>
                             </tr>
                         }
                     </table>
@@ -41,6 +41,7 @@
                                 @foreach (var item in Model)
                                 {
                                     var res = item.Value.Where(a => a.BeginTime.Hour == hour);
+
                                     if (res.Count() > 0)
                                     {
                                         <td class="diagram-cell"> 
@@ -53,7 +54,7 @@
                                     else
                                     {
                                         <td class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
-                                            @if (Request.IsAuthenticated)
+                                            @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
                                             {
                                                 <span data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>

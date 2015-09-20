@@ -30,8 +30,10 @@ namespace GreenHouse.WebUI.Controllers
         [HttpPost]
         public ActionResult Reservations(int year, int month, int day)
         {
-            var roomsAndResByDate = _roomRepository.GetRoomsAndReservationsByDate(new DateTime(year, month, day));
+            var date = new DateTime(year, month, day);
+            var roomsAndResByDate = _roomRepository.GetRoomsAndReservationsByDate(date);
 
+            ViewBag.Date = date;
             ViewBag.BeginHour = 9;
             ViewBag.EndHour = 21;
             return PartialView(roomsAndResByDate);
