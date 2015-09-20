@@ -1,5 +1,5 @@
 ﻿@model GreenHouse.WebUI.Models.RegisterViewModel
-@{
+@*@{
     ViewBag.Title = "Register";
 }
 
@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.ValidationSummary("", new { @class = "text-danger" })*@
 
     @*<div class="form-group">
         @Html.LabelFor(m => m.FName, new { @class = "col-md-2 control-label" })
@@ -26,7 +26,7 @@
         </div>
     </div>*@
 
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -50,8 +50,64 @@
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-}
+}*@
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+@using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnSuccess = "OnSuccess"}))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="reg-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="login-popup-logo">
+                    <img src="../../Content/images/logo-big.png" />
+                </div><br>
+                <form>
+                    <div class="reg-icons"><img src="../../Content/images/icon-user-green.png" /></div>
+                    @*<input type="text" name="user" placeholder="Имя">
+                    <input type="text" name="user" placeholder="Фамилия">*@
+                    @*<input type="text" name="user" placeholder="Электронная почта">*@
+                    @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <div class="reg-icons"><img src="../../Content/images/icon-key-green.png" /></div>
+                    @*<input type="password" name="pass" placeholder="Пароль">*@
+                    @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    @*<input type="password" name="pass" placeholder="Повторить пароль">*@
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "confPass", @class = "form-control", @placeholder = "Повторить пароль" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Зарегистрироваться">
+                </form>
+
+                <div class="login-help">
+                    <a id="reg-enter-link" data-toggle="modal" data-dismiss="modal" data-target="#login-modal">Войти</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
+<script>
+    function OnSuccess(data) {
+        if (data == 'OK') {
+            // data.redirect contains the string URL to redirect to
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+        else {
+            // data.form contains the HTML for the replacement form
+            $("#result").replaceWith(data);
+        }
+    }
+</script>
+
+
+
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
