@@ -53,14 +53,18 @@
                                     }
                                     else
                                     {
-                                        <td class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
+                                        <td style="padding: 0;" class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                             @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
                                             {
-                                                <span data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
+
+                                                <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>
                                                 <button id='reservate'>Бронировать</button> </div>">
-                                                <img class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
+                                                    <span>
+                                                <img style="padding: 12px" class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
                                                 </span>
+                                                </div>
+
                                             }
                                         </td>
                                     }
