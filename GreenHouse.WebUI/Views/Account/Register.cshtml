@@ -71,6 +71,10 @@
                     @*<input type="text" name="user" placeholder="Имя">
                         <input type="text" name="user" placeholder="Фамилия">*@
                     @*<input type="text" name="user" placeholder="Электронная почта">*@
+                    @Html.TextBoxFor(m => m.FName, new {@class = "form-control", @placeholder = "Имя" })
+                    
+                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control", @placeholder = "Фамилия" })
+
                     @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     <div class="reg-icons"><img src="../../Content/images/icon-key-green.png" /></div>

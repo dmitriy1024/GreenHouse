@@ -28,6 +28,7 @@ namespace GreenHouse.WebUI.Infrastructure
         {
             _ninjectKernel.Bind<IRoomRepository>().To<EFRoomRepository>();
             _ninjectKernel.Bind<IReservationRepository>().To<EFReservationRepository>();
+            _ninjectKernel.Bind<IAspUserRepository>().To<EFAspUserRepository>();
         }
     }
 }

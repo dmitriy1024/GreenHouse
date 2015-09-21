@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GreenHouse.WebUI.Models;
+using GreenHouse.Domain.Abstract;
 
 namespace GreenHouse.WebUI.Controllers
 {
@@ -17,9 +18,11 @@ namespace GreenHouse.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IAspUserRepository _aspUserRepository;
 
-        public AccountController()
+        public AccountController(IAspUserRepository aspUserRepository)
         {
+            _aspUserRepository = aspUserRepository;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -74,9 +77,18 @@ namespace GreenHouse.WebUI.Controllers
                 return Json("Error");
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = _aspUserRepository.GetAspNetUserByEmail(model.Email);
+
+            SignInStatus result;
+            if(user == null)
+            {
+                result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            }
+            else
+            {
+                result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            }
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -150,9 +162,9 @@ namespace GreenHouse.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                //string userName = String.Format("{0} {1}", model.FName, model.LName);
-                //var user = new ApplicationUser { UserName = userName, Email = model.Email };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };//{ UserName = "user", Email = model.Email };
+                string userName = String.Format("{0} {1}", model.FName, model.LName);
+                var user = new ApplicationUser { UserName = userName, Email = model.Email };
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -64,13 +64,13 @@ namespace GreenHouse.WebUI.Models
 
     public class RegisterViewModel
     {
-        //[Required]
-        //[Display(Name = "First Name")]
-        //public string FName { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
+        public string FName { get; set; }
 
-        //[Required]
-        //[Display(Name = "Last Name")]
-        //public string LName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
 
         [Required]
         [EmailAddress]

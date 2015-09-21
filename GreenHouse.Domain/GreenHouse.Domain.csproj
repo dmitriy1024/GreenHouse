@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAspUserRepository.cs" />
     <Compile Include="Abstract\IReservationRepository.cs" />
     <Compile Include="Abstract\IRoomRepository.cs" />
+    <Compile Include="Concrete\EFAspUserRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFReservationRepository.cs" />
     <Compile Include="Concrete\EFRoomRepository.cs" />
