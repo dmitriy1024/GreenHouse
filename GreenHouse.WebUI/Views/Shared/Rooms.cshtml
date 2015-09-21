@@ -1,5 +1,58 @@
 ﻿<div class="container-fluid map-bg">
     <div class="row">
+        <div class="col-xs-6 filter-bs-con"></div>
+        <div class="col-xs-6 filter-bs-con">
+            <div class="filter-container">
+                <div class="filter">
+                    <span class="filter-labels">Количество посадочных мест:</span><br><br>
+                    <input type="range" step="25"/>
+                    <table class="range-labels">
+                        <tr>
+                            <td>
+                                от 10
+                            </td>
+                            <td>
+                                от 30
+                            </td>
+                            <td>
+                                от 70
+                            </td>
+                            <td>
+                                от 100
+                            </td>
+                            <td>
+                                от 200
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="color: #fafafa; padding: 10px;">
+                        <span class="filter-labels">Техническая база:</span>
+
+                        <table class="table-filter">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" checked="checked"/><label for="checkboxG1" class="css-label"></label><span class="filter-labels">Wi-Fi</span>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" checked="checked"/><label for="checkboxG2" class="css-label"></label><span class="filter-labels">Проектор</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" checked="checked"/><label for="checkboxG3" class="css-label"></label><span class="filter-labels">Монитор</span>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox" checked="checked"/><label for="checkboxG4" class="css-label"></label><span class="filter-labels">Микрофон</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
         <div class="col-xs-12">
             <div class="mapContainer">
                 <h3>План Этажа</h3>
@@ -21,39 +74,39 @@
                     <div class="room" id="room302"><span>302</span></div>
                     <div class="room" id="room303"><span>303</span></div>
                     <div class="room" id="room304"><span>304</span></div>
-                    <img src="@Url.Content("~/Content/images/map.png")" usemap="#roommap" />
+                    <img src="@Url.Content("~/Content/images/map.png")" usemap="#roommap"/>
                     <map name="roommap">
                         @*307*@
-                        <area shape="rect" coords="40,25,130,86" href="http://google.com" />
+                        <area shape="rect" coords="40,25,130,86" href="http://google.com"/>
                         @*308*@
-                        <area shape="rect" coords="40,95,125,127" href="http://google.com" />
+                        <area shape="rect" coords="40,95,125,127" href="http://google.com"/>
                         @*309*@
-                        <area shape="rect" coords="40,134,125,172" href="http://google.com" />
+                        <area shape="rect" coords="40,134,125,172" href="http://google.com"/>
                         @*310*@
-                        <area shape="rect" coords="40,180,125,237" href="http://google.com" />
+                        <area shape="rect" coords="40,180,125,237" href="http://google.com"/>
                         @*306*@
-                        <area shape="rect" coords="196,28,264,75" href="http://google.com" />
+                        <area shape="rect" coords="196,28,264,75" href="http://google.com"/>
                         @*305*@
-                        <area shape="rect" coords="173,82,264,128" href="http://google.com" />
+                        <area shape="rect" coords="173,82,264,128" href="http://google.com"/>
                         @*312*@
-                        <area shape="rect" coords="190,307,340,394" href="http://google.com" />
+                        <area shape="rect" coords="190,307,340,394" href="http://google.com"/>
                         @*313*@
-                        <area shape="rect" coords="350,307,455,394" href="http://google.com" />
+                        <area shape="rect" coords="350,307,455,394" href="http://google.com"/>
                         @*314*@
-                        <area shape="rect" coords="465,307,611,394" href="http://google.com" />
+                        <area shape="rect" coords="465,307,611,394" href="http://google.com"/>
                         @*315*@
-                        <area shape="rect" coords="621,307,665,337" href="http://google.com" />
+                        <area shape="rect" coords="621,307,665,337" href="http://google.com"/>
                         @*301*@
-                        <area shape="rect" coords="504,165,612,257" href="http://google.com" />
+                        <area shape="rect" coords="504,165,612,257" href="http://google.com"/>
                         @*302*@
-                        <area shape="rect" coords="464,165,500,257" href="http://google.com" />
+                        <area shape="rect" coords="464,165,500,257" href="http://google.com"/>
                         @*303*@
-                        <area shape="rect" coords="295,165,336,257" href="http://google.com" />
+                        <area shape="rect" coords="295,165,336,257" href="http://google.com"/>
                         @*304*@
-                        <area shape="poly" coords="173,192, 285,192, 285,256, 200,256, 173, 225" href="http://google.com" />
+                        <area shape="poly" coords="173,192, 285,192, 285,256, 200,256, 173, 225" href="http://google.com"/>
                         @*311*@
-                        <area shape="circle" coords="105,320,67" href="korr.ua" />
-                        <area shape="circle" coords="55,270,25" href="korr.ua" />
+                        <area shape="circle" coords="105,320,67" href="korr.ua"/>
+                        <area shape="circle" coords="55,270,25" href="korr.ua"/>
 
                     </map>
                 </div>

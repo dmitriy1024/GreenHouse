@@ -216,6 +216,7 @@ table.table-condensed .dow{
 
 .map-bg {
     background-image: url(images/bg_plan.png);
+    position: relative;
 }
 
 div.mapContainer {
@@ -520,3 +521,117 @@ table.time {
     resize: none;
      margin: 10px 0;
 } 
+
+
+
+
+
+
+
+
+.filter-bs-con {
+    position: absolute;
+    bottom: 280px;
+    right: 20px;
+    z-index: 1000;
+}
+
+ .filter-container {
+    width: 330px;
+    height: 290px;
+    padding: 20px;
+}
+
+.filter {
+    width: 300px;
+    height: 240px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, .2);
+    padding: 30px;
+}
+
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range] {
+    width: 220px;
+    height: 18px;
+    background-image: url(images/slider_bg.jpg);
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 39px;
+    width: 10px;
+    background-image: url(images/thumb.png);
+    /*border-radius: 50%;*/
+    /*background: goldenrod;*/
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+/*input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}*/
+
+
+
+
+.filter-labels {
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 100;
+    color: white;
+}
+
+.range-labels{
+    width: 260px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 100;
+    color: white;
+}
+
+
+/*.table-filter tr td{
+    padding: 10px;
+}*/
+
+.filter-container .filter .table-filter input[type=checkbox].css-checkbox {
+                            position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+                        }
+
+                        input[type=checkbox].css-checkbox + label.css-label {
+                            padding-left:35px;
+                            height:30px; 
+                            display:inline-block;
+                            line-height:30px;
+                            background-repeat:no-repeat;
+                            background-position: 0 0;
+                            font-size:30px;
+                            vertical-align:middle;
+                            cursor:pointer;
+
+                        }
+
+                        input[type=checkbox].css-checkbox:checked + label.css-label {
+                            background-position: 0 -30px;
+                        }
+                        label.css-label {
+                background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_3564c816c9773cc0ee5c4224be6236e2.png);
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
