@@ -44,19 +44,34 @@
 
                                     if (res.Count() > 0)
                                     {
-                                        <td class="diagram-cell"> 
-                                            <span data-toggle="popover" title="" data-content="
+                                        if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
+                                        {
+                                            <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
+                                                <span data-toggle="popover" title="" data-content="
+                                                    <div class='custompopover'>                                               
+                                                @res.First().Purpose <br/> 
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
+                                                {
+                                                    <a id='delReserv'>Отменить</a>
+                                                }
+                                                </div>">@res.First().AspNetUser.UserName</span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="diagram-cell">
+                                                <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
                                                     <img src='../../Content/images/icon-user-grey.png'>
                                             @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
-                                        </td>
+                                            </td>
+                                        }
                                     }
                                     else
                                     {
                                         <td style="padding: 0;" class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                             @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
                                             {
-
                                                 <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>
                                                 <button id='reservate'>Бронировать</button> </div>">
@@ -64,7 +79,6 @@
                                                 <img style="padding: 12px" class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
                                                 </span>
                                                 </div>
-
                                             }
                                         </td>
                                     }
@@ -131,6 +145,49 @@
             });           
         });
     });
+
+     $(function () {
+        $("#resTable").delegate('#delReserv', 'click', function () {
+            var roomId = $("#delReserv").closest("td").data("roomId");
+            var beginHour = $("#delReserv").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
+            
+            var model = {
+                roomId: roomId,
+                year: year,
+                month: month,
+                day: day,
+                beginHour: beginHour,
+            };
+            
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("DelReservation", "Home")'
+            }).done(function (result) {
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+               
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+            });           
+        });
+    });
+
     $(function() {
         $('#next-column').click(function (event) {
             event.preventDefault();

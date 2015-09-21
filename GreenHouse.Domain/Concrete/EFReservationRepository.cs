@@ -36,5 +36,17 @@ namespace GreenHouse.Domain.Concrete
             _context.Reservations.Add(res);
             _context.SaveChanges();
         }
+
+        public void DelReservation(string userId, int roomId, DateTime beginTime)
+        {
+            var reserv = _context.Reservations.
+                            Where(a => String.Compare(a.AspNetUserId, userId, false) == 0 && a.RoomId == roomId && a.BeginTime == beginTime);
+            if(reserv.Count() > 0)
+            {
+                var resToDel = reserv.First();
+                _context.Reservations.Remove(resToDel);
+                _context.SaveChanges();
+            }            
+        }
     }
 }
