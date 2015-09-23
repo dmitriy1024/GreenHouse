@@ -38,7 +38,6 @@
             td.popover('hide');
         }
     });
+
 })(jQuery);
-
-
 

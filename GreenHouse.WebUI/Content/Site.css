@@ -217,6 +217,7 @@ table.table-condensed .dow{
 .map-bg {
     background-image: url(images/bg_plan.png);
     position: relative;
+    z-index: 1;
 }
 
 div.mapContainer {
@@ -524,8 +525,16 @@ table.time {
 
 
 
+/*.popover-content {
+    display: block;
+    width: 200px;
+    height: 300px;
+}*/
 
-
+.mapImgContainer div {
+    width: 200px;
+    height: 300px;
+}
 
 
 
