@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container header-image">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="reserve-form">
+                <h2>Комната @ViewBag.RoomNumber</h2>
+                <div>
+                    <div class="input-group">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9" id="diagram">
+            <div id="content">
+                Загрузка...
+            </div>
+        </div>
+        <div class="col-sm-3 text-right cal">
+            <div style="overflow: hidden;">
+                <div class="form-group">
+                    <div class="row">
+                        <div id="datetimepicker-room"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+            $(function() {
+                $('[data-toggle="popover"]').popover({
+                    html: true
+                });
+            })
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            
+
+            $('#datetimepicker-room').on("changeDate", function (e) {
+                var day = e.date.getDate();
+                var month = e.date.getMonth() + 1;
+                var year = e.date.getFullYear();
+
+                //$('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+
+                //$('#forCurrentYear').val(year);
+                //$('#forCurrentMonth').val(month);
+                //$('#forCurrentDay').val(day);
+
+                var model = {
+                    roomNumber:@ViewBag.RoomNumber,
+                    Year: year,
+                    Month: month,
+                    Day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model,
+                    dataType: "html",
+                    url: '@Url.Action("RoomDayReservations", "Room")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+            });
+        });
+</script>

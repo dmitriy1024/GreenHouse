@@ -7,6 +7,8 @@ namespace GreenHouse.Domain.Abstract
     public interface IRoomRepository
     {
         IEnumerable<Room> Rooms { get; }
-        IDictionary<Room, IEnumerable<Reservation>> GetRoomsAndReservationsByDate(DateTime date);       
+        IDictionary<Room, IEnumerable<Reservation>> GetRoomsAndReservationsByDate(DateTime date);
+        bool Exists(string roomNumber);
+        Room GetRoomByNumber(string roomNumber);       
     }
 }

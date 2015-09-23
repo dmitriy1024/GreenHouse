@@ -62,13 +62,20 @@
 
     <script type="text/javascript">
         $(function () {
+            //calendar init on Home/Index
             $('#datetimepicker12').datepicker({
                 inline: true,
                 sideBySide: true,
-                language: 'ru'               
+                language: 'ru'
             });
-
             $('#datetimepicker12').datepicker('_setDate', new Date());
+            //calendar init on Room/Index
+            $('#datetimepicker-room').datepicker({
+                inline: true,
+                sideBySide: true,
+                language: 'ru'
+            });
+            $('#datetimepicker-room').datepicker('_setDate', new Date());
 
             $("#hideCal").click(function () {
                 $(".cal").slideUp("slow");//.hide();

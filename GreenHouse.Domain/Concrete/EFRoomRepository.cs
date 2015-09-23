@@ -18,6 +18,27 @@ namespace GreenHouse.Domain.Concrete
             }
         }
 
+        public bool Exists(string roomNumber)
+        {
+            var rooms = _context.Rooms.Where(a => String.Compare(a.Number, roomNumber, true) == 0);
+
+            return rooms.Count() > 0;
+        }
+
+        public Room GetRoomByNumber(string roomNumber)
+        {
+            var rooms = _context.Rooms.Where(a => String.Compare(a.Number, roomNumber, true) == 0);
+
+            if(rooms.Count() > 0)
+            {
+                return rooms.First();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public IDictionary<Room, IEnumerable<Reservation>> GetRoomsAndReservationsByDate(DateTime date)
         {
             var rooms = _context.Rooms;

@@ -48,5 +48,29 @@ namespace GreenHouse.Domain.Concrete
                 _context.SaveChanges();
             }            
         }
+
+        public IEnumerable<Reservation> GetRoomReservationsByDate(string roomNumber, DateTime date)
+        {
+            var begDate = date.Date;
+            var endDate = date.AddDays(1);
+
+            var reservations = _context.Reservations.Where(a => a.BeginTime > begDate && a.BeginTime < endDate);
+            var roomReservations = reservations.Where(a => String.Compare(a.Room.Number, roomNumber, true) == 0);
+
+            return roomReservations.ToList();
+        }
+
+        //public IEnumerable<Reservation> GetRoomReservationsByDate(int roomId, DateTime date)
+        //{
+        //    var rooms = _context.Rooms.Where(a => a.Id == roomId);
+        //    if(rooms.Count() > 0)
+        //    {
+        //        return GetRoomReservationsByDate(rooms.First().Number, date);
+        //    }
+        //    else
+        //    {
+        //        return new List<Reservation>();
+        //    }
+        //}
     }
 }

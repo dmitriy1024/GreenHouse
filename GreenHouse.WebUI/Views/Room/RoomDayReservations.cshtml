@@ -1,0 +1,184 @@
+﻿@using GreenHouse.Domain.Entities;
+@{
+    Layout = null;
+}
+@model IEnumerable<Reservation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <a id="previous-column" href="#"><h4><</h4></a>
+            <div class="time-table">
+                <table class="time" >
+                    @for (int t = ViewBag.BeginHour; t <= ViewBag.EndHour; t++)
+                    {
+                        <tr>
+                            <td class="cell">@t<span>:00</span></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-sm-10">
+            <div class="table-container">
+                <table class="table sliding-window table-header" style="width:650px">
+                    <tr>
+                        
+                        <td><span>@ViewBag.Date.Day  @ViewBag.Date.Month @ViewBag.Date.Year</span></td>
+                        
+                    </tr>
+                </table>
+
+                <table class="table sliding-window" id="resTable" style="width:650px">
+
+                    @for (int hour = ViewBag.BeginHour; hour < ViewBag.EndHour; hour++)
+                    {
+                        <tr>
+                            @*@foreach (var item in Model)*@
+                            @{
+                                var res = Model.Where(a => a.BeginTime.Hour == hour);
+
+                                if (res.Count() > 0)
+                                {
+                                    if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
+                                    {
+                                        <td class="diagram-cell" data-begin-hour="@hour">
+                                            <span data-toggle="popover" title="" data-content="
+                                                    <div class='custompopover'>
+                                                @res.First().Purpose <br/>
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
+                                                {
+                                                    <a id='delReserv'>Отменить</a>
+                                                }
+                                                </div>">@res.First().AspNetUser.UserName</span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="diagram-cell">
+                                            <span data-toggle="popover" title="" data-content="
+                                                    <div class='custompopover'>
+                                                    <img src='../../Content/images/icon-user-grey.png'>
+                                            @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td style="padding: 0;" class="cell" data-begin-hour="@hour">
+                                        @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
+                                        {
+                                            <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
+                                                <textarea id='purpose' autofocus cols=31 maxlength=80 rows=3></textarea>
+                                                <button id='reservate'>Бронировать</button> </div>">
+                                                    <span>
+                                                <img style="padding: 12px" class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
+                                                </span>
+                                                </div>
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <a id="next-column" href="#"><h4>></h4></a>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    $(function() {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    })
+
+    $(function () {
+        $("#resTable").delegate('#reservate', 'click', function () {
+
+            var beginHour = $("#reservate").closest("td").data("beginHour");
+            debugger;
+            var model = {
+                roomNumber: @ViewBag.RoomNumber,
+                year: @ViewBag.Date.Year,
+                month: @ViewBag.Date.Month,
+                day: @ViewBag.Date.Day,
+                beginHour: beginHour,
+                purpose: $("#purpose").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("AddReservation", "Room")'
+            }).done(function (result) {
+                var model2 = {
+                    roomNumber: @ViewBag.RoomNumber,
+                    year: @ViewBag.Date.Year,
+                    month: @ViewBag.Date.Month,
+                    day: @ViewBag.Date.Day
+                    };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("RoomDayReservations", "Room")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+
+            });
+        });
+
+        $(function () {
+            $("#resTable").delegate('#delReserv', 'click', function () {
+                var beginHour = $("#delReserv").closest("td").data("beginHour");
+                debugger;
+                var model = {
+                    roomNumber: @ViewBag.RoomNumber,
+                    year: @ViewBag.Date.Year,
+                    month: @ViewBag.Date.Month,
+                    day: @ViewBag.Date.Day,
+                    beginHour: beginHour
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model,
+                    dataType: "html",
+                    url: '@Url.Action("DelReservation", "Room")'
+                }).done(function (result) {
+                    var model2 = {
+                        roomNumber: @ViewBag.RoomNumber,
+                        year: @ViewBag.Date.Year,
+                        month: @ViewBag.Date.Month,
+                        day: @ViewBag.Date.Day
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        data: model2,
+                        dataType: "html",
+                        url: '@Url.Action("RoomDayReservations", "Room")'
+                    }).done(function (result) {
+                        $('#content').html(result);
+                    });
+
+                });
+            });
+        });
+    });
+</script>
