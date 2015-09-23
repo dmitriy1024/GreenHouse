@@ -1,11 +1,28 @@
 ﻿<div class="container-fluid map-bg">
     <div class="row">
+
+        @*<div class="col-xs-12">
+            <div class="roominfo" data-ng-show="selectedRoom" style="color: white;">
+                <h3>Комната № {{ selectedRoom.number }}</h3>
+                <table>
+                    <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                    <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                    <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                    <tr><td><span class="icon-microphone"></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                    <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                </table>
+            </div>
+        </div>*@
+
         <div class="col-xs-6 filter-bs-con"></div>
         <div class="col-xs-6 filter-bs-con">
-            <div class="filter-container">
+            <div class="filter-container" id="f">
                 <div class="filter">
+                    
                     <span class="filter-labels">Количество посадочных мест:</span><br><br>
-                    <input type="range" step="25"/>
+                    <input value ="0" id="places-slider" type="range" min="0" max="100" step = "25" ng-model="searchText" ng-change="filtering(searchText)" onchange="updateTextInput(this.value)"/>
+                    @*<a ng-click="filtering(searchText)">sdagsfg</a>*@
+                    @*<input type="text" id="textInput" value="">*@
                     <table class="range-labels">
                         <tr>
                             <td>
@@ -32,18 +49,18 @@
                         <table class="table-filter">
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" checked="checked"/><label for="checkboxG1" class="css-label"></label><span class="filter-labels">Wi-Fi</span>
+                                    <input type="checkbox" name="wifi" id="wifi" class="css-checkbox" ng-click="filtering(searchText)"/><label for="wifi" class="css-label"></label><span class="filter-labels">Wi-Fi</span>
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" checked="checked"/><label for="checkboxG2" class="css-label"></label><span class="filter-labels">Проектор</span>
+                                    <input type="checkbox" name="projector" id="projector" class="css-checkbox" ng-click="filtering(searchText)"/><label for="projector" class="css-label"></label><span class="filter-labels">Проектор</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" checked="checked"/><label for="checkboxG3" class="css-label"></label><span class="filter-labels">Монитор</span>
+                                    <input type="checkbox" name="monitor" id="monitor" class="css-checkbox" ng-click="filtering(searchText)"/><label for="monitor" class="css-label"></label><span class="filter-labels">Монитор</span>
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox" checked="checked"/><label for="checkboxG4" class="css-label"></label><span class="filter-labels">Микрофон</span>
+                                    <input type="checkbox" name="microphone" id="microphone" class="css-checkbox" ng-click="filtering(searchText)"/><label for="microphone" class="css-label"></label><span class="filter-labels">Микрофон</span>
                                 </td>
                             </tr>
                         </table>
@@ -56,10 +73,14 @@
         <div class="col-xs-12">
             <div class="mapContainer">
                 <h3>План Этажа</h3>
-                <h4>Комнат 12</h4>
-
+                <h4>Комнат 15</h4>
+                @*<div>filtered rooms length: {{filteredRooms.length}}</div>*@
+                @*<ul>
+                    <li ng-repeat="i in filteredRooms">{{i.number}}</li>
+                </ul>*@
                 <div class="mapImgContainer">
-                    <div class="room" id="room307"><span>307</span></div>
+                    <div ng-repeat="i in filteredRooms"><div class="room" id="room{{i.number}}"><span>{{i.number}}</span></div></div>
+                    @*<div class="room" id="room307"><span>307</span></div>
                     <div class="room" id="room311"><span>311</span></div>
                     <div class="room" id="room306"><span>306</span></div>
                     <div class="room" id="room308"><span>308</span></div>
@@ -73,46 +94,199 @@
                     <div class="room" id="room301"><span>301</span></div>
                     <div class="room" id="room302"><span>302</span></div>
                     <div class="room" id="room303"><span>303</span></div>
-                    <div class="room" id="room304"><span>304</span></div>
-                    <img src="@Url.Content("~/Content/images/map.png")" usemap="#roommap"/>
+                    <div class="room" id="room304"><span>304</span></div>*@
+                    <img style="z-index: 2;" src="@Url.Content("~/Content/images/map.png")" usemap="#roommap"/>
                     <map name="roommap">
                         @*307*@
-                        <area shape="rect" coords="40,25,130,86" href="http://google.com"/>
+                        <div style="top: -100px; left: -75px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="40,25,130,86" ng-mouseover="selectRoom(307)"/>
+                        </div>
                         @*308*@
-                        <area shape="rect" coords="40,95,125,127" href="http://google.com"/>
+                        <div style="top: -35px; left: -75px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="40,95,125,127" ng-mouseover="selectRoom(308)"/>
+                        </div>
                         @*309*@
-                        <area shape="rect" coords="40,134,125,172" href="http://google.com"/>
+                        <div style="left: -75px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="40,134,125,172" ng-mouseover="selectRoom(309)"/>
+                        </div>
                         @*310*@
-                        <area shape="rect" coords="40,180,125,237" href="http://google.com"/>
+                        <div style="top: 60px; left: -75px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="40,180,125,237" ng-mouseover="selectRoom(310)"/></div>
                         @*306*@
-                        <area shape="rect" coords="196,28,264,75" href="http://google.com"/>
+                        <div style="top: -100px; left: 70px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="196,28,264,75" ng-mouseover="selectRoom(306)"/></div>
                         @*305*@
-                        <area shape="rect" coords="173,82,264,128" href="http://google.com"/>
+                        <div style="top: -40px; left: 70px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="173,82,264,128" ng-mouseover="selectRoom(305)"/></div>
                         @*312*@
-                        <area shape="rect" coords="190,307,340,394" href="http://google.com"/>
+                        <div style="top: 200px; left: 140px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="190,307,340,394"  ng-mouseover="selectRoom(312)"/></div>
                         @*313*@
-                        <area shape="rect" coords="350,307,455,394" href="http://google.com"/>
+                        <div style="top: 200px; left: 260px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="350,307,455,394" ng-mouseover="selectRoom(313)"/></div>
                         @*314*@
-                        <area shape="rect" coords="465,307,611,394" href="http://google.com"/>
+                        <div style="top: 200px; left: 410px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="465,307,611,394" ng-mouseover="selectRoom(314)"/></div>
                         @*315*@
-                        <area shape="rect" coords="621,307,665,337" href="http://google.com"/>
+                        <div style="top: 175px; left: 475px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="621,307,665,337" ng-mouseover="selectRoom(315)"/></div>
                         @*301*@
-                        <area shape="rect" coords="504,165,612,257" href="http://google.com"/>
+                        <div style="top: 60px; left: 410px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="504,165,612,257" ng-mouseover="selectRoom(301)"/></div>
                         @*302*@
-                        <area shape="rect" coords="464,165,500,257" href="http://google.com"/>
+                        <div style="top: 60px; left: 302px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="464,165,500,257" ng-mouseover="selectRoom(302)"/></div>
                         @*303*@
-                        <area shape="rect" coords="295,165,336,257" href="http://google.com"/>
+                        <div style="top: 60px; left: 140px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="rect" coords="295,165,336,257" ng-mouseover="selectRoom(303)"/></div>
                         @*304*@
-                        <area shape="poly" coords="173,192, 285,192, 285,256, 200,256, 173, 225" href="http://google.com"/>
+                        <div style="top: 70px; left: 85px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="poly" coords="173,192, 285,192, 285,256, 200,256, 173, 225" ng-mouseover="selectRoom(304)"/></div>
                         @*311*@
-                        <area shape="circle" coords="105,320,67" href="korr.ua"/>
-                        <area shape="circle" coords="55,270,25" href="korr.ua"/>
-
+                        <div style="top: 170px; left: -30px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom' style='color: white;'>
+                    <h3>Комната № {{ selectedRoom.number }}</h3>
+                    <table>
+                        <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
+                        <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
+                        <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
+                        <tr><td><span class='icon-microphone'></span>Microphone {{ selectedRoom.microphone }}</td></tr>
+                        <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
+                    </table>
+                    </div>"><area shape="circle" coords="105,320,67"  ng-mouseover="selectRoom(311)"/>
+                        <area shape="circle" coords="55,270,25" ng-mouseover="selectRoom(311)"/></div>
                     </map>
                 </div>
             </div>
-
         </div>
     </div>
+    <input type="hidden" id="places">
 </div>
 
+<script>
+    $(function() {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    })
+</script>
+
+
+<script type="text/javascript">
+    function updateTextInput(val) {
+
+        document.getElementById('textInput').value = val;
+        //angular.element(document.getElementById('places-slider')).scope().filtering(val);
+    };
+</script>

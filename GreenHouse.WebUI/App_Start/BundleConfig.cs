@@ -25,7 +25,11 @@ namespace GreenHouse.WebUI
                       "~/Scripts/respond.js",
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/bootstrap-datepicker.ru.min.js",
-                      "~/Scripts/common.js"));
+                      "~/Scripts/common.js",
+                       "~/Scripts/angular/angular.js"
+                ).IncludeDirectory("~/Scripts/angular/modules", "*.js")
+                .IncludeDirectory("~/Scripts/angular/controllers", "*.js")
+                .IncludeDirectory("~/Scripts/angular/services", "*.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
