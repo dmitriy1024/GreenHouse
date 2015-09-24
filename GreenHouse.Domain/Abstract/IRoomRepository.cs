@@ -9,6 +9,7 @@ namespace GreenHouse.Domain.Abstract
         IEnumerable<Room> Rooms { get; }
         IDictionary<Room, IEnumerable<Reservation>> GetRoomsAndReservationsByDate(DateTime date);
         bool Exists(string roomNumber);
-        Room GetRoomByNumber(string roomNumber);       
+        Room GetRoomByNumber(string roomNumber);
+        bool AdditEquipmExists(string roomNumber, string additEquipmName);       
     }
 }

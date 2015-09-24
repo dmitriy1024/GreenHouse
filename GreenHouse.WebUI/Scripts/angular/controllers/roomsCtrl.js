@@ -30,7 +30,7 @@
             if (x == 25) x = 30;
             if (x == 50) x = 70;
             if (x == 75) x = 100;
-            if (x == 100) x = 200;
+            else if (x == 100) x = 200;
 
             $scope.filteredRooms = [];
             var wifi = $('#wifi').is(':checked');

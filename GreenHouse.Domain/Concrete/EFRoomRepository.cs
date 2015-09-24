@@ -55,5 +55,27 @@ namespace GreenHouse.Domain.Concrete
 
             return dictToReturn;
         }
+
+        public bool AdditEquipmExists(string roomNumber, string additEquipmName)
+        {
+            var rooms = _context.Rooms.Where(a => String.Compare(a.Number, roomNumber, true) == 0);
+            if(rooms.Count() > 0)
+            {
+                var room = rooms.First();
+                foreach (var equip in room.AdditEquipments)
+                {
+                    if(String.Compare(equip.Name, additEquipmName, true) == 0)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
