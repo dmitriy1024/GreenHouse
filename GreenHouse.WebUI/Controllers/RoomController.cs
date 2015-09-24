@@ -25,6 +25,22 @@ namespace GreenHouse.WebUI.Controllers
             if(_roomRepository.Exists(roomNumber))
             {
                 ViewBag.RoomNumber = roomNumber;
+                ViewBag.Places = _roomRepository.GetRoomByNumber(roomNumber).Capacity;
+                ViewBag.Wifi = false;
+                ViewBag.Projector = false;
+                ViewBag.Monitor = false;
+                ViewBag.Microphone = false;
+                foreach (var item in _roomRepository.GetRoomByNumber(roomNumber).AdditEquipments)
+                {
+                    if (String.Compare(item.Name, "wifi", true) == 0)
+                        ViewBag.Wifi = true;
+                    if (String.Compare(item.Name, "projector", true) == 0)
+                        ViewBag.Projector = true;
+                    if (String.Compare(item.Name, "monitor", true) == 0)
+                        ViewBag.Monitor = true;
+                    if (String.Compare(item.Name, "microphone", true) == 0)
+                        ViewBag.Microphone = true;
+                }
                 return View();
             }                
             else

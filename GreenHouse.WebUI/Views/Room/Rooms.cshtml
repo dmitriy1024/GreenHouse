@@ -1,0 +1,90 @@
+﻿<div class="container-fluid map-bg">
+    <div class="row">
+        <div class="col-xs-6 info-bs-con"></div>
+        <div class="col-xs-6 info-bs-con">
+            <div class="info-container" id="f">
+                <table style="width: 100%; height: 100%;">
+                    <tr>
+                        <td colspan="4"><span>Комната @ViewBag.RoomNumber</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><img src="~/Content/images/icon-people-white.png"> Количество мест <span>@ViewBag.Places</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="~/Content/images/icon-wi-fi-white.png"> Wi-Fi</td><td> @if (@ViewBag.Wifi == true)
+                        {
+                            <img src="~/Content/images/icon-yes-white.png">
+                        }</td>
+                        <td><img src="~/Content/images/icon-monitor-white.png"> Монитор</td>
+                        <td>
+                            @if (@ViewBag.Monitor == true)
+                            {
+                                <img src="~/Content/images/icon-yes-white.png">
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="~/Content/images/icon-progector-white.png"> Проектор</td>
+                        <td>
+                            @if (@ViewBag.Projector == true)
+                            {
+                                <img src="~/Content/images/icon-yes-white.png">
+                            }
+                        </td>
+                        <td><img src="~/Content/images/icon-mic-white.png"> Микрофон</td>
+                        <td>
+                            @if (@ViewBag.Microphone == true)
+                            {
+                                <img src="~/Content/images/icon-yes-white.png">
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+            <div class="mapContainer">
+                <div class="mapImgContainer">
+                    <div class="room" id="oroom307"><span>307</span></div>
+                    <div class="room" id="oroom311"><span>311</span></div>
+                    <div class="room" id="oroom306"><span>306</span></div>
+                    <div class="room" id="oroom308"><span>308</span></div>
+                    <div class="room" id="oroom309"><span>309</span></div>
+                    <div class="room" id="oroom310"><span>310</span></div>
+                    <div class="room" id="oroom305"><span>305</span></div>
+                    <div class="room" id="oroom312"><span>312</span></div>
+                    <div class="room" id="oroom313"><span>313</span></div>
+                    <div class="room" id="oroom314"><span>314</span></div>
+                    <div class="room" id="oroom315"><span>315</span></div>
+                    <div class="room" id="oroom301"><span>301</span></div>
+                    <div class="room" id="oroom302"><span>302</span></div>
+                    <div class="room" id="oroom303"><span>303</span></div>
+                    <div class="room" id="oroom304"><span>304</span></div>
+                    <div class="room" id="room@(ViewBag.RoomNumber)"><span>@ViewBag.RoomNumber</span></div>@ViewBag.Equipment
+                    <img style="z-index: 2;" src="@Url.Content("~/Content/images/map.png")" usemap="#roommap"/>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="places">
+</div>
+
+<script>
+    $(function() {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    })
+</script>
+
+
+<script type="text/javascript">
+    function updateTextInput(val) {
+
+        document.getElementById('textInput').value = val;
+        //angular.element(document.getElementById('places-slider')).scope().filtering(val);
+    };
+</script>

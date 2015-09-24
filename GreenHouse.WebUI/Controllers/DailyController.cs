@@ -31,13 +31,19 @@ namespace GreenHouse.WebUI.Controllers
 
             foreach (var room in rooms)
             {
+                int bg = 0;
+                if (room.Capacity < 30) bg = 30;
+                if (room.Capacity >= 30 && room.Capacity < 70) bg = 70;
+                if (room.Capacity >= 70 && room.Capacity < 100) bg = 100;
+                if(room.Capacity >= 100) bg = 200;
                 model.Add(new {
                     number = room.Number,
                     places = room.Capacity,
                     wifi = _roomRepository.AdditEquipmExists(room.Number, "wifi"),
                     projector = _roomRepository.AdditEquipmExists(room.Number, "projector"),
                     monitor = _roomRepository.AdditEquipmExists(room.Number, "monitor"),
-                    microphone = _roomRepository.AdditEquipmExists(room.Number, "microphone")
+                    microphone = _roomRepository.AdditEquipmExists(room.Number, "microphone"),
+                    background = bg
                 });
             }
             

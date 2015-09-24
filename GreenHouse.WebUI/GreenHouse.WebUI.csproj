@@ -265,6 +265,7 @@
     <Content Include="Views\Home\Reservations.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\RoomDayReservations.cshtml" />
+    <Content Include="Views\Room\Rooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Daily\" />

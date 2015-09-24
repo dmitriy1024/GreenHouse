@@ -77,12 +77,30 @@ h5 {
     margin-top: -60px;
 }
 
+.header-image-room {
+	display: block;
+	background-image: url(images/bg-header-img.png);	
+	background-position: center 0;
+	background-repeat: no-repeat;
+	text-align: center;
+    margin-top: -60px;
+}
+
 .reserve-form{
 	width: 45%;
 	height: 250px;
 	margin: 100px auto 60px auto;
 	background-color: rgba(255, 255, 255, .6);
 	box-shadow: 1px 4px 5px -5px #848484;
+	padding: 20px;
+}
+
+.reserve-room{
+	width: 45%;
+	height: 120px;
+	margin: 80px auto 60px auto;
+	background-color: rgba(255, 255, 255, .6);
+	box-shadow: 1px 6px 5px -5px #848484;
 	padding: 20px;
 }
 
@@ -243,6 +261,8 @@ div.mapImgContainer div {
     background-size: cover;
 }
 
+
+
 div#room307 {
     top: 29px;
     left: 39px;
@@ -361,6 +381,114 @@ div#room304 {
     width: 112px;
     height: 64px;
     background-image: url(images/rooms/r-304-100.png);
+}
+
+
+
+
+div#oroom307 {
+    top: 29px;
+    left: 39px;
+    width: 86px;
+    height: 57px;
+}
+
+div#oroom311 {
+    top: 247px;
+    left: 31px;
+    width: 153px;
+    height: 148px;
+}
+
+div#oroom306 {
+    top: 29px;
+    left: 198px;
+    width: 66px;
+    height: 48px;
+}
+
+div#oroom308 {
+    top: 95px;
+    left: 39px;
+    width: 87px;
+    height: 34px;
+}
+
+div#oroom309 {
+    top: 134px;
+    left: 39px;
+    width: 87px;
+    height: 40px;
+}
+
+div#oroom310 {
+    top: 178px;
+    left: 39px;
+    width: 87px;
+    height: 63px;
+}
+
+div#oroom305 {
+    top: 82px;
+    left: 173px;
+    width: 90px;
+    height: 48px;
+}
+
+div#oroom312 {
+    top: 307px;
+    left: 190px;
+    width: 151px;
+    height: 88px;
+}
+
+div#oroom313 {
+    top: 307px;
+    left: 350px;
+    width: 105px;
+    height: 88px;
+}
+
+div#oroom314 {
+    top: 307px;
+    left: 465px;
+    width: 146px;
+    height: 88px;
+}
+
+div#oroom315 {
+    top: 307px;
+    left: 621px;
+    width: 44px;
+    height: 30px;
+}
+
+div#oroom301 {
+    top: 165px;
+    left: 504px;
+    width: 108px;
+    height: 92px;
+}
+
+div#oroom302 {
+    top: 165px;
+    left: 464px;
+    width: 37px;
+    height: 92px;
+}
+
+div#oroom303 {
+    top: 165px;
+    left: 295px;
+    width: 41px;
+    height: 92px;
+}
+
+div#oroom304 {
+    top: 192px;
+    left: 173px;
+    width: 112px;
+    height: 64px;
 }
 
 .room {
@@ -546,10 +674,30 @@ table.time {
     z-index: 1000;
 }
 
+.info-bs-con {
+    position: absolute;
+    bottom: 300px;
+    right: 20px;
+    z-index: 1000;
+}
+
  .filter-container {
     width: 330px;
     height: 290px;
     padding: 20px;
+}
+
+.info-container {
+    width: 330px;
+    height: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    color: #f7f7f7;
+    background-color: rgba(255, 255, 255, .3)
+}
+
+.info-container span {
+    font-size: 20px;
 }
 
 .filter {
