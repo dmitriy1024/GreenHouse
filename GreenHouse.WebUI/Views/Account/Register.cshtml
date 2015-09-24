@@ -64,10 +64,10 @@
             <div class="loginmodal-container">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="login-popup-logo">
-                    <img src="../../Content/images/logo-big.png" />
+                    <img src="~/Content/images/logo-big.png" />
                 </div><br>
                 <form>
-                    <div class="reg-icons"><img src="../../Content/images/icon-user-green.png" /></div>
+                    <div class="reg-icons"><img src="~/Content/images/icon-user-green.png" /></div>
                     @*<input type="text" name="user" placeholder="Имя">
                         <input type="text" name="user" placeholder="Фамилия">*@
                     @*<input type="text" name="user" placeholder="Электронная почта">*@
@@ -77,7 +77,7 @@
 
                     @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    <div class="reg-icons"><img src="../../Content/images/icon-key-green.png" /></div>
+                    <div class="reg-icons"><img src="~/Content/images/icon-key-green.png" /></div>
                     @*<input type="password" name="pass" placeholder="Пароль">*@
                     @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
