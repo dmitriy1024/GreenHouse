@@ -20,17 +20,6 @@
             $scope.selectedRoom = $filter('filter')($scope.rooms, { number: roomNumber })[0];
         }
 
-        
-        //$scope.filtering = function (x) {
-        //    //$scope.filteredRooms = $filter('filter')($scope.rooms, { places: x });
-        //    $scope.filteredRooms = [];
-        //    for (var i = 0; i < $scope.rooms.length; i++) {
-        //        if ($scope.rooms[i].places >= x) {
-        //            $scope.filteredRooms.push($scope.rooms[i]);
-        //        }
-        //    }
-        //}
-
         $scope.filtering = function (x) {
             if (x == 0) x = 10;
             if (x == 25) x = 30;
