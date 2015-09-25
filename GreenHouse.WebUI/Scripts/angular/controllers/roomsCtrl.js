@@ -6,9 +6,15 @@
     function roomsCtrl($scope, $filter, roomsService) {
         roomsService.getRooms().then(function (response) {
             $scope.rooms = response.data;
+
+            angular.element(document).ready(function () {
+                $scope.filtering(0);
+            });
         });
 
         $scope.selectedRoom = null;
+        $scope.searchText = 0;
+
 
         $scope.selectRoom = function (roomNumber) {
             $scope.selectedRoom = $filter('filter')($scope.rooms, { number: roomNumber })[0];

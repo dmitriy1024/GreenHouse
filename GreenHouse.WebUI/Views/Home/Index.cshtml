@@ -33,7 +33,7 @@
                 Календарь
                 <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default" id="hideCal">Скрыть</button>
-                    <button type="button" class="btn btn-default" id="showCal">Показать</button>
+                    <button type="button" class="btn btn-default active" id="showCal">Показать</button>
                 </div>
             </h6>
         </div>
@@ -61,17 +61,20 @@
     <input type="hidden" id="forCurrentDay" >
 
     <script>
-            $(function() {
-                $('[data-toggle="popover"]').popover({
-                    html: true
-                });
+        $(function() {
+            $('[data-toggle="popover"]').popover({
+                html: true
+            });
 
-            })
+        })
     </script>
 
     <script type="text/javascript">
+
         $(function () {
-            
+            $('#hideCal').click(function() {
+                $('#showCal').removeClass("active");
+            });
             
 
             $('#datetimepicker12').on("changeDate", function (e) {
