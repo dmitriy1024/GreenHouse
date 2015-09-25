@@ -6,24 +6,19 @@
     function roomsCtrl($scope, $filter, roomsService) {
         roomsService.getRooms().then(function (response) {
             $scope.rooms = response.data;
+
+            angular.element(document).ready(function () {
+                $scope.filtering(0);
+            });
         });
 
         $scope.selectedRoom = null;
+        $scope.searchText = 0;
+
 
         $scope.selectRoom = function (roomNumber) {
             $scope.selectedRoom = $filter('filter')($scope.rooms, { number: roomNumber })[0];
         }
-
-        
-        //$scope.filtering = function (x) {
-        //    //$scope.filteredRooms = $filter('filter')($scope.rooms, { places: x });
-        //    $scope.filteredRooms = [];
-        //    for (var i = 0; i < $scope.rooms.length; i++) {
-        //        if ($scope.rooms[i].places >= x) {
-        //            $scope.filteredRooms.push($scope.rooms[i]);
-        //        }
-        //    }
-        //}
 
         $scope.filtering = function (x) {
             if (x == 0) x = 10;

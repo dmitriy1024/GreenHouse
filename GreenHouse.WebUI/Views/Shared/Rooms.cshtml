@@ -1,26 +1,14 @@
 ﻿<div class="container-fluid map-bg">
     <div class="row">
 
-        @*<div class="col-xs-12">
-            <div class="roominfo" data-ng-show="selectedRoom" style="color: white;">
-                <h3>Комната № {{ selectedRoom.number }}</h3>
-                <table>
-                    <tr><td>Кол-во мест {{ selectedRoom.places }}</td></tr>
-                    <tr><td>Wifi {{ selectedRoom.wifi }}</td></tr>
-                    <tr><td>Projector {{ selectedRoom.projector }}</td></tr>
-                    <tr><td><span class="icon-microphone"></span>Microphone {{ selectedRoom.microphone }}</td></tr>
-                    <tr><td>Monitor {{ selectedRoom.monitor }}</td></tr>
-                </table>
-            </div>
-        </div>*@
-
         <div class="col-xs-6 filter-bs-con"></div>
         <div class="col-xs-6 filter-bs-con">
             <div class="filter-container" id="f">
                 <div class="filter">
                     
                     <span class="filter-labels">Количество посадочных мест:</span><br><br>
-                    <input value ="0" id="places-slider" type="range" min="0" max="100" step = "25" ng-model="searchText" ng-change="filtering(searchText)" onchange="updateTextInput(this.value)"/>
+                    @*<input id="places-slider" type="range" min="0" max="100" step = "25" ng-model="searchText" ng-change="filtering(searchText)" onchange="updateTextInput(this.value)"/>*@
+                    <input id="places-slider" type="range" min="0" max="100" value="0" step="25" ng-model="searchText" ng-change="filtering(searchText)" onchange="updateTextInput(this.value)"/>
                     @*<a ng-click="filtering(searchText)">sdagsfg</a>*@
                     @*<input type="text" id="textInput" value="">*@
                     <table class="range-labels">
@@ -79,7 +67,7 @@
                     <li ng-repeat="i in filteredRooms">{{i.number}}</li>
                 </ul>*@
                 <div class="mapImgContainer">
-                    <div ng-repeat="i in filteredRooms"><div class="room" id="room{{i.number}}"><span>{{i.number}}</span></div></div>
+                    <div ng-repeat="i in filteredRooms"><div class="room" id="oroom{{i.number}}" style="background-image: url(Content/images/rooms/r-{{i.number}}-{{i.background}}.png)"><span>{{i.number}}</span></div></div>
                     @*<div class="room" id="room307"><span>307</span></div>
                     <div class="room" id="room311"><span>311</span></div>
                     <div class="room" id="room306"><span>306</span></div>

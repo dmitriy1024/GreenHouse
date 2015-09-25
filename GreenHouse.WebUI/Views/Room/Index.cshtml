@@ -3,10 +3,10 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container header-image">
+<div class="container header-image-room">
     <div class="row">
         <div class="col-xs-12">
-            <div class="reserve-form">
+            <div class="reserve-room">
                 <h2>Комната @ViewBag.RoomNumber</h2>
                 <div>
                     <div class="input-group">
@@ -33,8 +33,10 @@
             </div>
         </div>
     </div>
-
 </div>
+
+@Html.Partial("~/Views/Room/Rooms.cshtml")
+
 
 <script>
             $(function() {
