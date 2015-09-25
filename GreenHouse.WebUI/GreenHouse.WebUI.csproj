@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CabinetController.cs" />
     <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Home\Reservations.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\RoomDayReservations.cshtml" />
+    <Content Include="Views\Cabinet\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Daily\" />

@@ -175,7 +175,7 @@ namespace GreenHouse.WebUI.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    
                     //return RedirectToAction("Index", "Home");
                     return Json(@"OK");
                 }
@@ -416,6 +416,50 @@ namespace GreenHouse.WebUI.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult ChangePassword(string oldPass, string newPass, string newPassConfirm)
+        {
+            if(String.Compare(newPass, newPassConfirm, false) == 0)
+            {
+                var result = UserManager.ChangePassword(User.Identity.GetUserId(), oldPass, newPass);
+                if(result.Succeeded)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    return Json("OK");
+                }
+                else
+                {
+                    return Json(result.Errors.First());
+                }
+            }
+            else
+            {
+                return Json("Пароли не совпадают");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult ChangeNameAndEmail(string fname, string sname, string email, string password)
+        {   
+            if(UserManager.CheckPassword(UserManager.FindById(User.Identity.GetUserId()), password))
+            {
+                string name = String.Format("{0} {1}", fname.Trim(), sname.Trim());
+                if (_aspUserRepository.ChangeNameAndLogin(User.Identity.GetUserId(), name, email.Trim()))
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    return Json("OK");
+                }
+                else
+                {
+                    return Json("Не удалось изменить имя или Email");
+                }
+            }
+            else
+            {
+                return Json("Неправильный пароль");
+            }
         }
 
         protected override void Dispose(bool disposing)
