@@ -765,23 +765,24 @@ margin-top: 20px;
     text-align: right;
     margin-top: 45px;
 }
-.name-profile-inp{
+.name-profile-input{
 	display: inline-block;
-	width: 200px;
+	width: 46%;
 
 }
 
-.email-profile-inp{
+.email-profile-input{
 	display: block;
-	width: 425px;
+	width: 97%;
+    margin-bottom: 0;
 }
 
-.form .password-profile-field{
+.cabinet-form .password-profile-field{
 	display: block;
-	width: 425px;
+	width: 97%;
 }
 
-.form input{
+.cabinet-form input{
 	margin: 10px;
 	height: 45px;
     border-radius: 2px;
@@ -796,7 +797,7 @@ margin-top: 20px;
     margin: 0 100px;
 }
 
-.text-danger {
+.text-validate-msg {
     color: red;
     margin: 0 140px;
     padding: 20px;

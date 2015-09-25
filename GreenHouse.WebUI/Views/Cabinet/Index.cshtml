@@ -14,13 +14,13 @@
         <div id="name-changing-form-container">
             @using (Ajax.BeginForm("ChangeNameAndEmail", "Account", new AjaxOptions {OnSuccess = "ChangeNameOnSuccess"}))
             {
-                <div class="form">
+                <div class="cabinet-form">
                     <form action="POST">
-                        @Html.TextBox("fname", "", new {@class = "name-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0]})
-                        @Html.TextBox("sname", "", new {@class = "name-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[1]})
-                        @Html.TextBox("email", "", new {@class = "email-profile-inp", @minlength = "5", @placeholder = ViewBag.User.Email})
+                        @Html.TextBox("fname", "", new {@class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0]})
+                        @Html.TextBox("sname", "", new {@class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[1]})
+                        @Html.TextBox("email", "", new {@class = "email-profile-input", @minlength = "5", @placeholder = ViewBag.User.Email})
                         @Html.TextBox("password", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
-                        <div class="text-danger"><div id="changingNameResult"></div></div>
+                        <div class="text-validate-msg"><div id="changingNameResult"></div></div>
                         <div class="name-changing-buttons-container">
                             <button id="name-changing-button-cancel" class="btn-lg">Отменить</button>   
                             <button type="submit" class="btn-lg">Сохранить</button>
@@ -34,21 +34,21 @@
     <div class="col-xs-12 col-sm-6">
         <div class="new-room">
             <div id="change-pass-buttons-container">
-                <button class="btn-lg">Новая комната</button>
+                <button class="btn-lg" style="display: none;">Новая комната</button>
                 <button id="pass-changing-button" class="btn-lg">Сменить пароль</button>
             </div>
             <div id="pass-changing-form-container">
                 @using (Ajax.BeginForm("ChangePassword", "Account", new AjaxOptions {OnSuccess = "ChangePassOnSuccess"}))
                 {
-                    <div class="form">
+                    <div class="cabinet-form">
                         <form action="POST">
-                            @Html.TextBox("oldPass", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Пароль"})
-                            @Html.TextBox("newPass", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Новый пароль"})
-                            @Html.TextBox("newPassConfirm", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Повторить новый пароль"})
-                            <span>
-                            <button id="pass-changing-button-cancel" class="btn-lg">Отменить</button>
-                            <button type="submit" class="btn-lg">Сохранить</button>
-                        </span>
+                            @Html.TextBox("oldPass", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
+                            @Html.TextBox("newPass", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Новый пароль"})
+                            @Html.TextBox("newPassConfirm", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Повторить новый пароль"})
+                            <div>
+                                <button id="pass-changing-button-cancel" class="btn-lg">Отменить</button>
+                                <button type="submit" class="btn-lg">Сохранить</button>
+                            </div>
 
 
                         </form>
@@ -85,12 +85,12 @@
 
     $('#name-changing-form-container').hide();
     $('#name-changing-button').click(function() {
-        $('#name-changing-form-container').show("slow");
-        $('#profile-info-container').hide("slow");
+        $('#name-changing-form-container').slideDown("slow");
+        $('#profile-info-container').slideUp("slow");
     });
     $('#name-changing-button-cancel').click(function () {
         $('#name-changing-form-container').slideUp("slow");
-        $('#profile-info-container').show("slow");
+        $('#profile-info-container').slideDown("slow");
     });
 
 
