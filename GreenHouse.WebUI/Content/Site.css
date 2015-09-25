@@ -60,14 +60,6 @@ h5 {
 	padding-left: 18px;
 }
 
-.new-room {
-	text-align: right;
-}
-
-.new-room h6 {
-	margin-right: 70px;
-}
-
 .header-image {
 	display: block;
 	background-image: url(images/bg-home-img.png);	
@@ -759,9 +751,75 @@ input[type=range]:focus {
 }
 
 
-/*.table-filter tr td{
-    padding: 10px;
-}*/
+
+
+
+
+
+.admin-profile-info {
+color: #434343;
+margin-top: 20px;
+}
+
+.new-room {
+    text-align: right;
+    margin-top: 45px;
+}
+.name-profile-inp{
+	display: inline-block;
+	width: 200px;
+
+}
+
+.email-profile-inp{
+	display: block;
+	width: 425px;
+}
+
+.form .password-profile-field{
+	display: block;
+	width: 425px;
+}
+
+.form input{
+	margin: 10px;
+	height: 45px;
+    border-radius: 2px;
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+.name-changing-buttons-container button {
+    display: inline-block;
+}
+.name-changing-buttons-container {
+    margin: 0 100px;
+}
+
+.text-danger {
+    color: red;
+    margin: 0 140px;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.new-room {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.new-room h6 {
+    margin-right: 70px;
+}
+
+
+
+
+
+
+
+
+
 
 .filter-container .filter .table-filter input[type=checkbox].css-checkbox {
                             position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;

@@ -3,87 +3,58 @@
     ViewBag.Title = "Index";
 }
 
-<style>
-    .admin-profile-info {
-    color: #434343;
-    margin-top: 20px;
-    }
-
-    .new-room {
-        text-align: right;
-        margin-top: 45px;
-    }
-	.name-profile-inp{
-		display: inline-block;
-		width: 50px;
-	}
-
-	.email-profile-inp{
-		display: block;
-		width: 100px;
-	}
-
-    .password-profile-inp{
-		display: block;
-		width: 100px;
-	}
-
-	.form input{
-		margin: 10px;
-		height: 45px;
-	}
-
-</style>
-
-
 <div class="row">
     <div class="admin-profile-info col-xs-12 col-sm-6">
-        <h3>@User.Identity.Name<span>Admin</span></h3>
-        <h5>@ViewBag.User.Email</h5>
-        <button class="btn-lg">Редактировать</button>
+        <div id="profile-info-container">
+            <h3>@User.Identity.Name<span style="display: none;">Admin</span></h3>
+            <h5>@ViewBag.User.Email</h5>
+            <button class="btn-lg" id="name-changing-button">Редактировать</button>
+        </div>
 
-
-
-        @using (Ajax.BeginForm("ChangeNameAndEmail", "Account", new AjaxOptions { OnSuccess = "ChangeNameOnSuccess" }))
-        {
-            <div class="form">
-                <form action="POST">
-                    @Html.TextBox("fname", "", new {@class = "name-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] })
-                    @Html.TextBox("sname", "", new { @class = "lname-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
-                    @Html.TextBox("email", "", new { @class = "email-profile-inp", @minlength = "5", @placeholder = ViewBag.User.Email })
-                    @Html.TextBox("password", "", new { @type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Пароль" })
-                    <span>
-                        <button class="btn-lg">Отменить</button>   
-                        <button type="submit" class="btn-lg">Сохранить</button>
-                    </span>
-                    <div id="changingNameResult" class="text-danger"></div>
-
-                </form>
-            </div>
-        }
+        <div id="name-changing-form-container">
+            @using (Ajax.BeginForm("ChangeNameAndEmail", "Account", new AjaxOptions {OnSuccess = "ChangeNameOnSuccess"}))
+            {
+                <div class="form">
+                    <form action="POST">
+                        @Html.TextBox("fname", "", new {@class = "name-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0]})
+                        @Html.TextBox("sname", "", new {@class = "name-profile-inp", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[1]})
+                        @Html.TextBox("email", "", new {@class = "email-profile-inp", @minlength = "5", @placeholder = ViewBag.User.Email})
+                        @Html.TextBox("password", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
+                        <div class="text-danger"><div id="changingNameResult"></div></div>
+                        <div class="name-changing-buttons-container">
+                            <button id="name-changing-button-cancel" class="btn-lg">Отменить</button>   
+                            <button type="submit" class="btn-lg">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
 
     </div>
     <div class="col-xs-12 col-sm-6">
         <div class="new-room">
-            <button class="btn-lg">Новая комната</button>
-            <button class="btn-lg">Сменить пароль</button>
-
-            @using (Ajax.BeginForm("ChangePassword", "Account", new AjaxOptions { OnSuccess = "ChangePassOnSuccess" }))
-            {
-                <div class="form">
-                    <form action="POST">
-                        @Html.TextBox("oldPass", "", new { @type = "password", @class = "password-profile-inp", @minlength = "5",@placeholder = "Пароль" })
-                        @Html.TextBox("newPass", "", new { @type = "password", @class = "password-profile-inp", @minlength = "5",@placeholder = "Новый пароль" })
-                        @Html.TextBox("newPassConfirm", "", new { @type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Повторить новый пароль" })
-                        <span>
-                            <button class="btn-lg">Отменить</button>
+            <div id="change-pass-buttons-container">
+                <button class="btn-lg">Новая комната</button>
+                <button id="pass-changing-button" class="btn-lg">Сменить пароль</button>
+            </div>
+            <div id="pass-changing-form-container">
+                @using (Ajax.BeginForm("ChangePassword", "Account", new AjaxOptions {OnSuccess = "ChangePassOnSuccess"}))
+                {
+                    <div class="form">
+                        <form action="POST">
+                            @Html.TextBox("oldPass", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Пароль"})
+                            @Html.TextBox("newPass", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Новый пароль"})
+                            @Html.TextBox("newPassConfirm", "", new {@type = "password", @class = "password-profile-inp", @minlength = "5", @placeholder = "Повторить новый пароль"})
+                            <span>
+                            <button id="pass-changing-button-cancel" class="btn-lg">Отменить</button>
                             <button type="submit" class="btn-lg">Сохранить</button>
                         </span>
 
 
-                    </form>
-                </div>
-            }
+                        </form>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 
@@ -111,4 +82,26 @@
             $("#changingPassResult").replaceWith(data);
         }
     }
+
+    $('#name-changing-form-container').hide();
+    $('#name-changing-button').click(function() {
+        $('#name-changing-form-container').show("slow");
+        $('#profile-info-container').hide("slow");
+    });
+    $('#name-changing-button-cancel').click(function () {
+        $('#name-changing-form-container').slideUp("slow");
+        $('#profile-info-container').show("slow");
+    });
+
+
+    $('#pass-changing-form-container').hide();
+    $('#pass-changing-button').click(function () {
+        $('#pass-changing-form-container').slideDown("slow");
+        $('#change-pass-buttons-container').slideUp("slow");
+    });
+    $('#pass-changing-button-cancel').click(function () {
+        $('#pass-changing-form-container').slideUp("slow");
+        $('#change-pass-buttons-container').slideDown("slow");
+    });
+
 </script>
