@@ -60,17 +60,70 @@ namespace GreenHouse.Domain.Concrete
             return roomReservations.ToList();
         }
 
-        //public IEnumerable<Reservation> GetRoomReservationsByDate(int roomId, DateTime date)
-        //{
-        //    var rooms = _context.Rooms.Where(a => a.Id == roomId);
-        //    if(rooms.Count() > 0)
-        //    {
-        //        return GetRoomReservationsByDate(rooms.First().Number, date);
-        //    }
-        //    else
-        //    {
-        //        return new List<Reservation>();
-        //    }
-        //}
+        public IDictionary<DateTime, IEnumerable<Reservation>> GetRoomWeekReservationsByDate(string roomNumber, DateTime date)
+        {
+            var week = GetWeekByDay(date);
+            var weekReservations = new Dictionary<DateTime, IEnumerable<Reservation>>();
+
+            if(week == null)
+            {
+                return weekReservations;
+            }
+            else
+            {
+                foreach (var day in week)
+                {
+                    weekReservations.Add(day, GetReservationsByDate(day).Where(a => String.Compare(a.Room.Number, roomNumber, true) == 0));
+                }
+
+                return weekReservations;
+            }
+        }
+
+        private DateTime[] GetWeekByDay(DateTime date)
+        {
+            int dayNumber = 0;
+
+            switch (date.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    dayNumber = 1;
+                    break;
+                case DayOfWeek.Tuesday:
+                    dayNumber = 2;
+                    break;
+                case DayOfWeek.Wednesday:
+                    dayNumber = 3;
+                    break;
+                case DayOfWeek.Thursday:
+                    dayNumber = 4;
+                    break;
+                case DayOfWeek.Friday:
+                    dayNumber = 5;
+                    break;
+                case DayOfWeek.Saturday:
+                    dayNumber = 6;
+                    break;
+                case DayOfWeek.Sunday:
+                    dayNumber = 7;
+                    break;
+            }
+
+            if(dayNumber == 0)
+            {
+                return new DateTime[0];
+            }
+            else
+            {
+                var week = new DateTime[7];
+                int addDayNum = -dayNumber + 1;
+                for (int i = 0; i < 7; i++)
+                {
+                    week[i] = date.AddDays(addDayNum++);
+                }
+
+                return week;
+            }
+        }
     }
 }

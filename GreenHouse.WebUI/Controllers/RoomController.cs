@@ -63,6 +63,18 @@ namespace GreenHouse.WebUI.Controllers
             return PartialView(reservations);
         }
 
+        public ActionResult RoomWeekReservations(string roomNumber, int year, int month, int day)
+        {
+            var date = new DateTime(year, month, day);
+            var reservations = _reservationRepository.GetRoomWeekReservationsByDate(roomNumber, date);
+
+            ViewBag.RoomNumber = roomNumber;
+            ViewBag.Date = date;
+            ViewBag.BeginHour = 9;
+            ViewBag.EndHour = 21;
+
+            return PartialView(reservations);
+        }
 
         [HttpPost]
         public void AddReservation(string roomNumber, int year, int month, int day, int beginHour, string purpose)

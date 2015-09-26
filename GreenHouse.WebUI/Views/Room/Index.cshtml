@@ -17,6 +17,21 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-sm-6">
+           
+        </div>
+        <div class="col-sm-6 text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default active" id="day">День</button>
+                    <button type="button" class="btn btn-default" id="week">Неделя</button>
+                </div>
+        </div>
+    </div>
+
+
+
     <div class="row">
         <div class="col-sm-9" id="diagram">
             <div id="content">
@@ -33,6 +48,10 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="forDayActive">
+    <input type="hidden" id="forCurrentYear">
+    <input type="hidden" id="forCurrentMonth">
+    <input type="hidden" id="forCurrentDay">
 </div>
 
 @Html.Partial("~/Views/Room/Rooms.cshtml")
@@ -48,18 +67,45 @@
 
 <script type="text/javascript">
         $(function () {
-            
+            $('#day').click(function() {
+                $('#day').addClass("active");
+                $('#forDayActive').val("true");
+                $('#week').removeClass("active");
+
+                var model = {
+                    roomNumber:@ViewBag.RoomNumber,
+                    Year: $('#forCurrentYear').attr('value'),
+                    Month: $('#forCurrentMonth').attr('value'),
+                    Day: $('#forCurrentDay').attr('value')
+                };
+
+                $().GetResByDayOrWeek(model);
+            });
+
+            $('#week').click(function() {
+                $('#week').addClass("active");
+                $('#forDayActive').val("false");
+                $('#day').removeClass("active");
+
+                var model = {
+                    roomNumber:@ViewBag.RoomNumber,
+                    Year: $('#forCurrentYear').attr('value'),
+                    Month: $('#forCurrentMonth').attr('value'),
+                    Day: $('#forCurrentDay').attr('value')
+                };
+
+                $().GetResByDayOrWeek(model);
+            });
+
 
             $('#datetimepicker-room').on("changeDate", function (e) {
                 var day = e.date.getDate();
                 var month = e.date.getMonth() + 1;
                 var year = e.date.getFullYear();
 
-                //$('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
-
-                //$('#forCurrentYear').val(year);
-                //$('#forCurrentMonth').val(month);
-                //$('#forCurrentDay').val(day);
+                $('#forCurrentYear').val(year);
+                $('#forCurrentMonth').val(month);
+                $('#forCurrentDay').val(day);
 
                 var model = {
                     roomNumber:@ViewBag.RoomNumber,
@@ -68,6 +114,25 @@
                     Day: day
                 };
 
+                $().GetResByDayOrWeek(model);
+            });
+        });
+
+    (function($) {
+        $.fn.GetResByDayOrWeek = function(model){
+            if($('#forDayActive').val() == "false")
+            {
+                $.ajax({
+                    type: "POST",
+                    data: model,
+                    dataType: "html",
+                    url: '@Url.Action("RoomWeekReservations", "Room")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+            }
+            else
+            {
                 $.ajax({
                     type: "POST",
                     data: model,
@@ -76,6 +141,8 @@
                 }).done(function (result) {
                     $('#content').html(result);
                 });
-            });
-        });
+            }
+            return this;
+        };
+    })(jQuery);
 </script>
