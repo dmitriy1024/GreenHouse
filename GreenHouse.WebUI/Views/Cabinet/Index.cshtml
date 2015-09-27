@@ -34,9 +34,61 @@
     <div class="col-xs-12 col-sm-6">
         <div class="new-room">
             <div id="change-pass-buttons-container">
-                <button class="btn-lg" style="display: none;">Новая комната</button>
+                <button id="add-new-room-button" class="btn-lg">Новая комната</button>
                 <button id="pass-changing-button" class="btn-lg">Сменить пароль</button>
             </div>
+
+            <div id="adding-new-room-container">
+                <h2 class="text-center">Добавить новую комнату</h2>
+                <div class="new-room-adding-form">
+                    <input type="text" class="capacity-input-field" placeholder="Колличество мест">
+                    <table class="new-room-form">
+                        <tr>
+                            <td><img src="~/Content/images/icon-wi-fi-grey.png"><span class="new-room-labels">Wi-Fi</span></td>
+                            <td>
+                                <input type="checkbox" name="wifi" id="wifi" class="css-checkbox"/><label for="wifi" class="css-label"></label>
+                            </td>
+                            <td><img src="~/Content/images/icon-progector-grey.png"><span class="new-room-labels">Проектор</span></td>
+                            <td>
+                                <input type="checkbox" name="projector" id="projector" class="css-checkbox"/><label for="projector" class="css-label"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="~/Content/images/icon-monitor-grey.png"><span class="new-room-labels">Монитор</span></td>
+                            <td>
+                                <input type="checkbox" name="monitor" id="monitor" class="css-checkbox"/><label for="monitor" class="css-label"></label>
+                            </td>
+                            <td><img src="~/Content/images/icon-mic-grey.png"><span class="new-room-labels">Микрофон</span></td>
+                            <td>
+                                <input type="checkbox" name="microphone" id="microphone" class="css-checkbox"/><label for="microphone" class="css-label"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h5 class="text-left" style="padding: 5px 0 15px 0;">Выберите комнату:</h5>
+                <div class="map-min">
+                    @*<div class="room" id="min-room307" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>307</span></div>
+                <div class="room" id="min-room311" style="background-image: url(../../Content/images/rooms/r-min-311-100.png);"><span>311</span></div>
+                <div class="room" id="min-room306" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>306</span></div>
+                <div class="room" id="min-room308" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>308</span></div>
+                <div class="room" id="min-room309" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>309</span></div>
+                <div class="room" id="min-room310" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>310</span></div>
+                <div class="room" id="min-room305" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>305</span></div>
+                <div class="room" id="min-room312" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>312</span></div>
+                <div class="room" id="min-room313" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>313</span></div>
+                <div class="room" id="min-room314" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>314</span></div>
+                <div class="room" id="min-room315" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>315</span></div>
+                <div class="room" id="min-room301" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>301</span></div>
+                <div class="room" id="min-room302" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>302</span></div>
+                <div class="room" id="min-room303" style="background-image: url(../../Content/images/rooms/r-307-100.png);"><span>303</span></div>
+                <div class="room" id="min-room304" style="background-image: url(../../Content/images/rooms/r-min-304-100.png);"><span>304</span></div>*@
+                    <div ng-repeat="i in filteredRooms"><div class="room" id="min-room{{i.number}}" style="background-image: url(Content/images/rooms/min/r-min-{{i.number}}-100.png)"></div></div>
+                </div>
+                <button id="add-new-room-button-cancel" class="btn-lg">Отмена</button>
+                <button id="" class="btn-lg">Добавить</button>
+            </div>
+
             <div id="pass-changing-form-container">
                 @using (Ajax.BeginForm("ChangePassword", "Account", new AjaxOptions {OnSuccess = "ChangePassOnSuccess"}))
                 {
@@ -104,4 +156,15 @@
         $('#change-pass-buttons-container').slideDown("slow");
     });
 
+
+
+    $('#adding-new-room-container').hide();
+    $('#add-new-room-button').click(function () {
+        $('#adding-new-room-container').slideDown("slow");
+        $('#change-pass-buttons-container').slideUp("slow");
+    });
+    $('#add-new-room-button-cancel').click(function () {
+        $('#adding-new-room-container').slideUp("slow");
+        $('#change-pass-buttons-container').slideDown("slow");
+    });
 </script>
