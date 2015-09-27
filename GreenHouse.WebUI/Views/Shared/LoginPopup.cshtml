@@ -1,7 +1,7 @@
 ﻿@using GreenHouse.WebUI.Models
 @model GreenHouse.WebUI.Models.LoginViewModel
 
-@using (Ajax.BeginForm("Login", "Account", new AjaxOptions { OnSuccess = "OnSuccess" }))
+@using (Ajax.BeginForm("Login", "Account", new AjaxOptions { OnSuccess = "OnSuccessLogPopup" }))
 {
     @Html.AntiForgeryToken()
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -16,7 +16,7 @@
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    <div id="result" class="text-danger"></div>
+                    <div id="result" class="text-danger" style="color : red; margin-left: 60px; margin-top: 10px"></div>
                     <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
                     @*<input type="submit" name="login" class="login loginmodal-submit" value="Войти">*@
                 </form>
@@ -30,14 +30,19 @@
     </div>
 }
 <script>
-    function OnSuccess(data) {
+    function OnSuccessLogPopup(data) {
+        debugger;
         if (data == 'OK') {
             // data.redirect contains the string URL to redirect to
             window.location.href = '@Url.Action("Index", "Home")';
         }
         else {
             // data.form contains the HTML for the replacement form
-            $("#result").replaceWith(data);
+            $("#result").text(data);
         }
     }
+
+    $("#login-modal").click(function () {
+        $("#result").text("");
+    });
 </script>

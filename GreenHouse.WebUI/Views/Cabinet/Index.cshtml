@@ -17,7 +17,14 @@
                 <div class="cabinet-form">
                     <form action="POST">
                         @Html.TextBox("fname", "", new {@class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0]})
-                        @Html.TextBox("sname", "", new {@class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[1]})
+                        @if (User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                        {
+                            @Html.TextBox("sname", "", new { @class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
+                        }
+                        else
+                        {
+                            @Html.TextBox("sname", "", new { @class = "name-profile-input", @minlength = "5" })
+                        }
                         @Html.TextBox("email", "", new {@class = "email-profile-input", @minlength = "5", @placeholder = ViewBag.User.Email})
                         @Html.TextBox("password", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
                         <div class="text-validate-msg"><div id="changingNameResult"></div></div>

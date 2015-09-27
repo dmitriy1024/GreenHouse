@@ -54,7 +54,33 @@
                                                 {
                                                     <a id='delReserv'>Отменить</a>
                                                 }
-                                                </div>">@res.First().AspNetUser.UserName</span>
+                                                </div>">
+                                                @if(res.First().AspNetUser.UserName.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                                                {
+                                                    if(res.First().AspNetUser.UserName.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
+                                                    {
+                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Substring(0, 8), "..");
+                                                    }
+                                                    else
+                                                    {
+                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                                    }
+                                                    <br/>
+                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Length > 11)
+                                                    {
+                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Substring(0, 8), "..");
+                                                    }
+                                                    else
+                                                    {
+                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @res.First().AspNetUser.UserName; 
+                                                }
+                                                
+                                                </span>
                                             </td>
                                         }
                                         else
@@ -63,7 +89,34 @@
                                                 <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
                                                     <img src='~/../Content/images/icon-user-grey.png'>
-                                            @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
+                                            @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">
+                                                
+                                                @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                                                {
+                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
+                                                    {
+                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Substring(0, 9), "..");
+                                                    }
+                                                    else
+                                                    {
+                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                                    }
+                                                    <br />
+                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Length > 11)
+                                                    {
+                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Substring(0, 9), "..");
+                                                    }
+                                                    else
+                                                    {
+                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @res.First().AspNetUser.UserName;
+                                                }
+                                                
+                                                </span>
                                             </td>
                                         }
                                     }
@@ -74,7 +127,12 @@
                                             {
                                                 <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
-                                                <button id='reservate'>Бронировать</button> </div>">
+                                                @if (User.IsInRole("admin"))
+                                                {
+                                                    <button>Блокировать</button>
+                                                }
+                                                    
+                                                    <button id='reservate'>Бронировать</button> </div>">
                                                     <span>
                                                 <img style="padding: 12px" class="icon-add-new-event" src='~/Content/images/icon-add-new-event.png'>
                                                 </span>

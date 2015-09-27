@@ -8,6 +8,7 @@ using GreenHouse.Domain.Abstract;
 using GreenHouse.Domain.Entities;
 using GreenHouse.WebUI.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GreenHouse.WebUI.Controllers
 {

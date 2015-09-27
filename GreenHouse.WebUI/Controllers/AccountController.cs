@@ -98,7 +98,44 @@ namespace GreenHouse.WebUI.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return Json("Invalid login attempt.");
+                    return Json("Incorrect login or password");
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginActResult(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                //return RedirectToAction("Index", "Home", model);
+                return Json("Error");
+            }
+
+            var user = _aspUserRepository.GetAspNetUserByEmail(model.Email);
+
+            SignInStatus result;
+            if (user == null)
+            {
+                result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            }
+            else
+            {
+                result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            }
+
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:                    
+                case SignInStatus.RequiresVerification:                    
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View("Login");
             }
         }
 

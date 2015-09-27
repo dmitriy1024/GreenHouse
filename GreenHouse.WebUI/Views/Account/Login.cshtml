@@ -4,71 +4,67 @@
     ViewBag.Title = "Log in";
 }
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-        @Html.AntiForgeryToken()
-        <div >
-            <div class="modal-dialog">
-                <div class="loginmodal-container" style="background-color: #FFFFFF">
-                    
-                    <div class="login-popup-logo">
-                        <img src="~/Content/images/logo-big.png" />
-                    </div><br>
-                    <form>
-                        @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        <div id="result" class="text-danger"></div>
-                        <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
-
-                    </form>
-
-
-                    @*<div class="login-help">
-                        <a id="log-reg-link" data-toggle="modal" data-dismiss="modal" data-target="#reg-modal">Регистрация</a>
-                    </div>*@
-                </div>
-            </div>
-        </div>
-    }
-@*@using (Ajax.BeginForm("Login","Account", new AjaxOptions { OnSuccess = "OnSuccess" }))
+@*@using (Html.BeginForm("LoginActResult", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div >
         <div class="modal-dialog">
-            <div class="loginmodal-container">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="loginmodal-container" style="background-color: #FFFFFF">
                 <div class="login-popup-logo">
                     <img src="~/Content/images/logo-big.png" />
                 </div><br>
-                <form>
+                <form>                    
                     @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    <div id="result" class="text-danger"></div>
-                    <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
-                    
-                </form>
-                
 
-                <div class="login-help">
-                    <a id="log-reg-link" data-toggle="modal" data-dismiss="modal" data-target="#reg-modal">Регистрация</a>
-                </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    
+                    <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
+                </form>
             </div>
         </div>
     </div>
 }*@
+
+<div id="commonRow"class="container header-image">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="reserve-form">
+                
+                <div>
+                    <div >
+                        @using (Html.BeginForm("LoginActResult", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div >
+                                <div >
+                                    <div class="loginmodal-container" style="background: 0,0,0,0; box-shadow: 0 0 0 rgba(0, 0, 0, 0)" >
+                                        
+                                        <form>
+                                            @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                            @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                            @Html.ValidationSummary(true, "", new { @id = "valSummaryLogin", @class = "text-danger" })
+
+                                            <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    function OnSuccess(data) {
-        if (data == 'OK') {
-            // data.redirect contains the string URL to redirect to
-            window.location.href = '@Url.Action("Index", "Home")';
-        }
-        else {
-            // data.form contains the HTML for the replacement form
-            $("#result").replaceWith(data);
-        }
-    }
+    $("#commonRow").click(function () {
+        $("#valSummaryLogin").text("");
+    });
 </script>
