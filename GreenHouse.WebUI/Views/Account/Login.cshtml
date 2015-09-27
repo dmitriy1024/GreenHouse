@@ -4,66 +4,35 @@
     ViewBag.Title = "Log in";
 }
 
-@*<h2>@ViewBag.Title.</h2>
-    <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-default" />
-                        </div>
-                    </div>
-                    <p>
-                        @Html.ActionLink("Register as a new user", "Register")
-                    </p>
-                }
-            </section>
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        @Html.AntiForgeryToken()
+        <div >
+            <div class="modal-dialog">
+                <div class="loginmodal-container" style="background-color: #FFFFFF">
+                    
+                    <div class="login-popup-logo">
+                        <img src="~/Content/images/logo-big.png" />
+                    </div><br>
+                    <form>
+                        @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        <div id="result" class="text-danger"></div>
+                        <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
+
+                    </form>
+
+
+                    @*<div class="login-help">
+                        <a id="log-reg-link" data-toggle="modal" data-dismiss="modal" data-target="#reg-modal">Регистрация</a>
+                    </div>*@
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>
-    </div>*@
-
-
-
-
-
-
-
-
-
-
-@using (Ajax.BeginForm("Login","Account", new AjaxOptions { OnSuccess = "OnSuccess" }))
+    }
+@*@using (Ajax.BeginForm("Login","Account", new AjaxOptions { OnSuccess = "OnSuccess" }))
 {
     @Html.AntiForgeryToken()
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -80,7 +49,7 @@
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     <div id="result" class="text-danger"></div>
                     <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
-                    @*<input type="submit" name="login" class="login loginmodal-submit" value="Войти">*@
+                    
                 </form>
                 
 
@@ -90,7 +59,7 @@
             </div>
         </div>
     </div>
-}
+}*@
 <script>
     function OnSuccess(data) {
         if (data == 'OK') {
@@ -103,15 +72,3 @@
         }
     }
 </script>
-
-
-
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-
-@*<script>
-    $('document').on("pageload", function() {
-        $('#login-modal').modal();
-    });
-</script>*@
