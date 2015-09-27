@@ -46,8 +46,8 @@
                                 {
                                     if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
                                     {
-                                        <td class="diagram-cell" data-begin-hour="@hour">
-                                            <span data-toggle="popover" title="" data-content="
+                                        <td class="diagram-cell" data-begin-hour="@hour" style="background-color:#ffe400">
+                                            <span data-toggle="popover" style="color: #000000" title="" data-content="
                                                     <div class='custompopover'>
                                                 @res.First().Purpose <br/>
                                                 @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
@@ -62,7 +62,7 @@
                                         <td class="diagram-cell">
                                             <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
-                                                    <img src='../../Content/images/icon-user-grey.png'>
+                                                    <img src='~/../Content/images/icon-user-grey.png'>
                                             @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
                                         </td>
                                     }

@@ -45,8 +45,8 @@
                                 {
                                     if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
                                     {
-                                        <td class="diagram-cell" data-year="@item.Key.Year" data-month="@item.Key.Month" data-day="@item.Key.Day" data-begin-hour="@hour">
-                                            <span data-toggle="popover" title="" data-content="
+                                        <td class="diagram-cell" data-year="@item.Key.Year" data-month="@item.Key.Month" data-day="@item.Key.Day" data-begin-hour="@hour" style="background-color:#ffe400">
+                                            <span data-toggle="popover" style="color: #000000" title="" data-content="
                                                     <div class='custompopover'>
                                                 @res.First().Purpose <br/>
                                                 @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
@@ -61,7 +61,7 @@
                                         <td class="diagram-cell">
                                             <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
-                                                    <img src='../../Content/images/icon-user-grey.png'>
+                                                    <img src='~/../Content/images/icon-user-grey.png'>
                                             @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">@res.First().AspNetUser.UserName</span>
                                         </td>
                                     }
@@ -75,7 +75,7 @@
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
                                                 <button id='reservate'>Бронировать</button> </div>">
                                                     <span>
-                                                <img style="padding: 12px" class="icon-add-new-event" src="../../Content/images/icon-add-new-event.png">
+                                                <img style="padding: 12px" class="icon-add-new-event" src="~/Content/images/icon-add-new-event.png">
                                                 </span>
                                                 </div>
                                         }
