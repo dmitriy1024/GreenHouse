@@ -68,3 +68,4 @@ packages/
 
 #Test files
 *.testsettings
+.vs/config/applicationhost.config
