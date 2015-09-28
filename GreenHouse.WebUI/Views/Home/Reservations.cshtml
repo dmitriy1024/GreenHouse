@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using GreenHouse.Domain.Entities;
+@using GreenHouse.WebUI.Infrastructure;
 @{
     ViewBag.Title = "Reservations";
 }
@@ -44,20 +45,78 @@
 
                                     if (res.Count() > 0)
                                     {
-                                        if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
+                                        if (String.Compare(res.First().Purpose, "block", true) == 0 && res.First().AspNetUser.IsAdmin())
                                         {
-                                            <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour" style="background-color:#ffe400">
-                                                <span data-toggle="popover" style="color: #000000" title="" data-content="
-                                                    <div class='custompopover'>                                               
-                                                @res.First().Purpose <br/> 
+                                            <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour" style="background-color:#d6dddb">
+                                       
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now && Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
+                                                {
+                                                    <span data-toggle="popover" style="color: #000000" title="" data-content="
+                                                    <div class='custompopover'>
+                                                        <span><img src='~/../Content/images/icon-unlock-grey.png'>
+                                                        <a id='delBlock'>Разблокировать</a></span>
+  
+                                                        </div>">
+                                                        <img src='~/Content/images/icon-lock-grey.png'>
+                                                </span>
+                                                }
+                                                else
+                                                {
+                                                    <img src='~/Content/images/icon-lock-grey.png'>
+                                                }    
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            if (Request.IsAuthenticated && String.Compare(User.Identity.Name, res.First().AspNetUser.UserName, true) == 0)
+                                            {
+                                                <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour" style="background-color:#ffe400">
+                                                    <span data-toggle="popover" style="color: #000000" title="" data-content="
+                                                    <div class='custompopover'>
+                                                @res.First().Purpose <br/>
                                                 @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
                                                 {
                                                     <a id='delReserv'>Отменить</a>
                                                 }
                                                 </div>">
-                                                @if(res.First().AspNetUser.UserName.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                                                        @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                                                        {
+                                                            if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
+                                                            {
+                                                                @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Substring(0, 8), "..");
+                                                            }
+                                                            else
+                                                            {
+                                                                @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                                            }
+                                                            <br />
+                                                            if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Length > 11)
+                                                            {
+                                                                @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Substring(0, 8), "..");
+                                                            }
+                                                            else
+                                                            {
+                                                                @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            @res.First().AspNetUser.UserName;
+                                                        }
+                                               </span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="diagram-cell">
+                                                    <span data-toggle="popover" title="" data-content="
+                                                    <div class='custompopover'>
+                                                    <img src='~/../Content/images/icon-user-grey.png'>
+                                                @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">
+
+                                                @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                                                 {
-                                                    if(res.First().AspNetUser.UserName.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
+                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
                                                     {
                                                         @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Substring(0, 8), "..");
                                                     }
@@ -65,7 +124,7 @@
                                                     {
                                                         @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
                                                     }
-                                                    <br/>
+                                                    <br />
                                                     if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Length > 11)
                                                     {
                                                         @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Substring(0, 8), "..");
@@ -77,48 +136,14 @@
                                                 }
                                                 else
                                                 {
-                                                    @res.First().AspNetUser.UserName; 
-                                                }
-                                                
-                                                </span>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td class="diagram-cell">
-                                                <span data-toggle="popover" title="" data-content="
-                                                    <div class='custompopover'>
-                                                    <img src='~/../Content/images/icon-user-grey.png'>
-                                            @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">
-                                                
-                                                @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
-                                                {
-                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
-                                                    {
-                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Substring(0, 9), "..");
-                                                    }
-                                                    else
-                                                    {
-                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                                                    }
-                                                    <br />
-                                                    if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Length > 11)
-                                                    {
-                                                        @String.Format("{0}{1}", res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1].Substring(0, 9), "..");
-                                                    }
-                                                    else
-                                                    {
-                                                        @res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                                                    }
-                                                }
-                                                else
-                                                {
                                                     @res.First().AspNetUser.UserName;
                                                 }
-                                                
+
                                                 </span>
-                                            </td>
+                                                </td>
+                                            }
                                         }
+
                                     }
                                     else
                                     {
@@ -129,9 +154,9 @@
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
                                                 @if (User.IsInRole("admin"))
                                                 {
-                                                    <button>Блокировать</button>
+                                                    <button id='addBlock'>Блокировать</button>
                                                 }
-                                                    
+
                                                     <button id='reservate'>Бронировать</button> </div>">
                                                     <span>
                                                 <img style="padding: 12px" class="icon-add-new-event" src='~/Content/images/icon-add-new-event.png'>
@@ -244,7 +269,9 @@
                 $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
             });           
         });
-    });
+     });
+
+
 
     $(function() {
         $('#next-column').click(function (event) {
