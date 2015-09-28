@@ -99,5 +99,17 @@ namespace GreenHouse.WebUI.Controllers
                 _reservationRepository.DelReservation(User.Identity.GetUserId(), room.Id, beginTime);
             }           
         }
+
+        [HttpPost]
+        public void AddBlock(string roomNumber, int year, int month, int day, int beginHour)
+        {
+            DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
+            var room = _roomRepository.GetRoomByNumber(roomNumber);
+
+            if (room != null)
+            {
+                _reservationRepository.AddBlock(User.Identity.GetUserId(), room.Id, beginTime, beginTime.AddHours(1));
+            }
+        }
     }
 }
