@@ -56,6 +56,14 @@ namespace GreenHouse.WebUI.Controllers
             _reservationRepository.DelReservation(User.Identity.GetUserId(), roomId, beginTime);
         }
 
+        [HttpPost]
+        public void AddBlock(int roomId, int year, int month, int day, int beginHour)
+        {
+            DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
+
+            _reservationRepository.AddBlock(User.Identity.GetUserId(), roomId, beginTime, beginTime.AddHours(1));
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

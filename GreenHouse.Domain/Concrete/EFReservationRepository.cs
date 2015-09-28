@@ -125,5 +125,22 @@ namespace GreenHouse.Domain.Concrete
                 return week;
             }
         }
+
+        public void AddBlock(string userId, int roomId, DateTime beginTime, DateTime endTime)
+        {
+            var room = _context.Rooms.Where(a => a.Id == roomId).ToList();
+
+            var res = new Reservation()
+            {
+                AspNetUserId = userId,
+                BeginTime = beginTime,
+                EndTime = endTime,
+                RoomId = room[0].Id,
+                Purpose = null
+            };
+
+            _context.Reservations.Add(res);
+            _context.SaveChanges();
+        }
     }
 }
