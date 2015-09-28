@@ -77,5 +77,38 @@ namespace GreenHouse.Domain.Concrete
                 return false;
             }
         }
+
+        public void AddRoom(int selectedRoom, string capacity, string wifiOpt, string projectorOpt, string monitorOpt, string microphoneOpt)
+        {
+            var room = new Room()
+            {
+                Number = selectedRoom.ToString().Trim(),
+                Capacity = Int32.Parse(capacity),
+                Floor = 5
+            };
+
+            _context.Rooms.Add(room);
+            _context.SaveChanges();
+            var x = _context.Rooms.First(a => String.Compare(a.Number, selectedRoom.ToString(), true) == 0);
+            var b = _context.AdditEquipments.First(a => String.Compare(a.Name, "wifi", true) == 0);
+            if(wifiOpt != null)
+                b.Rooms.Add(x);
+            if (projectorOpt != null)
+            {
+                b = _context.AdditEquipments.First(a => String.Compare(a.Name, "projector", true) == 0);
+                b.Rooms.Add(x);
+            }
+            if (monitorOpt != null)
+            {
+                b = _context.AdditEquipments.First(a => String.Compare(a.Name, "monitor", true) == 0);
+                b.Rooms.Add(x);
+            }
+            if (microphoneOpt != null)
+            {
+                b = _context.AdditEquipments.First(a => String.Compare(a.Name, "microphone", true) == 0);
+                b.Rooms.Add(x);
+            }
+            _context.SaveChanges();
+        }
     }
 }

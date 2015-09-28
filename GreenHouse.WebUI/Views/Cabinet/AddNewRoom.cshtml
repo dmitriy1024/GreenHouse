@@ -1,0 +1,91 @@
+﻿@using System.Web.Mvc.Html
+<div id="adding-new-room-container">
+    <h2 class="text-center">Добавить новую комнату</h2>
+    <div class="new-room-adding-form">
+        @using (Ajax.BeginForm("AddNewRoom", "Cabinet", new AjaxOptions { OnSuccess = "AddNewRoomOnSuccess" }))
+        {
+            @Html.AntiForgeryToken()
+            <form action="POST">
+                <input type="text" name="capacity" class="capacity-input-field" placeholder="Колличество мест">
+                <table class="new-room-form">
+                    <tr>
+                        <td><img src="~/Content/images/icon-wi-fi-grey.png"><span class="new-room-labels">Wi-Fi</span></td>
+                        <td>
+                            @*@Html.CheckBox("wifi-opt", new {@type = "checkbox", @id = "wifi-opt", @class = "css-checkbox"})*@
+                            <input type="checkbox" name="wifiOpt" id="wifiOpt" class="css-checkbox"/><label for="wifiOpt" class="css-label"></label>
+                        </td>
+                        <td><img src="~/Content/images/icon-progector-grey.png"><span class="new-room-labels">Проектор</span></td>
+                        <td>
+                            @*@Html.CheckBox("projector-opt", new {@type = "checkbox", @name = "projector-opt", @id = "projector-opt", @class = "css-checkbox"})*@
+                            <input type="checkbox" name="projectorOpt" id="projectorOpt" class="css-checkbox"/><label for="projectorOpt" class="css-label"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="~/Content/images/icon-monitor-grey.png"><span class="new-room-labels">Монитор</span></td>
+                        <td>
+                            @*@Html.CheckBox("monitor-opt", new {@type = "checkbox", @id = "monitor-opt", @class = "css-checkbox"})*@
+                            <input type="checkbox" name="monitorOpt" id="monitorOpt" class="css-checkbox"/><label for="monitorOpt" class="css-label"></label>
+                        </td>
+                        <td><img src="~/Content/images/icon-mic-grey.png"><span class="new-room-labels">Микрофон</span></td>
+                        <td>
+                            @*@Html.CheckBox("microphone-opt", new {@type = "checkbox", @id = "microphone-opt", @class = "css-checkbox"})*@
+                            <input type="checkbox" name="microphoneOpt" id="microphoneOpt" class="css-checkbox"/><label for="microphoneOpt" class="css-label"></label>
+                        </td>
+                    </tr>
+                </table>
+                @*@Html.TextBox("selectedRoom", "", new { @style="display: none;", @id = "selectedRoom", @name="selectedRoom",  @class = "css-checkbox" })*@
+                <input id="selectedRoom" name="selectedRoom" value="" type="hidden"/>
+                <button  type="submit" id="" class="btn-lg">Добавить</button>
+            </form>
+        }
+    </div>
+
+    <h5 class="text-left" style="padding: 5px 0 15px 0;">Выберите комнату:</h5>
+    <div class="map-min">
+        <div class="room hover-area" id="min-room301" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room302" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room303" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room304" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room305" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room306" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room307" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room308" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room309" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room310" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room311" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room312" style="background: grey;" onclick="selectRoom(312)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room313" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room314" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room315" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+
+        <div ng-repeat="i in filteredRooms"><div class="room" id="min-room{{i.number}}" style="background-image: url(Content/images/rooms/min/r-min-{{i.number}}-100.png)"></div></div>
+    </div>
+    <button id="add-new-room-button-cancel" class="btn-lg">Отмена</button>
+    @*<button class="btn-lg" type="submit" form="newRoomForm">Добавить</button>*@
+</div>
+
+
+
+<script>
+
+$('#adding-new-room-container').hide();
+$('#add-new-room-button').click(function () {
+    $('#adding-new-room-container').slideDown("slow");
+    $('#change-pass-buttons-container').slideUp("slow");
+});
+$('#add-new-room-button-cancel').click(function () {
+    $('#adding-new-room-container').slideUp("slow");
+    $('#change-pass-buttons-container').slideDown("slow");
+});
+
+
+function selectRoom(roomNum) {
+    $('#selectedRoom').val(roomNum);
+    $('#min-room'+roomNum).addClass('active');
+}
+
+function AddNewRoomOnSuccess(data) {
+    //$("#adding-new-room-container").replaceWith(data);
+    window.location.href = '@Url.Action("Index", "Home")';
+}
+</script>
