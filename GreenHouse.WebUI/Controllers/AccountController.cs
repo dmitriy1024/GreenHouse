@@ -196,7 +196,7 @@ namespace GreenHouse.WebUI.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        {
+        {   
             if (ModelState.IsValid)
             {
                 string userName = String.Format("{0} {1}", model.FName, model.LName);
@@ -216,12 +216,16 @@ namespace GreenHouse.WebUI.Controllers
                     //return RedirectToAction("Index", "Home");
                     return Json(@"OK");
                 }
-                AddErrors(result);
+                else
+                {
+                    return Json(result.Errors.FirstOrDefault());
+                }
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             //return View(model);
-            return Json("Error");
+            return Json("Model is not valid");
         }
 
         //

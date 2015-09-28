@@ -56,7 +56,7 @@
 
 
 
-@using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnSuccess = "OnSuccess" }))
+@using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnSuccess = "OnSuccessRegister" }))
 {
     @Html.AntiForgeryToken()
     <div class="modal fade" id="reg-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -66,24 +66,30 @@
                 <div class="login-popup-logo">
                     <img src="~/Content/images/logo-big.png" />
                 </div><br>
-                <form>
+                <form id="regForm">
                     <div class="reg-icons"><img src="~/Content/images/icon-user-green.png" /></div>
                     @*<input type="text" name="user" placeholder="Имя">
                         <input type="text" name="user" placeholder="Фамилия">*@
                     @*<input type="text" name="user" placeholder="Электронная почта">*@
-                    @Html.TextBoxFor(m => m.FName, new {@class = "form-control", @placeholder = "Имя" })
+                    @Html.TextBoxFor(m => m.FName, new {@class = "form-control name", @placeholder = "Имя" })
+                    @Html.ValidationMessageFor(m => m.FName, "", new { @class = "text-danger" })
                     
-                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control", @placeholder = "Фамилия" })
-
+                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control name", @placeholder = "Фамилия" })
+                    @Html.ValidationMessageFor(m => m.LName, "", new { @class = "text-danger" })
+                    
                     @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     <div class="reg-icons"><img src="~/Content/images/icon-key-green.png" /></div>
                     @*<input type="password" name="pass" placeholder="Пароль">*@
+                    
                     @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     @*<input type="password" name="pass" placeholder="Повторить пароль">*@
+                    
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "confPass", @class = "form-control", @placeholder = "Повторить пароль" })
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+                    <div id="resultRegister" class="text-danger" style="color : red; margin-left: 20px; margin-top: 10px"></div>
                     <input type="submit" name="login" class="login loginmodal-submit" value="Зарегистрироваться">
                 </form>
 
@@ -95,7 +101,24 @@
     </div>
 }
 <script>
-    function OnSuccess(data) {
+    function OnSuccessRegister(data) {
+        if (data == 'OK') {
+            // data.redirect contains the string URL to redirect to
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+        else {
+            // data.form contains the HTML for the replacement form
+            $("#resultRegister").text(data);
+        }
+    }
+
+    $("#reg-modal").click(function () {
+        $("#resultRegister").text("");
+    });
+
+
+
+    @*function OnSuccess(data) {
         if (data == 'OK') {
             // data.redirect contains the string URL to redirect to
             window.location.href = '@Url.Action("Index", "Home")';
@@ -104,7 +127,18 @@
             // data.form contains the HTML for the replacement form
             $("#result").replaceWith(data);
         }
-    }
+    }*@
+    $(document).ready(function () {
+        $('regForm').validate();
+    });
+
+    $.validator.addClassRules({
+
+        name: {
+            required: true,
+            maxlength: 15
+        }
+    });
 </script>
 
 
