@@ -10,6 +10,9 @@ namespace GreenHouse.Domain.Abstract
         IDictionary<Room, IEnumerable<Reservation>> GetRoomsAndReservationsByDate(DateTime date);
         bool Exists(string roomNumber);
         Room GetRoomByNumber(string roomNumber);
-        bool AdditEquipmExists(string roomNumber, string additEquipmName);       
+        bool AdditEquipmExists(string roomNumber, string additEquipmName);
+
+        void AddRoom(int selectedRoom, string capacity, string wifiOpt, string projectorOpt, string monitorOpt,
+            string microphoneOpt);
     }
 }

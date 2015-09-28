@@ -925,7 +925,7 @@ margin-top: 20px;
     background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_3564c816c9773cc0ee5c4224be6236e2.png);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
+    -html-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -1044,5 +1044,18 @@ div#min-room304 {
     left: 101px;
     width: 75px;
     height: 44px;
+}
+
+.hover-area {
+    opacity: 0;
+}
+
+.hover-area:hover {
+    opacity: 1;
+}
+
+.hover-area.active {
+    opacity: 1;
+    border: 1px solid green;
 }
 /*-----------------------------------------------------------------------------------------------------------*/

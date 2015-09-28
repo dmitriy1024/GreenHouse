@@ -270,6 +270,7 @@
     <Content Include="Views\Cabinet\Index.cshtml" />
     <Content Include="Views\Room\Rooms.cshtml" />
     <Content Include="Views\Room\RoomWeekReservations.cshtml" />
+    <Content Include="Views\Cabinet\AddNewRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Daily\" />
