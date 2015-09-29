@@ -45,7 +45,7 @@
 
                                     if (res.Count() > 0)
                                     {
-                                        if (String.Compare(res.First().Purpose, "block", true) == 0 && res.First().AspNetUser.IsAdmin())
+                                        if (res.First().Purpose == null && res.First().AspNetUser.IsAdmin())
                                         {
                                             <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour" style="background-color:#d6dddb">
                                        
@@ -154,7 +154,7 @@
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
                                                 @if (User.IsInRole("admin"))
                                                 {
-                                                    <button id='addBlock'>Блокировать</button>
+                                                    <button id='addBlock'><img src='~/Content/images/icon-lock-grey.png'></button>
                                                 }
 
                                                     <button id='reservate'>Бронировать</button> </div>">
@@ -270,8 +270,90 @@
             });           
         });
      });
+    ////
+    $(function () {
+        $("#resTable").delegate('#addBlock', 'click', function () {
+            var roomId = $("#addBlock").closest("td").data("roomId");
+            var beginHour = $("#addBlock").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
 
+            var model = {
+                roomId: roomId,
+                year: year,
+                month: month,
+                day: day,
+                beginHour: beginHour,
+            };
 
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("AddBlock", "Home")'
+            }).done(function (result) {
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+            });
+        });
+    });
+
+    $(function () {
+        $("#resTable").delegate('#delBlock', 'click', function () {
+            var roomId = $("#delBlock").closest("td").data("roomId");
+            var beginHour = $("#delBlock").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
+
+            var model = {
+                roomId: roomId,
+                year: year,
+                month: month,
+                day: day,
+                beginHour: beginHour,
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("DelReservation", "Home")'
+            }).done(function (result) {
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+            });
+        });
+    });
 
     $(function() {
         $('#next-column').click(function (event) {

@@ -11,5 +11,6 @@ namespace GreenHouse.Domain.Abstract
         void DelReservation(string userId, int roomId, DateTime beginTime);
         IEnumerable<Reservation> GetRoomReservationsByDate(string roomNumber, DateTime date);
         IDictionary<DateTime, IEnumerable<Reservation>> GetRoomWeekReservationsByDate(string roomNumber, DateTime date);
+        void AddBlock(string userId, int roomId, DateTime beginTime, DateTime endTime);
     }
 }
