@@ -1,4 +1,12 @@
 ﻿<div class="container-fluid map-bg">
+<style>
+    span.selected {
+        display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;
+    }
+    .hide {
+        display: none;
+    }
+</style>
     <div class="row">
         <div class="col-xs-6 filter-bs-con"></div>
         <div class="col-xs-6 filter-bs-con">
@@ -89,10 +97,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="40,25,130,86" ng-mouseover="selectRoom(307)"/>
                         </div>
@@ -101,10 +109,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="40,95,125,127" ng-mouseover="selectRoom(308)"/>
                         </div>
@@ -113,10 +121,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="40,134,125,172" ng-mouseover="selectRoom(309)"/>
                         </div>
@@ -125,10 +133,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="40,180,125,237" ng-mouseover="selectRoom(310)"/></div>
                         @*306*@
@@ -136,10 +144,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="196,28,264,75" ng-mouseover="selectRoom(306)"/></div>
                         @*305*@
@@ -147,21 +155,21 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="173,82,264,128" ng-mouseover="selectRoom(305)"/></div>
                         @*312*@
-                        <div class="testPopP" style="top: 307px; left: 190px; width: 150px; height: 87px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom'>
+                        <div class="" style="top: 307px; left: 190px; width: 150px; height: 87px;" data-trigger="hover" data-toggle="popover" data-content="<div class='roominfo' data-ng-show='selectedRoom'>
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="190,307,340,394"  ng-mouseover="selectRoom(312)"/></div>
                         @*313*@
@@ -169,10 +177,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="350,307,455,394" ng-mouseover="selectRoom(313)"/></div>
                         @*314*@
@@ -180,10 +188,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="465,307,611,394" ng-mouseover="selectRoom(314)"/></div>
                         @*315*@
@@ -191,10 +199,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="621,307,665,337" ng-mouseover="selectRoom(315)"/></div>
                         @*301*@
@@ -202,10 +210,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="504,165,612,257" ng-mouseover="selectRoom(301)"/></div>
                         @*302*@
@@ -213,10 +221,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="464,165,500,257" ng-mouseover="selectRoom(302)"/></div>
                         @*303*@
@@ -224,10 +232,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="rect" coords="295,165,336,257" ng-mouseover="selectRoom(303)"/></div>
                         @*304*@
@@ -235,10 +243,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="poly" coords="173,192, 285,192, 285,256, 200,256, 173, 225" ng-mouseover="selectRoom(304)"/></div>
                         @*311*@
@@ -246,10 +254,10 @@
                     <h3>Комната {{ selectedRoom.number }}</h3>
                     <table class='popover-table' style='width: 90%;'>
                         <tr><td style='width: 26px; height: 35px; background: url(~/../Content/images/icon-people-grey.png) no-repeat;'></td><td>Кол-во мест</td><td>{{selectedRoom.places}}</td></tr>
-                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'>{{ selectedRoom.wifi }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'>{{ selectedRoom.projector }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'>{{ selectedRoom.microphone }}</td></tr>
-                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'>{{ selectedRoom.monitor }}</td></tr>
+                        <tr><td style='width: 25px; height: 35px; background: url(~/../Content/images/icon-wi-fi-grey.png) no-repeat;'></td><td>Wifi</td><td id='tstPOPtdWifi'><span class='{{ getClass(selectedRoom.wifi) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-progector-grey.png) no-repeat;'></td><td>Projector</td><td id='tstPOPtdProj'><span class='{{ getClass(selectedRoom.projector) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-mic-grey.png) no-repeat;'></td><td><span class='icon-microphone'></span>Microphone</td><td id='tstPOPtdMic'><span class='{{ getClass(selectedRoom.microphone) }}'></span></td></tr>
+                        <tr><td style='width: 30px; height: 35px; background: url(~/../Content/images/icon-monitor-grey.png) no-repeat;'></td><td>Monitor</td><td id='tstPOPtdMon'><span class='{{ getClass(selectedRoom.monitor) }}'></span></td></tr>
                     </table>
                     </div>"><area shape="circle" coords="105,320,67"  ng-mouseover="selectRoom(311)"/>
                         <area shape="circle" coords="55,270,25" ng-mouseover="selectRoom(311)"/></div>
@@ -268,23 +276,23 @@
         });
     });
 
-    $(function () {
-        $('.testPopP').mousemove(function () {
-            if ($('#tstPOPtdWifi').html() == 'true')
-                $('#tstPOPtdWifi').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
+    //$(function () {
+    //    $('.testPopP').mousemove(function () {
+    //        //if ($('#tstPOPtdWifi').html() == 'true')
+    //        //    $('#tstPOPtdWifi').html("");
 
-            if ($('#tstPOPtdProj').html() == 'true')
-                $('#tstPOPtdProj').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
+    //        if ($('#tstPOPtdProj').html() == 'true')
+    //            $('#tstPOPtdProj').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
 
-            if ($('#tstPOPtdMon').html() == 'true')
-                $('#tstPOPtdMon').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
+    //        if ($('#tstPOPtdMon').html() == 'true')
+    //            $('#tstPOPtdMon').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
 
-            if ($('#tstPOPtdMic').html() == 'true')
-                $('#tstPOPtdMic').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
+    //        if ($('#tstPOPtdMic').html() == 'true')
+    //            $('#tstPOPtdMic').html("<span style='display: block; width: 25px; height: 22px; background: url(~/../Content/images/icon-yes-grey.png) no-repeat;'></span>");
 
-        });
+    //    });
         
-    });
+    //});
 </script>
 
 
