@@ -150,7 +150,7 @@
                                         <td style="padding: 0;" class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                             @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
                                             {
-                                                <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
+                                                <div style="height: 100%;" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
                                                 @if (User.IsInRole("admin"))
                                                 {
