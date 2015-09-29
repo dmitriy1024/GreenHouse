@@ -494,12 +494,19 @@ div#oroom304 {
 }
 
 .popover {
-    background-color: lightgrey;
+    background-color: white;
+    color: grey;
+    /*background-color: lightgrey;*/
     border-radius: 0;
 }
 
+.roominfo h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .popover.right .arrow:after {
-    border-right-color: lightgrey;
+    /*border-right-color: lightgrey;*/
 }
 
 
@@ -644,20 +651,15 @@ table.time {
      margin: 10px 0;
 } 
 
-
-
-/*.popover-content {
-    display: block;
-    width: 200px;
-    height: 300px;
-}*/
-
 .mapImgContainer div {
     width: 200px;
-    height: 300px;
+    height: 250px;
 }
 
-
+.popover-table tr td {
+    /*line-height: 10px;*/
+    /*border: 1px solid black;*/
+}
 
 .filter-bs-con {
     position: absolute;
