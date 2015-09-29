@@ -1,5 +1,5 @@
 ﻿@using System.Web.Mvc.Html
-<div id="adding-new-room-container">
+<div id="adding-new-room-container" style="display: none;">
     <h2 class="text-center">Добавить новую комнату</h2>
     <div class="new-room-adding-form">
         @using (Ajax.BeginForm("AddNewRoom", "Cabinet", new AjaxOptions { OnSuccess = "AddNewRoomOnSuccess" }))
@@ -70,12 +70,13 @@
 
 $('#adding-new-room-container').hide();
 $('#add-new-room-button').click(function () {
-    $('#adding-new-room-container').slideDown("slow");
-    $('#change-pass-buttons-container').slideUp("slow");
+    $("#adding-new-room-container").css("display", "block");
+    $('#adding-new-room-container').slideDown("medium");
+    $('#change-pass-buttons-container').slideUp("medium");
 });
 $('#add-new-room-button-cancel').click(function () {
-    $('#adding-new-room-container').slideUp("slow");
-    $('#change-pass-buttons-container').slideDown("slow");
+    $('#adding-new-room-container').slideUp("medium");
+    $('#change-pass-buttons-container').slideDown("medium");
 });
 
 
