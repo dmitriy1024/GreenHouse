@@ -120,7 +120,6 @@
 
     $('#name-changing-form-container').hide();
     $('#name-changing-button').click(function () {
-        $("#name-changing-form-container").css("display", "block");
         $('#name-changing-form-container').slideDown("medium");
         $('#profile-info-container').slideUp("medium");
     });
@@ -132,7 +131,6 @@
 
     $('#pass-changing-form-container').hide();
     $('#pass-changing-button').click(function () {
-        $("#pass-changing-form-container").css("display", "block");
         $('#pass-changing-form-container').slideDown("medium");
         $('#change-pass-buttons-container').slideUp("medium");
     });
@@ -140,10 +138,6 @@
         $('#pass-changing-form-container').slideUp("medium");
         $('#change-pass-buttons-container').slideDown("medium");
     });
-
-    //$(document).ready(function () {
-    //    $('changeNameForm').validate();
-    //});
 
     $.validator.addClassRules({
         nameCabinet: {
