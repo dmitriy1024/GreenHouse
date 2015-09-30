@@ -3,25 +3,26 @@
     $.GreenHouse = $.GreenHouse || {};
 
     $.extend($.GreenHouse, {       
-        btnCalendarMode_Click: function(elem) {
-			element = $(elem)
-			
-			var selectedDayTd = $("#datetimepicker12 td.active");
-			
-			if (selectedDayTd.length) {
-				selectedDayTd.parent().toggleClass('activeWeek');
-			}
-			
-			var mode = element.attr('data-mode');
-			if (mode == 1) {
-				element.text('День')
-				mode = 0;
-			} else {
-				$(element).text('Неделя')
-				mode = 1;
-			}
-			
-			element.attr('data-mode', mode);
+        btnCalendarMode_Click: function (elem) {
+            element = $(elem)
+
+            var selectedDayTd = $("#datetimepicker-room td.active");
+
+            if (selectedDayTd.length) {
+                selectedDayTd.parent().toggleClass('activeWeek');
+                $("#datetimepicker-room td.active").css('background-image', 'none');
+            }
+
+            var mode = element.attr('data-mode');
+            if (mode == 1) {
+                element.text('День')
+                mode = 0;
+            } else {
+                $(element).text('Неделя')
+                mode = 1;
+            }
+
+            element.attr('data-mode', mode);
         },
         bookRoom: function(id) {
             var td = $("#" + id);

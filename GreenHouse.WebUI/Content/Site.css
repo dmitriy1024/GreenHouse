@@ -189,7 +189,7 @@ table.table-condensed .dow{
     border: none;
 }
 
-.datepicker {
+/*.datepicker {
 	float: right;
 }
 
@@ -200,9 +200,9 @@ table.table-condensed .dow{
 
 .diagram-cell span {
 	color: #ffffff;
-}
+}*/
 
-.datepicker table tr.activeWeek {
+/*.datepicker table tr.activeWeek {
 	position: relative;
 }
 
@@ -222,7 +222,7 @@ table.table-condensed .dow{
 	border-bottom: 2px solid green;
 	border-top: 2px solid green;
 	border-radius: 0;
-}
+}*/
 
 
 .map-bg {
@@ -1061,3 +1061,47 @@ div#min-room304 {
     border: 1px solid green;
 }
 /*-----------------------------------------------------------------------------------------------------------*/
+
+
+.datepicker {
+	float: right;
+}
+
+.diagram-cell {
+	background-color: #438E11;
+	max-width: 30%;
+	width: 35px;
+	border: solid 1px grey;
+}
+
+.diagram-cell span {
+	color: #ffffff;
+}
+
+.datepicker table tr.activeWeek {
+	position: relative;
+}
+
+.datepicker table tr.activeWeek td:first-child {
+	border-left: 2px solid green;
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+	border-radius: 20px 0 0 20px;
+}
+
+.datepicker table tr.activeWeek>td:last-child {
+    border-radius: 0 20px 20px 0;
+	border-right: 2px solid green;
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+}
+.datepicker table tr.activeWeek td:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+	border-radius: 0;
+}
+
+table {
+	display: table;
+	border-collapse: separate;
+}
