@@ -12,9 +12,9 @@
                     <img src="~/Content/images/logo-big.png" />
                 </div><br>
                 <form>
-                    @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                    @Html.TextBoxFor(m => m.Email, new { @maxlength = "255", @id = "email", @class = "form-control", @placeholder = "Электронная почта", })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                    @Html.PasswordFor(m => m.Password, new { @maxlength = "16", @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     <div id="result" class="text-danger" style="color : red; margin-left: 60px; margin-top: 10px"></div>
                     <input type="submit" value="Войти" class="btn btn-default login loginmodal-submit" />
