@@ -13,16 +13,16 @@
                 $("#datetimepicker-room td.active").css('background-image', 'none');
             }
 
-            var mode = element.attr('data-mode');
+            var mode = $('#btnCalendarMode').attr('data-mode');
             if (mode == 1) {
-                element.text('День')
+                //element.text('День');
                 mode = 0;
             } else {
-                $(element).text('Неделя')
+                //$(element).text('Неделя');
                 mode = 1;
             }
 
-            element.attr('data-mode', mode);
+            $('#btnCalendarMode').attr('data-mode', mode);
         },
         bookRoom: function(id) {
             var td = $("#" + id);
