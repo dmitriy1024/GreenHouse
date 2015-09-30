@@ -62,6 +62,47 @@ namespace GreenHouse.WebUI.Models
         public bool RememberMe { get; set; }
     }
 
+    public class ChangeNameViewModel
+    {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
+
+    public class ChangePassViewModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string OldPassword { get; set; }
+      
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class CabinetViewModel
+    {
+        public ChangeNameViewModel ChangeNameViewModel { get; set; }
+        public ChangePassViewModel ChangePassViewModel { get; set; }
+    }
+
     public class RegisterViewModel
     {
         [Required]

@@ -10,6 +10,30 @@ namespace GreenHouse.Domain.Concrete
     {
         private EFDbContext _context = new EFDbContext();
 
+        public bool ChangeName(string userId, string name)
+        {
+            var users = _context.AspNetUsers.Where(a => String.Compare(a.Id, userId, false) == 0);
+            if (users.Count() > 0)
+            {
+                var user = users.First();
+                try
+                {
+                    user.UserName = name;
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (DbUpdateException e)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exception " + e.Message);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool ChangeNameAndLogin(string userId, string name, string email)
         {
             var users = _context.AspNetUsers.Where(a => String.Compare(a.Id, userId, false) == 0);
@@ -20,7 +44,6 @@ namespace GreenHouse.Domain.Concrete
                 {
                     user.Email = email;
                     user.UserName = name;
-                    user.Email = email;
                     _context.SaveChanges();
                     return true;
                 }

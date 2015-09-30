@@ -460,47 +460,61 @@ namespace GreenHouse.WebUI.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangePassword(string oldPass, string newPass, string newPassConfirm)
+        public JsonResult ChangePassword(CabinetViewModel model)
         {
-            if(String.Compare(newPass, newPassConfirm, false) == 0)
+            if(model.ChangePassViewModel.OldPassword == null || model.ChangePassViewModel.Password == null || model.ChangePassViewModel.ConfirmPassword == null)
             {
-                var result = UserManager.ChangePassword(User.Identity.GetUserId(), oldPass, newPass);
-                if(result.Succeeded)
-                {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    return Json("OK");
-                }
-                else
-                {
-                    return Json(result.Errors.First());
-                }
+                return Json("Fields cannot be empty");                
             }
             else
             {
-                return Json("Пароли не совпадают");
+                if (String.Compare(model.ChangePassViewModel.Password, model.ChangePassViewModel.ConfirmPassword, false) == 0)
+                {
+                    var result = UserManager.ChangePassword(User.Identity.GetUserId(), model.ChangePassViewModel.OldPassword, model.ChangePassViewModel.Password);
+                    if (result.Succeeded)
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        return Json("OK");
+                    }
+                    else
+                    {
+                        return Json(result.Errors.First());
+                    }
+                }
+                else
+                {
+                    return Json("Passwords do not match");
+                }
             }
         }
 
         [HttpPost]
-        public JsonResult ChangeNameAndEmail(string fname, string sname, string email, string password)
+        public JsonResult ChangeName(CabinetViewModel model)
         {   
-            if(UserManager.CheckPassword(UserManager.FindById(User.Identity.GetUserId()), password))
+            if(model.ChangeNameViewModel.LName == null || model.ChangeNameViewModel.FName == null || model.ChangeNameViewModel.LName.Count() == 0 || model.ChangeNameViewModel.FName.Count() == 0)
             {
-                string name = String.Format("{0} {1}", fname.Trim(), sname.Trim());
-                if (_aspUserRepository.ChangeNameAndLogin(User.Identity.GetUserId(), name, email.Trim()))
-                {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    return Json("OK");
-                }
-                else
-                {
-                    return Json("Не удалось изменить имя или Email");
-                }
+                return Json("Fields cannot be empty");
             }
             else
             {
-                return Json("Неправильный пароль");
-            }
+                if (UserManager.CheckPassword(UserManager.FindById(User.Identity.GetUserId()), model.ChangeNameViewModel.Password))
+                {
+                    string name = String.Format("{0} {1}", model.ChangeNameViewModel.FName.Trim(), model.ChangeNameViewModel.LName.Trim());
+                    if (_aspUserRepository.ChangeName(User.Identity.GetUserId(), name))
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        return Json("OK");
+                    }
+                    else
+                    {
+                        return Json("Error with changing name");
+                    }
+                }
+                else
+                {
+                    return Json("Incorrect password");
+                }
+            }            
         }
 
         protected override void Dispose(bool disposing)

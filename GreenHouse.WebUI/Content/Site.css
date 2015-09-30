@@ -11,7 +11,30 @@ button.btn-lg {
 	font-size: 18px;
 }
 
+input.btn-lg {
+	background-color: #438E11;
+	color: #ffffff;
+	border-radius: 3px;
+	border: 0;
+	font-weight: 300;
+	font-size: 18px;
+}
+
+span.btn-lg {
+	background-color: #438E11;
+	color: #ffffff;
+	border-radius: 3px;
+	border: 0;
+	font-weight: 300;
+	font-size: 18px;
+}
+
 button.btn-lg:hover {
+	color: yellow;
+	background-color: #438E11;
+}
+
+input.btn-lg:hover {
 	color: yellow;
 	background-color: #438E11;
 }
@@ -765,7 +788,7 @@ margin-top: 20px;
 
 .new-room {
     text-align: right;
-    margin-top: 45px;
+    margin-top: 0px;
 }
 .name-profile-input{
 	display: inline-block;
@@ -795,6 +818,10 @@ margin-top: 20px;
 .name-changing-buttons-container button {
     display: inline-block;
 }
+
+.name-changing-buttons-container input {
+    display: inline-block;
+}
 .name-changing-buttons-container {
     margin: 0 100px;
 }
@@ -808,7 +835,7 @@ margin-top: 20px;
 
 .new-room {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .new-room h6 {

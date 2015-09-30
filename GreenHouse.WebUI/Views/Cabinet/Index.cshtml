@@ -2,44 +2,53 @@
 @{
     ViewBag.Title = "Index";
 }
+@model GreenHouse.WebUI.Models.CabinetViewModel
 
-<div class="row">
-    <div class="admin-profile-info col-xs-12 col-sm-6">
+<br/>
+<div class="row" >
+    <div class="col-xs-12 col-sm-6">
         <div id="profile-info-container">
             <h3>@User.Identity.Name<span style="display: none;">Admin</span></h3>
             <h5>@ViewBag.User.Email</h5>
             <button class="btn-lg" id="name-changing-button">Редактировать</button>
         </div>
 
-        <div id="name-changing-form-container">
-            @using (Ajax.BeginForm("ChangeNameAndEmail", "Account", new AjaxOptions {OnSuccess = "ChangeNameOnSuccess"}))
+        <div id="name-changing-form-container" style="display: none;">
+            @using (Ajax.BeginForm("ChangeName", "Account", new AjaxOptions { OnSuccess = "ChangeNameOnSuccess" }))
             {
-                <div class="cabinet-form">
-                    <form action="POST">
-                        @Html.TextBox("fname", "", new {@class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries)[0]})
+                <div class="cabinet-form" >
+                    <form id="changeNameForm">
+                        @Html.TextBoxFor(m => m.ChangeNameViewModel.FName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] })                        
+                        @Html.ValidationMessageFor(m => m.ChangeNameViewModel.FName, "", new { @class = "text-danger" })
+                        
                         @if (User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                         {
-                            @Html.TextBox("sname", "", new { @class = "name-profile-input", @minlength = "5", @placeholder = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
+                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
+                            @Html.ValidationMessageFor(m => m.ChangeNameViewModel.LName, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBox("sname", "", new { @class = "name-profile-input", @minlength = "5" })
+                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet" })
+                            @Html.ValidationMessageFor(m => m.ChangeNameViewModel.FName, "", new { @class = "text-danger" })
                         }
-                        @Html.TextBox("email", "", new {@class = "email-profile-input", @minlength = "5", @placeholder = ViewBag.User.Email})
-                        @Html.TextBox("password", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
+                        @Html.TextBoxFor(m => m.ChangeNameViewModel.Password, new { @minlength = "6", @maxlength = "16", @type = "password", @style = "display: block;", @class = "password-profile-field", @placeholder = "Пароль для подтверждения" })
+                        @Html.ValidationMessageFor(m => m.ChangeNameViewModel.Password, "", new { @class = "text-danger" })
+
                         <div class="text-validate-msg"><div id="changingNameResult"></div></div>
-                        <div class="name-changing-buttons-container">
-                            <button id="name-changing-button-cancel" class="btn-lg">Отменить</button>   
-                            <button type="submit" class="btn-lg">Сохранить</button>
+                     
+                        <div class="name-changing-buttons-container">                           
+                            <button type="button" id="name-changing-button-cancel" class="btn-lg" style="display: inline;">Отменить</button>
+                            <button type="submit" class="btn-lg" style="display: inline;"> Сохранить</button>                           
                         </div>
                     </form>
-                </div>  
+                </div>
             }
         </div>
 
+
     </div>
     <div class="col-xs-12 col-sm-6">
-        <div class="new-room">
+        <div class="new-room" >
             <div id="change-pass-buttons-container">
                 <button id="add-new-room-button" class="btn-lg">Новая комната</button>
                 <button id="pass-changing-button" class="btn-lg">Сменить пароль</button>
@@ -47,20 +56,29 @@
 
             @Html.Partial("~/Views/Cabinet/AddNewRoom.cshtml")
 
-            <div id="pass-changing-form-container">
+            <div id="pass-changing-form-container" style="display: none;">
+                
                 @using (Ajax.BeginForm("ChangePassword", "Account", new AjaxOptions {OnSuccess = "ChangePassOnSuccess"}))
                 {
                     <div class="cabinet-form">
-                        <form action="POST">
-                            @Html.TextBox("oldPass", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Пароль"})
-                            @Html.TextBox("newPass", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Новый пароль"})
-                            @Html.TextBox("newPassConfirm", "", new {@type = "password", @class = "password-profile-field", @minlength = "5", @placeholder = "Повторить новый пароль"})
-                            <div>
-                                <button id="pass-changing-button-cancel" class="btn-lg">Отменить</button>
+                        <form>
+                            @Html.PasswordFor(m => m.ChangePassViewModel.OldPassword, new { @type = "password", @class = "password-profile-field passCabinet", @placeholder = "Пароль" })
+                            @Html.ValidationMessageFor(m => m.ChangePassViewModel.OldPassword, "", new { @class = "text-danger" })
+
+                            @Html.PasswordFor(m => m.ChangePassViewModel.Password, new { @type = "password", @class = "password-profile-field", @placeholder = "Новый пароль" })
+                            @Html.ValidationMessageFor(m => m.ChangePassViewModel.Password, "", new { @class = "text-danger" })
+
+                            @Html.PasswordFor(m => m.ChangePassViewModel.ConfirmPassword, new { @type = "password", @class = "password-profile-field", @placeholder = "Повторить новый пароль" })
+                            @Html.ValidationMessageFor(m => m.ChangePassViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+
+                            @*@Html.TextBox("oldPass", "", new {@type = "password", @class = "password-profile-field", @placeholder = "Пароль"})
+                            @Html.TextBox("newPass", "", new {@type = "password", @class = "password-profile-field",  @placeholder = "Новый пароль"})
+                            @Html.TextBox("newPassConfirm", "", new {@type = "password", @class = "password-profile-field", @placeholder = "Повторить новый пароль"})*@
+                            <div class="text-validate-msg"><div id="changingPassResult"></div></div>
+                            <div class="name-changing-buttons-container">
+                                <button type="button" id="pass-changing-button-cancel" class="btn-lg">Отменить</button>
                                 <button type="submit" class="btn-lg">Сохранить</button>
                             </div>
-
-
                         </form>
                     </div>
                 }
@@ -71,6 +89,8 @@
 </div>
 
 <script>
+
+
     function ChangeNameOnSuccess(data) {
         if (data == 'OK') {
             // data.redirect contains the string URL to redirect to
@@ -92,25 +112,48 @@
         }
     }
 
+    //$('#name-changing-form-container').click(function () {
+    //    debugger;
+    //    $("#changingNameResult").text(" ")
+    //    $("#changingPassResult").html("");
+    //});
+
     $('#name-changing-form-container').hide();
-    $('#name-changing-button').click(function() {
-        $('#name-changing-form-container').slideDown("slow");
-        $('#profile-info-container').slideUp("slow");
+    $('#name-changing-button').click(function () {
+        $("#name-changing-form-container").css("display", "block");
+        $('#name-changing-form-container').slideDown("medium");
+        $('#profile-info-container').slideUp("medium");
     });
     $('#name-changing-button-cancel').click(function() {
-        $('#name-changing-form-container').slideUp("slow");
-        $('#profile-info-container').slideDown("slow");
+        $('#name-changing-form-container').slideUp("medium");
+        $('#profile-info-container').slideDown("medium");
     });
 
 
     $('#pass-changing-form-container').hide();
-    $('#pass-changing-button').click(function() {
-        $('#pass-changing-form-container').slideDown("slow");
-        $('#change-pass-buttons-container').slideUp("slow");
+    $('#pass-changing-button').click(function () {
+        $("#pass-changing-form-container").css("display", "block");
+        $('#pass-changing-form-container').slideDown("medium");
+        $('#change-pass-buttons-container').slideUp("medium");
     });
     $('#pass-changing-button-cancel').click(function() {
-        $('#pass-changing-form-container').slideUp("slow");
-        $('#change-pass-buttons-container').slideDown("slow");
+        $('#pass-changing-form-container').slideUp("medium");
+        $('#change-pass-buttons-container').slideDown("medium");
     });
 
+    //$(document).ready(function () {
+    //    $('changeNameForm').validate();
+    //});
+
+    $.validator.addClassRules({
+        nameCabinet: {
+            required: true
+        }
+    });
+
+    //$.validator.passCabinet({
+    //    nameCabinet: {
+    //        required: true
+    //    }
+    //});
 </script>

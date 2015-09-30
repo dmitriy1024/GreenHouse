@@ -9,5 +9,6 @@ namespace GreenHouse.Domain.Abstract
         AspNetUser GetAspNetUserByEmail(string email);
         AspNetUser GetAspNetUserById(string id);
         bool ChangeNameAndLogin(string userId, string name, string email);
+        bool ChangeName(string userId, string name);
     }
 }
