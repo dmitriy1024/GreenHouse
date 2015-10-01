@@ -81,7 +81,7 @@
                 var day = e.date.getDate();
                 var month = e.date.getMonth() + 1;
                 var year = e.date.getFullYear();
-
+                debugger;
                 $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
                 
                 $('#forCurrentYear').val(year);
@@ -106,10 +106,6 @@
             });
         });
 
-        //$('#datetimepicker12').on("show", function (e) {
-        //    $(".today").addClass("active");
-        //    alert("dc");
-        //});
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
             $("td.today").addClass("active");

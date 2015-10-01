@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-1">
-            <a id="previous-column" href="#"><h4><</h4></a>
+            <a id="previous-column"><h4 style="visibility: hidden"><</h4></a>
             <div class="time-table">
                 <table class="time" >
                     @for (int t = ViewBag.BeginHour; t <= ViewBag.EndHour; t++)
@@ -24,7 +24,7 @@
 
 
 
-        <div class="col-sm-10">
+        <div class="col-sm-11">
             <div class="table-container">
                 <table class="table sliding-window table-header" style="width:650px">
                     <tr>
@@ -117,9 +117,9 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-1">
+        @*<div class="col-sm-1">
             <a id="next-column" href="#"><h4>></h4></a>
-        </div>
+        </div>*@
 
 
     </div>
