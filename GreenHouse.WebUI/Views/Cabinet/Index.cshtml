@@ -51,10 +51,12 @@
         <div class="new-room" >
             <div id="change-pass-buttons-container">
                 <button id="add-new-room-button" class="btn-lg">Новая комната</button>
+                <button id="remove-room-button" class="btn-lg">Удалить комнату</button>
                 <button id="pass-changing-button" class="btn-lg">Сменить пароль</button>
             </div>
 
             @Html.Partial("~/Views/Cabinet/AddNewRoom.cshtml")
+            @Html.Partial("~/Views/Cabinet/RemoveRoom.cshtml")
 
             <div id="pass-changing-form-container" style="display: none;">
                 
@@ -144,6 +146,17 @@
             required: true
         }
     });
+
+    $('#remove-room-container').hide();
+    $('#remove-room-button').click(function () {
+        $('#remove-room-container').slideDown("medium");
+        $('#change-pass-buttons-container').slideUp("medium");
+    });
+    $('#remove-room-button-cancel').click(function () {
+        $('#remove-room-container').slideUp("medium");
+        $('#change-pass-buttons-container').slideDown("medium");
+    });
+
 
     //$.validator.passCabinet({
     //    nameCabinet: {

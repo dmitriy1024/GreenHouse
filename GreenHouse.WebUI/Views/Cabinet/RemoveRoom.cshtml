@@ -1,0 +1,62 @@
+﻿@using System.Web.Mvc.Html
+<div id="remove-room-container" style="display: none;">
+    <h2 class="text-center">Удалить комнату</h2>
+    <div class="remove-room-form">
+        @using (Ajax.BeginForm("RemoveRoom", "Cabinet", new AjaxOptions { OnSuccess = "RemoveRoomSuccess" }))
+        {
+            @Html.AntiForgeryToken()
+            <form action="POST">
+                @*@Html.TextBox("selectedRoom", "", new { @style="display: none;", @id = "selectedRoom", @name="selectedRoom",  @class = "css-checkbox" })*@
+                <input id="selectedRoomR" name="selectedRoomR" value="" />
+                <button type="submit" id="" class="btn-lg">Удалить</button>
+            </form>
+        }
+    </div>
+
+    <h5 class="text-left" style="padding: 5px 0 15px 0;">Выберите комнату:</h5>
+    <div class="map-min">
+        <div class="room hover-area" id="min-room301" style="background: grey; z-index: 100000000000;" onclick="selectRoom(301)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room302" style="background: grey; z-index: 100000000000;" onclick="selectRoom(302)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room303" style="background: grey; z-index: 100000000000;" onclick="selectRoom(303)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room304" style="background: grey; z-index: 100000000000;" onclick="selectRoom(304)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room305" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room306" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room307" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room308" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room309" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room310" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room311" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room312" style="background: grey;" onclick="selectRoom(312)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room313" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room314" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room315" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+
+        <div ng-repeat="i in filteredRooms"><div class="room" id="min-room{{i.number}}" style="background-image: url(Content/images/rooms/min/r-min-{{i.number}}-100.png)"></div></div>
+    </div>
+    <button id="remove-room-button-cancel" class="btn-lg">Отмена</button>
+</div>
+
+
+
+<script>
+
+    $('#remove-room-container').hide();
+    $('#remove-room-button').click(function () {
+        $('#remove-room-container').slideDown("medium");
+        $('#change-pass-buttons-container').slideUp("medium");
+    });
+    $('#remove-room-button-cancel').click(function () {
+        $('#remove-room-container').slideUp("medium");
+        $('#change-pass-buttons-container').slideDown("medium");
+    });
+
+
+function selectRoom(roomNum) {
+    $('#selectedRoomR').val(roomNum);
+    $('#min-room'+roomNum).addClass('active');
+}
+
+function RemoveRoomOnSuccess(data) {
+    window.location.href = '@Url.Action("Index", "Home")';
+}
+</script>

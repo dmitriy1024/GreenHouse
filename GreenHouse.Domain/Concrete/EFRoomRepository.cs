@@ -110,5 +110,25 @@ namespace GreenHouse.Domain.Concrete
             }
             _context.SaveChanges();
         }
+
+
+        public void RemoveRoom(int selectedRoom)
+        {
+            var currentRoom = _context.Rooms.First(a => String.Compare(a.Number, selectedRoom.ToString()) == 0);
+            var additEquip = currentRoom.AdditEquipments.ToList();
+            foreach (var item in additEquip)
+            {
+                currentRoom.AdditEquipments.Remove(item);
+            }
+            _context.SaveChanges();
+            var reservations = currentRoom.Reservations.ToList();
+            foreach (var item in reservations)
+            {
+                currentRoom.Reservations.Remove(item);
+            }
+            _context.SaveChanges();
+            _context.Rooms.Remove(currentRoom);
+            _context.SaveChanges();
+        }
     }
 }

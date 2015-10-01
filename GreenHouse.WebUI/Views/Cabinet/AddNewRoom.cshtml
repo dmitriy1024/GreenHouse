@@ -34,7 +34,7 @@
                     </tr>
                 </table>
                 @*@Html.TextBox("selectedRoom", "", new { @style="display: none;", @id = "selectedRoom", @name="selectedRoom",  @class = "css-checkbox" })*@
-                <input id="selectedRoom" name="selectedRoom" value="" type="hidden"/>
+                <input id="selectedRoom" name="selectedRoom" value=""/>
                 <button  type="submit" id="" class="btn-lg">Добавить</button>
             </form>
         }
@@ -43,7 +43,7 @@
     <h5 class="text-left" style="padding: 5px 0 15px 0;">Выберите комнату:</h5>
     <div class="map-min">
         <div class="room hover-area" id="min-room301" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
-        <div class="room hover-area" id="min-room302" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
+        <div class="room hover-area" id="min-room302" style="background: grey;" onclick="selectRoom(302)"><span><img src="Content/images/icon-add-new-event.png"></span></div>
         <div class="room hover-area" id="min-room303" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
         <div class="room hover-area" id="min-room304" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
         <div class="room hover-area" id="min-room305" style="background: grey;"><span><img src="Content/images/icon-add-new-event.png"></span></div>
