@@ -156,6 +156,21 @@
             }
             $("#datetimepicker-room td.active").css('background-image', "none");
         }
+    });
 
+    $(document).mouseup(function (e) {
+        var container = $(".popover");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+
+            //container.hide();
+            if ($("div.popover").length > 0) {
+                debugger;
+                $("div.popover").remove()
+            }
+
+        }
     });
 </script>
