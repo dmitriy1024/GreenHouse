@@ -45,17 +45,17 @@
                 <img style="margin: 30px;" src="~/Content/images/preloader.gif" alt="Alternate Text" />Загрузка...
             </div>
         </div>
-            <div class="col-sm-3 text-right cal">
-                <div style="overflow: hidden;">
-                    <div class="form-group">
-                        <div class="row">
-                            <div id="datetimepicker12"></div>
-                        </div>
+        <div class="col-sm-3 text-right cal">
+            <div style="overflow: hidden;">
+                <div class="form-group">
+                    <div class="row">
+                        <div id="datetimepicker12"></div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
     <input type="hidden" id="forCurrentYear" >
     <input type="hidden" id="forCurrentMonth" >
     <input type="hidden" id="forCurrentDay" >
@@ -101,10 +101,20 @@
                     url: '@Url.Action("Reservations", "Home")'
                 }).done(function (result) {
                     $('#content').html(result);
+
                 });
             });
         });
+
+        //$('#datetimepicker12').on("show", function (e) {
+        //    $(".today").addClass("active");
+        //    alert("dc");
+        //});
+        document.addEventListener("DOMContentLoaded", ready);
+        function ready() {
+            $("td.today").addClass("active");
+        }
     </script>
-</div>
+
 
 @Html.Partial("~/Views/Shared/Rooms.cshtml")
