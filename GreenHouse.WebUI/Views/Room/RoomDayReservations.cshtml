@@ -75,17 +75,22 @@
                                                 @res.First().Purpose <br/>
                                                 @if (ViewBag.Date.AddHours(hour) > DateTime.Now)
                                                 {                                                  
-                                                    <div  style="text-align: right;"><a id="delReserv">Отменить</a></div>
+                                                    <div  style="text-align: right;"><a onclick="delResRoomDay(@hour)">Отменить</a></div>
                                                 }
                                                 
                                             </td>
                                         }
                                         else
                                         {
-                                            <td class="diagram-cell" style="text-align: left; color: white;">
-            
+                                            <td class="diagram-cell" data-begin-hour="@hour" style="text-align: left; color: white;">        
                                             @res.First().Purpose<br />
-                                            <img src='~/Content/images/icon-user-white-small.png' style="display: inline-block"> @res.First().AspNetUser.UserName
+                                                
+                                            <img src='~/Content/images/icon-user-white-small.png' style="display: inline"> <div style="display: inline">@res.First().AspNetUser.UserName
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now && User.IsInRole("admin"))
+                                                {
+                                                    <div style="text-align: right; display: inline; float: right;" ><a style="color:white; text-align: right;" onclick="delResRoomDay(@hour)">Отменить</a></div>
+                                                }
+                                                </div>
                                             </td>
                                         }
                                     }
@@ -286,4 +291,39 @@
         });
     });
 
+    ///
+    function delResRoomDay(hour) {        
+            debugger;
+            var model = {
+                roomNumber: @ViewBag.RoomNumber,
+                year: @ViewBag.Date.Year,
+                month: @ViewBag.Date.Month,
+                day: @ViewBag.Date.Day,
+                beginHour: hour
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("DelReservation", "Room")'
+            }).done(function (result) {
+                var model2 = {
+                    roomNumber: @ViewBag.RoomNumber,
+                    year: @ViewBag.Date.Year,
+                    month: @ViewBag.Date.Month,
+                    day: @ViewBag.Date.Day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("RoomDayReservations", "Room")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+            });
+    }
 </script>

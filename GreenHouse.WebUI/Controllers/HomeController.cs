@@ -52,8 +52,14 @@ namespace GreenHouse.WebUI.Controllers
         public void DelReservation(int roomId, int year, int month, int day, int beginHour)
         {
             DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
-
-            _reservationRepository.DelReservation(User.Identity.GetUserId(), roomId, beginTime);
+            if(User.IsInRole("admin"))
+            {
+                _reservationRepository.DelReservationByAdmin(roomId, beginTime);
+            }
+            else
+            {
+                _reservationRepository.DelReservation(User.Identity.GetUserId(), roomId, beginTime);
+            }            
         }
 
         [HttpPost]

@@ -96,7 +96,14 @@ namespace GreenHouse.WebUI.Controllers
 
             if(room != null)
             {
-                _reservationRepository.DelReservation(User.Identity.GetUserId(), room.Id, beginTime);
+                if(User.IsInRole("admin"))
+                {
+                    _reservationRepository.DelReservationByAdmin(room.Id, beginTime);
+                }
+                else
+                {
+                    _reservationRepository.DelReservation(User.Identity.GetUserId(), room.Id, beginTime);
+                }                
             }           
         }
 

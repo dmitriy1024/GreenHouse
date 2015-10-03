@@ -108,12 +108,17 @@
                                             }
                                             else
                                             {
-                                                <td class="diagram-cell">
+                                                <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                                     <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
                                                     <img src='~/../Content/images/icon-user-grey.png'>
-                                                @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">
-
+                                                @res.First().AspNetUser.UserName<br/>@res.First().Purpose<br />
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now && User.IsInRole("admin"))
+                                                {
+                                                    <a id='delReserv'>Отменить</a>
+                                                }
+                                                        
+                                                </div>">
                                                 @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                                                 {
                                                     if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
@@ -236,7 +241,7 @@
             var year = $('#forCurrentYear').attr('value');
             var month = $('#forCurrentMonth').attr('value');
             var day = $('#forCurrentDay').attr('value');
-            
+            debugger;
             var model = {
                 roomId: roomId,
                 year: year,
