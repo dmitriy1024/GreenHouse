@@ -6,7 +6,7 @@
         {
             @Html.AntiForgeryToken()
             <form action="POST">
-                <input type="text" name="capacity" class="capacity-input-field" placeholder="Колличество мест">
+                <input type="text" required="" pattern="[0-9]{1,3}" name="capacity" class="capacity-input-field" placeholder="Колличество мест"> <label  class = "text-danger" style="text-align:left; float:left; margin-top:30px;" id="forAddingRoomresult"></label>
                 <table class="new-room-form">
                     <tr>
                         <td><img src="~/Content/images/icon-wi-fi-grey.png"><span class="new-room-labels">Wi-Fi</span></td>
@@ -34,8 +34,8 @@
                     </tr>
                 </table>
                 @*@Html.TextBox("selectedRoom", "", new { @style="display: none;", @id = "selectedRoom", @name="selectedRoom",  @class = "css-checkbox" })*@
-                <input id="selectedRoom" name="selectedRoom" value=""/>
-                <button  type="submit" id="" class="btn-lg">Добавить</button>
+                <input required="" style="display: none;" type="text" id="selectedRoom" name="selectedRoom" pattern="[0-9]{1,3}" value=""/>
+                <button  type="submit" required="" id="" class="btn-lg">Добавить</button>
             </form>
         }
     </div>
@@ -93,7 +93,18 @@ function selectRoom(roomNum) {
 }
 
 function AddNewRoomOnSuccess(data) {
-    //$("#adding-new-room-container").replaceWith(data);
-    window.location.href = '@Url.Action("Index", "Home")';
+    debugger;
+    if (data == "OK")
+    {
+        window.location.href = '@Url.Action("Index", "Home")';
+    }
+    else
+    {
+        $("#forAddingRoomresult").text("Мест должно быть больше 10");
+    }
 }
+
+    $("#adding-new-room-container").click(function () {
+        $("#forAddingRoomresult").text("");
+    });
 </script>

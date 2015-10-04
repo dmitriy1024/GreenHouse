@@ -7,7 +7,7 @@
             @Html.AntiForgeryToken()
             <form action="POST">
                 @*@Html.TextBox("selectedRoom", "", new { @style="display: none;", @id = "selectedRoom", @name="selectedRoom",  @class = "css-checkbox" })*@
-                <input id="selectedRoomR" name="selectedRoomR" value="" />
+                <input required="" id="selectedRoomR" name="selectedRoomR" value="" style="display: none;"/>
                 <button type="submit" id="" class="btn-lg">Удалить</button>
             </form>
         }

@@ -29,8 +29,23 @@ namespace GreenHouse.WebUI.Controllers
         [HttpPost]
         public JsonResult AddNewRoom(int selectedRoom, string capacity, string wifiOpt, string projectorOpt, string monitorOpt, string microphoneOpt)
         {
-            _roomRepository.AddRoom(selectedRoom, capacity, wifiOpt, projectorOpt, monitorOpt, microphoneOpt);
-            return Json("OK!");
+            int cap;
+            if(Int32.TryParse(capacity, out cap))
+            {
+                if(cap < 11)
+                {
+                    return Json("Error!");
+                }
+                else
+                {
+                    _roomRepository.AddRoom(selectedRoom, capacity, wifiOpt, projectorOpt, monitorOpt, microphoneOpt);
+                    return Json("OK");
+                }
+            }
+            else
+            {
+                return Json("Error!");
+            }            
         }
 
         [HttpPost]
