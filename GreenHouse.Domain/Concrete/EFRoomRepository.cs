@@ -133,12 +133,14 @@ namespace GreenHouse.Domain.Concrete
 
         public void RemoveRoom(int selectedRoom)
         {
-            var currentRoom = _context.Rooms.First(a => String.Compare(a.Number, selectedRoom.ToString()) == 0);
-
-            _context.Entry(currentRoom).Collection(c => c.Reservations).Load();
-            _context.Entry(currentRoom).Collection(c => c.AdditEquipments).Load();
-            _context.Rooms.Remove(currentRoom);
-            _context.SaveChanges();
+            var currentRoom = _context.Rooms.FirstOrDefault(a => String.Compare(a.Number, selectedRoom.ToString()) == 0);
+            if (currentRoom != null)
+            {
+                _context.Entry(currentRoom).Collection(c => c.Reservations).Load();
+                _context.Entry(currentRoom).Collection(c => c.AdditEquipments).Load();
+                _context.Rooms.Remove(currentRoom);
+                _context.SaveChanges();
+            }               
         }
     }
 }

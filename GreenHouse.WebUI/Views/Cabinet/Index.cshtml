@@ -31,12 +31,11 @@
                             @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet" })
                             @Html.ValidationMessageFor(m => m.ChangeNameViewModel.FName, "", new { @class = "text-danger" })
                         }
-                        @Html.TextBoxFor(m => m.ChangeNameViewModel.Password, new { @minlength = "6", @maxlength = "16", @type = "password", @style = "display: block;", @class = "password-profile-field", @placeholder = "Пароль для подтверждения" })
+                        @Html.TextBoxFor(m => m.ChangeNameViewModel.Password, new { @minlength = "6", @maxlength = "16", @type = "password", @style = "display: block; width : 255px;", @class = "name-profile-input nameCabinet", @placeholder = "Пароль для подтверждения" })
                         @Html.ValidationMessageFor(m => m.ChangeNameViewModel.Password, "", new { @class = "text-danger" })
-
-                        <div class="text-validate-msg"><div id="changingNameResult"></div></div>
+                            <div class="text-validate-msg"><div id="changingNameResult"></div></div>
                      
-                        <div class="name-changing-buttons-container">                           
+                            <div class="name-changing-buttons-container">                           
                             <button type="button" id="name-changing-button-cancel" class="btn-lg" style="display: inline;">Отменить</button>
                             <button type="submit" class="btn-lg" style="display: inline;"> Сохранить</button>                           
                         </div>
