@@ -33,11 +33,12 @@ namespace GreenHouse.WebUI.Controllers
         {
             var date = new DateTime(year, month, day);
             var roomsAndResByDate = _roomRepository.GetRoomsAndReservationsByDate(date);
-
+            var dict = roomsAndResByDate.OrderBy(pair => pair.Key.Number).ToDictionary(pair => pair.Key, pair => pair.Value);
             ViewBag.Date = date;
             ViewBag.BeginHour = 9;
             ViewBag.EndHour = 21;
-            return PartialView(roomsAndResByDate);
+            return PartialView(dict);
+            //return PartialView(roomsAndResByDate);
         }
 
         [HttpPost]
