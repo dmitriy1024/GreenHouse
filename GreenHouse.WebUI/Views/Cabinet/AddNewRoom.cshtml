@@ -80,8 +80,16 @@ $('#add-new-room-button-cancel').click(function () {
 
 
 function selectRoom(roomNum) {
-    $('#selectedRoom').val(roomNum);
-    $('#min-room'+roomNum).addClass('active');
+    if ($('#min-room' + roomNum).hasClass('active')) {
+        $('#min-room' + roomNum).removeClass('active');
+        $('#selectedRoom').val(null);
+    } else {
+        $('#selectedRoom').val(roomNum);
+        for (var i = 301; i <= 315; i++) {
+            $('#min-room' + i).removeClass('active');
+        }
+        $('#min-room' + roomNum).addClass('active');
+    }
 }
 
 function AddNewRoomOnSuccess(data) {
