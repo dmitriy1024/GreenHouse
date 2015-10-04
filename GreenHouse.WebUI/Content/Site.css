@@ -1074,7 +1074,126 @@ div#min-room304 {
     width: 75px;
     height: 44px;
 }
+/*------------------------------------------------------------*/
+div #r-min-room307 {
+    top: 6px;
+    left: 10px;
+    width: 58px;
+    height: 40px;
+}
 
+div#r-min-room311 {
+    top: 152px;
+    left: 3px;
+    width: 105px;
+    height: 105px;
+}
+
+div#r-min-room306 {
+    top: 6px;
+    left: 115px;
+    left: 117px;
+    width: 45px;
+    height: 33px;
+}
+
+div#r-min-room308 {
+    top: 50px;
+    left: 10px;
+    width: 58px;
+    height: 24px;
+}
+
+div#r-min-room309 {
+    top: 78px;
+    left: 10px;
+    width: 58px;
+    height: 25px;
+}
+
+div#r-min-room310 {
+    top: 107px;
+    left: 10px;
+    width: 58px;
+    height: 42px;
+}
+
+div#r-min-room305 {
+    top: 43px;
+    left: 100px;
+    width: 62px;
+    height: 31px;
+}
+
+div#r-min-room312 {
+    top: 195px;
+    left: 113px;
+    width: 102px;
+    height: 58px;
+}
+
+div#r-min-room313 {
+    top: 195px;
+    left: 220px;
+    width: 70px;
+    height: 58px;
+}
+
+div#r-min-room314 {
+    top: 195px;
+    left: 296px;
+    width: 100px;
+    height: 58px;
+}
+
+div#r-min-room315 {
+    top: 195px;
+    left: 401px;
+    width: 31px;
+    height: 22px;
+}
+
+div#r-min-room301 {
+    top: 100px;
+    left: 323px;
+    width: 72px;
+    height: 62px;
+}
+
+div#r-min-room302 {
+    top: 100px;
+    left: 297px;
+    width: 24px;
+    height: 62px;
+}
+
+div#r-min-room303 {
+    top: 100px;
+    left: 183px;
+    width: 28px;
+    height: 62px;
+}
+
+div#r-min-room304 {
+    top: 117px;
+    left: 101px;
+    width: 75px;
+    height: 44px;
+}
+
+.r-hover-area {
+    opacity: 0;
+}
+
+.r-hover-area:hover {
+    opacity: 1;
+}
+
+.r-hover-area.active {
+    opacity: 1;
+    border: 1px solid green;
+}
+/*------------------------------------------------------------*/
 .hover-area {
     opacity: 0;
 }

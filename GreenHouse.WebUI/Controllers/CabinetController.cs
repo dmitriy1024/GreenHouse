@@ -32,5 +32,12 @@ namespace GreenHouse.WebUI.Controllers
             _roomRepository.AddRoom(selectedRoom, capacity, wifiOpt, projectorOpt, monitorOpt, microphoneOpt);
             return Json("OK!");
         }
+
+        [HttpPost]
+        public JsonResult RemoveRoom(int selectedRoomR)
+        {
+            _roomRepository.RemoveRoom(selectedRoomR);
+            return Json("OK!");
+        }
     }
 }
