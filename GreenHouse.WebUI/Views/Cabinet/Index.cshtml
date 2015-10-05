@@ -18,20 +18,20 @@
             {
                 <div class="cabinet-form" >
                     <form id="changeNameForm">
-                        @Html.TextBoxFor(m => m.ChangeNameViewModel.FName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] })                        
+                        @Html.TextBoxFor(m => m.ChangeNameViewModel.FName, new { @maxlength = "20", @style = "display: block; margin-left: -10px;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] })                        
                         @Html.ValidationMessageFor(m => m.ChangeNameViewModel.FName, "", new { @class = "text-danger" })
                         
                         @if (User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                         {
-                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
+                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block; margin-left: -10px;", @class = "name-profile-input nameCabinet", @Value = User.Identity.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1] })
                             @Html.ValidationMessageFor(m => m.ChangeNameViewModel.LName, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block;", @class = "name-profile-input nameCabinet" })
+                            @Html.TextBoxFor(m => m.ChangeNameViewModel.LName, new { @maxlength = "20", @style = "display: block; margin-left: -10px;", @class = "name-profile-input nameCabinet" })
                             @Html.ValidationMessageFor(m => m.ChangeNameViewModel.FName, "", new { @class = "text-danger" })
                         }
-                        @Html.TextBoxFor(m => m.ChangeNameViewModel.Password, new { @minlength = "6", @maxlength = "16", @type = "password", @style = "display: block; width : 255px;", @class = "name-profile-input nameCabinet", @placeholder = "Пароль для подтверждения" })
+                        @Html.TextBoxFor(m => m.ChangeNameViewModel.Password, new { @minlength = "6", @maxlength = "16", @type = "password", @style = "display: block; width : 255px; margin-left: -10px;", @class = "name-profile-input nameCabinet", @placeholder = "Пароль для подтверждения" })
                         @Html.ValidationMessageFor(m => m.ChangeNameViewModel.Password, "", new { @class = "text-danger" })
                             <div class="text-validate-msg"><div id="changingNameResult"></div></div>
                      
