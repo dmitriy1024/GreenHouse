@@ -43,9 +43,9 @@
                                     <div class="loginmodal-container" style="background: 0,0,0,0; box-shadow: 0 0 0 rgba(0, 0, 0, 0)" >
                                         
                                         <form>
-                                            @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                                            @Html.TextBoxFor(m => m.Email, new { @maxlength = "255", @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                            @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                                            @Html.PasswordFor(m => m.Password, new { @maxlength = "16", @id = "pass", @class = "form-control", @placeholder = "Пароль" })
                                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
                                             @Html.ValidationSummary(true, "", new { @id = "valSummaryLogin", @class = "text-danger" })

@@ -45,7 +45,7 @@
 
                                     if (res.Count() > 0)
                                     {
-                                        if (String.Compare(res.First().Purpose, "block", true) == 0 && res.First().AspNetUser.IsAdmin())
+                                        if (res.First().Purpose == null && res.First().AspNetUser.IsAdmin())
                                         {
                                             <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour" style="background-color:#d6dddb">
                                        
@@ -108,12 +108,17 @@
                                             }
                                             else
                                             {
-                                                <td class="diagram-cell">
+                                                <td class="diagram-cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                                     <span data-toggle="popover" title="" data-content="
                                                     <div class='custompopover'>
                                                     <img src='~/../Content/images/icon-user-grey.png'>
-                                                @res.First().AspNetUser.UserName<br/>@res.First().Purpose</div>">
-
+                                                @res.First().AspNetUser.UserName<br/>@res.First().Purpose<br />
+                                                @if (ViewBag.Date.AddHours(hour) > DateTime.Now && User.IsInRole("admin"))
+                                                {
+                                                    <a id='delReserv'>Отменить</a>
+                                                }
+                                                        
+                                                </div>">
                                                 @if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                                                 {
                                                     if (res.First().AspNetUser.UserName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Length > 11)
@@ -150,11 +155,11 @@
                                         <td style="padding: 0;" class="cell" data-room-id="@item.Key.Id" data-begin-hour="@hour">
                                             @if (Request.IsAuthenticated && ViewBag.Date.AddHours(hour) > DateTime.Now)
                                             {
-                                                <div style="height: 100%;" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
+                                                <div style="height: 100%;" tabindex="0" data-toggle="popover" data-content="<div class='custompopover'><h6>Цель:</h6>
                                                 <textarea id='purpose' autofocus cols=31 maxlength=50 rows=3></textarea>
                                                 @if (User.IsInRole("admin"))
                                                 {
-                                                    <button id='addBlock'>Блокировать</button>
+                                                    <button id='addBlock'><img src='~/Content/images/icon-lock-grey.png'></button>
                                                 }
 
                                                     <button id='reservate'>Бронировать</button> </div>">
@@ -224,7 +229,7 @@
                     $('#content').html(result);
                 });
 
-                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+                $('#forCurrentDate').html('На  ' + day + '.' + month + '.' + year);
             });           
         });
     });
@@ -236,7 +241,7 @@
             var year = $('#forCurrentYear').attr('value');
             var month = $('#forCurrentMonth').attr('value');
             var day = $('#forCurrentDay').attr('value');
-            
+            debugger;
             var model = {
                 roomId: roomId,
                 year: year,
@@ -266,12 +271,94 @@
                     $('#content').html(result);
                 });
 
-                $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
+                $('#forCurrentDate').html('На  ' + day + '.' + month + '.' + year);
             });           
         });
      });
+    ////
+    $(function () {
+        $("#resTable").delegate('#addBlock', 'click', function () {
+            var roomId = $("#addBlock").closest("td").data("roomId");
+            var beginHour = $("#addBlock").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
 
+            var model = {
+                roomId: roomId,
+                year: year,
+                month: month,
+                day: day,
+                beginHour: beginHour,
+            };
 
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("AddBlock", "Home")'
+            }).done(function (result) {
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+                $('#forCurrentDate').html('На  ' + day + '.' + month + '.' + year);
+            });
+        });
+    });
+
+    $(function () {
+        $("#resTable").delegate('#delBlock', 'click', function () {
+            var roomId = $("#delBlock").closest("td").data("roomId");
+            var beginHour = $("#delBlock").closest("td").data("beginHour");
+            var year = $('#forCurrentYear').attr('value');
+            var month = $('#forCurrentMonth').attr('value');
+            var day = $('#forCurrentDay').attr('value');
+
+            var model = {
+                roomId: roomId,
+                year: year,
+                month: month,
+                day: day,
+                beginHour: beginHour,
+            };
+
+            $.ajax({
+                type: "POST",
+                data: model,
+                dataType: "html",
+                url: '@Url.Action("DelReservation", "Home")'
+            }).done(function (result) {
+                var model2 = {
+                    year: year,
+                    month: month,
+                    day: day
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: model2,
+                    dataType: "html",
+                    url: '@Url.Action("Reservations", "Home")'
+                }).done(function (result) {
+                    $('#content').html(result);
+                });
+
+                $('#forCurrentDate').html('На  ' + day + '.' + month + '.' + year);
+            });
+        });
+    });
 
     $(function() {
         $('#next-column').click(function (event) {
@@ -282,6 +369,23 @@
             event.preventDefault();
             $('.table-container').animate({ scrollLeft: '-=100' }, 'fast');
         });
+    });
+
+    $(document).mouseup(function (e) {
+        var container = $(".popover");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            
+            //container.hide();
+            if ($("div.popover").length > 0)
+            {
+                debugger;
+                $("div.popover").remove()
+            }
+            
+        }
     });
 </script>
 @Scripts.Render("~/bundles/bootstrap")

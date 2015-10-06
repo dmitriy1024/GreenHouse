@@ -71,22 +71,22 @@
                     @*<input type="text" name="user" placeholder="Имя">
                         <input type="text" name="user" placeholder="Фамилия">*@
                     @*<input type="text" name="user" placeholder="Электронная почта">*@
-                    @Html.TextBoxFor(m => m.FName, new {@class = "form-control name", @placeholder = "Имя" })
+                    @Html.TextBoxFor(m => m.FName, new { @maxlength = "20", @class = "form-control name", @placeholder = "Имя" })
                     @Html.ValidationMessageFor(m => m.FName, "", new { @class = "text-danger" })
                     
-                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control name", @placeholder = "Фамилия" })
+                    @Html.TextBoxFor(m => m.LName, new { @maxlength = "20", @class = "form-control name", @placeholder = "Фамилия" })
                     @Html.ValidationMessageFor(m => m.LName, "", new { @class = "text-danger" })
                     
-                    @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
+                    @Html.TextBoxFor(m => m.Email, new { @maxlength = "256", @id = "email", @class = "form-control", @placeholder = "Электронная почта" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     <div class="reg-icons"><img src="~/Content/images/icon-key-green.png" /></div>
                     @*<input type="password" name="pass" placeholder="Пароль">*@
                     
-                    @Html.PasswordFor(m => m.Password, new { @id = "pass", @class = "form-control", @placeholder = "Пароль" })
+                    @Html.PasswordFor(m => m.Password, new { @maxlength = "16",@id = "pass", @class = "form-control", @placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     @*<input type="password" name="pass" placeholder="Повторить пароль">*@
                     
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "confPass", @class = "form-control", @placeholder = "Повторить пароль" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @maxlength = "16", @id = "confPass", @class = "form-control", @placeholder = "Повторить пароль" })
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
 
                     <div id="resultRegister" class="text-danger" style="color : red; margin-left: 20px; margin-top: 10px"></div>

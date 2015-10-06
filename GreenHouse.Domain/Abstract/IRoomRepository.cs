@@ -14,5 +14,6 @@ namespace GreenHouse.Domain.Abstract
 
         void AddRoom(int selectedRoom, string capacity, string wifiOpt, string projectorOpt, string monitorOpt,
             string microphoneOpt);
+        void RemoveRoom(int selectedRoom);
     }
 }

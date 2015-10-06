@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h3>Расписание</h3>
-            <h4 id="forCurrentDate">@String.Format("На  {0}  {1}  {2}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) </h4>
+            <h4 id="forCurrentDate">@String.Format("На  {0}.{1}.{2}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) </h4>
         </div>
         <div class="col-sm-6 text-right">
             <h6>
@@ -45,17 +45,17 @@
                 <img style="margin: 30px;" src="~/Content/images/preloader.gif" alt="Alternate Text" />Загрузка...
             </div>
         </div>
-            <div class="col-sm-3 text-right cal">
-                <div style="overflow: hidden;">
-                    <div class="form-group">
-                        <div class="row">
-                            <div id="datetimepicker12"></div>
-                        </div>
+        <div class="col-sm-3 text-right cal">
+            <div style="overflow: hidden;">
+                <div class="form-group">
+                    <div class="row">
+                        <div id="datetimepicker12"></div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
     <input type="hidden" id="forCurrentYear" >
     <input type="hidden" id="forCurrentMonth" >
     <input type="hidden" id="forCurrentDay" >
@@ -81,7 +81,7 @@
                 var day = e.date.getDate();
                 var month = e.date.getMonth() + 1;
                 var year = e.date.getFullYear();
-
+                debugger;
                 $('#forCurrentDate').html('На  ' + day + '  ' + month + '  ' + year);
                 
                 $('#forCurrentYear').val(year);
@@ -101,10 +101,17 @@
                     url: '@Url.Action("Reservations", "Home")'
                 }).done(function (result) {
                     $('#content').html(result);
+
                 });
+                $('#forCurrentDate').html('На  ' + day + '.' + month + '.' + year);
             });
         });
+
+        document.addEventListener("DOMContentLoaded", ready);
+        function ready() {
+            $("td.today").addClass("active");
+        }
     </script>
-</div>
+
 
 @Html.Partial("~/Views/Shared/Rooms.cshtml")

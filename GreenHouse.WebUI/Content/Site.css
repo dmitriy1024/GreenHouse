@@ -11,7 +11,30 @@ button.btn-lg {
 	font-size: 18px;
 }
 
+input.btn-lg {
+	background-color: #438E11;
+	color: #ffffff;
+	border-radius: 3px;
+	border: 0;
+	font-weight: 300;
+	font-size: 18px;
+}
+
+span.btn-lg {
+	background-color: #438E11;
+	color: #ffffff;
+	border-radius: 3px;
+	border: 0;
+	font-weight: 300;
+	font-size: 18px;
+}
+
 button.btn-lg:hover {
+	color: yellow;
+	background-color: #438E11;
+}
+
+input.btn-lg:hover {
 	color: yellow;
 	background-color: #438E11;
 }
@@ -189,7 +212,7 @@ table.table-condensed .dow{
     border: none;
 }
 
-.datepicker {
+/*.datepicker {
 	float: right;
 }
 
@@ -200,9 +223,9 @@ table.table-condensed .dow{
 
 .diagram-cell span {
 	color: #ffffff;
-}
+}*/
 
-.datepicker table tr.activeWeek {
+/*.datepicker table tr.activeWeek {
 	position: relative;
 }
 
@@ -222,7 +245,7 @@ table.table-condensed .dow{
 	border-bottom: 2px solid green;
 	border-top: 2px solid green;
 	border-radius: 0;
-}
+}*/
 
 
 .map-bg {
@@ -494,12 +517,19 @@ div#oroom304 {
 }
 
 .popover {
-    background-color: lightgrey;
+    background-color: white;
+    color: grey;
+    /*background-color: lightgrey;*/
     border-radius: 0;
 }
 
+.roominfo h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .popover.right .arrow:after {
-    border-right-color: lightgrey;
+    /*border-right-color: lightgrey;*/
 }
 
 
@@ -644,20 +674,15 @@ table.time {
      margin: 10px 0;
 } 
 
-
-
-/*.popover-content {
-    display: block;
-    width: 200px;
-    height: 300px;
-}*/
-
 .mapImgContainer div {
     width: 200px;
-    height: 300px;
+    height: 250px;
 }
 
-
+.popover-table tr td {
+    /*line-height: 10px;*/
+    /*border: 1px solid black;*/
+}
 
 .filter-bs-con {
     position: absolute;
@@ -763,7 +788,7 @@ margin-top: 20px;
 
 .new-room {
     text-align: right;
-    margin-top: 45px;
+    margin-top: 0px;
 }
 .name-profile-input{
 	display: inline-block;
@@ -793,6 +818,10 @@ margin-top: 20px;
 .name-changing-buttons-container button {
     display: inline-block;
 }
+
+.name-changing-buttons-container input {
+    display: inline-block;
+}
 .name-changing-buttons-container {
     margin: 0 100px;
 }
@@ -806,7 +835,7 @@ margin-top: 20px;
 
 .new-room {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .new-room h6 {
@@ -1045,7 +1074,126 @@ div#min-room304 {
     width: 75px;
     height: 44px;
 }
+/*------------------------------------------------------------*/
+div #r-min-room307 {
+    top: 6px;
+    left: 10px;
+    width: 58px;
+    height: 40px;
+}
 
+div#r-min-room311 {
+    top: 152px;
+    left: 3px;
+    width: 105px;
+    height: 105px;
+}
+
+div#r-min-room306 {
+    top: 6px;
+    left: 115px;
+    left: 117px;
+    width: 45px;
+    height: 33px;
+}
+
+div#r-min-room308 {
+    top: 50px;
+    left: 10px;
+    width: 58px;
+    height: 24px;
+}
+
+div#r-min-room309 {
+    top: 78px;
+    left: 10px;
+    width: 58px;
+    height: 25px;
+}
+
+div#r-min-room310 {
+    top: 107px;
+    left: 10px;
+    width: 58px;
+    height: 42px;
+}
+
+div#r-min-room305 {
+    top: 43px;
+    left: 100px;
+    width: 62px;
+    height: 31px;
+}
+
+div#r-min-room312 {
+    top: 195px;
+    left: 113px;
+    width: 102px;
+    height: 58px;
+}
+
+div#r-min-room313 {
+    top: 195px;
+    left: 220px;
+    width: 70px;
+    height: 58px;
+}
+
+div#r-min-room314 {
+    top: 195px;
+    left: 296px;
+    width: 100px;
+    height: 58px;
+}
+
+div#r-min-room315 {
+    top: 195px;
+    left: 401px;
+    width: 31px;
+    height: 22px;
+}
+
+div#r-min-room301 {
+    top: 100px;
+    left: 323px;
+    width: 72px;
+    height: 62px;
+}
+
+div#r-min-room302 {
+    top: 100px;
+    left: 297px;
+    width: 24px;
+    height: 62px;
+}
+
+div#r-min-room303 {
+    top: 100px;
+    left: 183px;
+    width: 28px;
+    height: 62px;
+}
+
+div#r-min-room304 {
+    top: 117px;
+    left: 101px;
+    width: 75px;
+    height: 44px;
+}
+
+.r-hover-area {
+    opacity: 0;
+}
+
+.r-hover-area:hover {
+    opacity: 1;
+}
+
+.r-hover-area.active {
+    opacity: 1;
+    border: 1px solid green;
+}
+/*------------------------------------------------------------*/
 .hover-area {
     opacity: 0;
 }
@@ -1059,3 +1207,47 @@ div#min-room304 {
     border: 1px solid green;
 }
 /*-----------------------------------------------------------------------------------------------------------*/
+
+
+.datepicker {
+	float: right;
+}
+
+.diagram-cell {
+	background-color: #438E11;
+	max-width: 30%;
+	width: 35px;
+	border: solid 1px grey;
+}
+
+.diagram-cell span {
+	color: #ffffff;
+}
+
+.datepicker table tr.activeWeek {
+	position: relative;
+}
+
+.datepicker table tr.activeWeek td:first-child {
+	border-left: 2px solid green;
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+	border-radius: 20px 0 0 20px;
+}
+
+.datepicker table tr.activeWeek>td:last-child {
+    border-radius: 0 20px 20px 0;
+	border-right: 2px solid green;
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+}
+.datepicker table tr.activeWeek td:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid green;
+	border-top: 2px solid green;
+	border-radius: 0;
+}
+
+#datetimepicker-room table {
+	display: table;
+	border-collapse: separate;
+}

@@ -20,6 +20,13 @@
             $scope.selectedRoom = $filter('filter')($scope.rooms, { number: roomNumber })[0];
         }
 
+        $scope.getClass = function (param)
+        {
+            if (param === true) {
+                return "selected";
+            }
+        }
+
         $scope.filtering = function (x) {
             if (x == 0) x = 10;
             if (x == 25) x = 30;

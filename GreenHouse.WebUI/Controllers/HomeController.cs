@@ -34,10 +34,13 @@ namespace GreenHouse.WebUI.Controllers
             var date = new DateTime(year, month, day);
             var roomsAndResByDate = _roomRepository.GetRoomsAndReservationsByDate(date);
 
+            var dict = roomsAndResByDate.OrderBy(pair => pair.Key.Number).ToDictionary(pair => pair.Key, pair => pair.Value);
+
             ViewBag.Date = date;
             ViewBag.BeginHour = 9;
             ViewBag.EndHour = 21;
-            return PartialView(roomsAndResByDate);
+            return PartialView(dict);
+            //return PartialView(roomsAndResByDate);
         }
 
         [HttpPost]
@@ -52,8 +55,22 @@ namespace GreenHouse.WebUI.Controllers
         public void DelReservation(int roomId, int year, int month, int day, int beginHour)
         {
             DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
+            if(User.IsInRole("admin"))
+            {
+                _reservationRepository.DelReservationByAdmin(roomId, beginTime);
+            }
+            else
+            {
+                _reservationRepository.DelReservation(User.Identity.GetUserId(), roomId, beginTime);
+            }            
+        }
 
-            _reservationRepository.DelReservation(User.Identity.GetUserId(), roomId, beginTime);
+        [HttpPost]
+        public void AddBlock(int roomId, int year, int month, int day, int beginHour)
+        {
+            DateTime beginTime = new DateTime(year, month, day).AddHours(beginHour);
+
+            _reservationRepository.AddBlock(User.Identity.GetUserId(), roomId, beginTime, beginTime.AddHours(1));
         }
 
         public ActionResult About()
