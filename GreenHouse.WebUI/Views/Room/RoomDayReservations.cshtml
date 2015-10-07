@@ -29,7 +29,7 @@
                 <table class="table sliding-window table-header" style="width:650px">
                     <tr>
                         
-                        <td style="padding: 6px;"><span style="font-size: larger">@ViewBag.Date.Day.@ViewBag.Date.Month.@ViewBag.Date.Year</span></td>
+                        <td style="padding: 6px;"><span style="font-size: larger">@DateTimeExtentions.GetRusDayOfWeek(ViewBag.Date) @ViewBag.Date.Day.@ViewBag.Date.Month.@ViewBag.Date.Year</span></td>
                         
                     </tr>
                 </table>

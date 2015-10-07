@@ -28,7 +28,7 @@
                     <tr>
                         @foreach (var date in Model.Keys)
                         {
-                            <td><span>@date.Date.Day   @date.Date.Month</span></td>
+                            <td><span>@DateTimeExtentions.GetShortRusDayOfWeek(date) &nbsp;&nbsp; @date.Date.Day.@date.Date.Month</span></td>
                         }
                     </tr>
                 </table>
